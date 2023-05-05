@@ -20,6 +20,6 @@ public class ScheduleService {
     }
 
     public Race getRaceById(int id) {
-        return raceRepository.findById(id).get();
+        return raceRepository.getOne(id);
     }
 }

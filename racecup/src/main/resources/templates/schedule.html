@@ -3,49 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>RaceCup</title>
-    <style>
-    /* стили для навигационного меню */
-    nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background-color: #ccc;
-      padding: 10px;
-    }
-
-    nav ul {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      width: 50%;
-    }
-
-    nav li {
-      margin-right: 20px;
-    }
-
-    nav a {
-      color: #000;
-      text-decoration: none;
-    }
-
-    nav a:hover {
-      text-decoration: underline;
-    }
-
-    main {
-    display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-
-
-
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <header>
@@ -75,7 +33,8 @@
                 <td th:text="${race.raceType}">Тип</td>
                 <td th:text="${race.name}">Название</td>
                 <td th:text="${race.location}">Место</td>
-                <!-- <td th:text="${race.distanceKm}">Дистанция</td>-->
+                <!--Ошибка при выводе DECIMAL(6,2) -> Text
+                 <td th:text="${race.distanceKm}">Дистанция</td>-->
             </tr>
         </table>
     </div>

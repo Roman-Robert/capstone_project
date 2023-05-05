@@ -2,5 +2,15 @@ package com.epam.racecup.models;
 
 public enum Gender {
     MALE,
-    FEMALE
+    FEMALE;
+    @Override
+    public String toString() {
+        switch (this) {
+            case MALE:
+                return "M";
+            case FEMALE:
+                return "W";
+        }
+        return "";
+    }
 }
