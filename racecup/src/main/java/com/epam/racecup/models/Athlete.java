@@ -1,15 +1,27 @@
 package com.epam.racecup.models;
 
+import javax.persistence.*;
 import java.util.Date;
-
+@Entity
+@Table(name = "athlete")
 public class Athlete extends User{
-
+    @Id
+    @Column(name="id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(name="user_id")
     private int user_id;
+    @Column(name="birthday", columnDefinition ="DATE")
+    @Temporal(TemporalType.DATE)
     private Date birthday;
+    @Column(name="gender")
+    @Enumerated(EnumType.STRING)
     private Gender gender;
+    @Column(name="country")
     private String country;
+    @Column(name="city")
     private String city;
+    @Column(name="team")
     private String team;
 
 

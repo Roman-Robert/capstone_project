@@ -1,30 +1,32 @@
 package com.epam.racecup.models;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+
 @Entity
-@Table(name="race")
+@Table(name = "race")
 public class Race {
     @Id
-    @Column(name="id")
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(name="race_type")
-    @Enumerated(EnumType.STRING)
-    private RaceType raceType;
-    @Column(name="name")
+    @Column(name = "race_type")
+    private String raceType;
+    @Column(name = "name")
     private String name;
-    @Column(name="location")
+    @Column(name = "location")
     private String location;
-    @Column(name="distance")
+    @Column(name = "distanceKm")
     private Double distanceKm;
-    @Column(name="date_time")
-    private LocalDateTime dateTime;
-    @Column(name="info")
+    //    @Column(name="date_time", columnDefinition = "DATE")
+    @Column(name = "date_time")
+    private String date;
+    @Column(name = "info")
     private String info;
-    @Column(name="organizer_id")
+    @Column(name = "organizer_id")
     private int organizerId;
 
-    public Race() {}
+    public Race() {
+    }
 
     public int getId() {
         return id;
@@ -34,11 +36,11 @@ public class Race {
         this.id = id;
     }
 
-    public RaceType getRaceType() {
+    public String getRaceType() {
         return raceType;
     }
 
-    public void setRaceType(RaceType raceType) {
+    public void setRaceType(String raceType) {
         this.raceType = raceType;
     }
 
@@ -58,20 +60,20 @@ public class Race {
         this.location = location;
     }
 
-    public Double getDistanceKM() {
+    public Double getDistanceKm() {
         return distanceKm;
     }
 
-    public void setDistanceKM(Double distanceKM) {
-        this.distanceKm = distanceKM;
+    public void setDistanceKm(Double distanceKm) {
+        this.distanceKm = distanceKm;
     }
 
-    public LocalDateTime getDateTime() {
-        return dateTime;
+    public String getDate() {
+        return date;
     }
 
-    public void setDateTime(LocalDateTime dateTime) {
-        this.dateTime = dateTime;
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public String getInfo() {
@@ -98,7 +100,7 @@ public class Race {
                 ", name='" + name + '\'' +
                 ", location='" + location + '\'' +
                 ", distanceKM=" + distanceKm +
-                ", dateTime=" + dateTime +
+                ", dateTime=" + date +
                 ", info='" + info + '\'' +
                 ", organizerId=" + organizerId +
                 '}';

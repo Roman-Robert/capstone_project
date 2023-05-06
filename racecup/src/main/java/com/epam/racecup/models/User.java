@@ -1,14 +1,27 @@
 package com.epam.racecup.models;
 
-public class User {
+import javax.persistence.*;
 
+@Entity
+@Table(name="user")
+public class User {
+    @Id
+    @Column(name="id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(name="username")
     private String username;
+    @Column(name="first_name")
     private String firstName;
+    @Column(name="last_name")
     private String lastName;
+    @Column(name="email", unique = true)
     private String email;
+    @Column(name="password")
     private String password;
+    @Column(name="is_active")
     private boolean isActive;
+    @Column(name="role")
     private String role;
 
     public User() {

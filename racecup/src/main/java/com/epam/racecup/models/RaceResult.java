@@ -1,13 +1,21 @@
 package com.epam.racecup.models;
 
+import javax.persistence.*;
 import java.sql.Time;
-
+@Entity
+@Table(name="race_result")
 public class RaceResult {
-
+    @Id
+    @Column(name="id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int resultId;
-    private int athletId;
+    @Column(name = "athlete_id")
+    private int athleteId;
+    @Column(name="race_id")
     private int raceId;
+    @Column(name = "transit_time", columnDefinition = "TIME")
     private Time transitTime;
+    @Column(name="status")
     private Status status;
 
     public RaceResult() {
@@ -21,12 +29,12 @@ public class RaceResult {
         this.resultId = resultId;
     }
 
-    public int getAthletId() {
-        return athletId;
+    public int getAthleteId() {
+        return athleteId;
     }
 
-    public void setAthletId(int athletId) {
-        this.athletId = athletId;
+    public void setAthleteId(int athleteId) {
+        this.athleteId = athleteId;
     }
 
     public int getRaceId() {
@@ -57,7 +65,7 @@ public class RaceResult {
     public String toString() {
         return "RaceResult{" +
                 "resultId=" + resultId +
-                ", athletId=" + athletId +
+                ", athletId=" + athleteId +
                 ", raceId=" + raceId +
                 ", transitTime=" + transitTime +
                 ", status=" + status +
