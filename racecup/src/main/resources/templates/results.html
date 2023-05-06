@@ -7,15 +7,7 @@
 </head>
 <body>
 <header>
-    <nav>
-        <h1><a href="/mainpage">RaceCup</a></h1>
-        <ul>
-            <li><a href="/schedule">Календарь</a></li>
-            <li><a href="/results">Результаты</a></li>
-            <li><a href="/rating">Рейтинг</a></li>
-            <li><a href="/enter">Вход/Регистрация</a></li>
-        </ul>
-    </nav>
+    <div th:replace="/fragments/header :: header"></div>
 </header>
 <main>
     <!-- Основное содержимое страницы здесь -->
@@ -26,7 +18,7 @@
 
 </main>
 <footer>
-    <!-- Нижний колонтитул здесь -->
+    <div th:replace="/fragments/footer :: footer"></div>
 </footer>
 </body>
 </html>
