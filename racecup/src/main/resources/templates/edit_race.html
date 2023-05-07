@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>RaceCup</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+    <div th:replace="/fragments/header :: header"></div>
+</header>
+<main>
+    <!-- Основное содержимое страницы здесь -->
+    <div>
+        <!-- Форма создания гонки -->
+        <form th:method="PATCH" th:action="@{{id}(id=${race.getId()})}" th:object="${race}">
+            <h3>Изменение информации</h3>
+            <p>
+                <!--        Подумать как реализовать ENUM-->
+                <input type="text" th:field="*{raceType}" placeholder="Race type">
+            </p>
+            <p>
+                <input type="text" th:field="*{name}" placeholder="Race name">
+            </p>
+            <p>
+                <input type="text" th:field="*{location}" placeholder="Location">
+            </p>
+            <p>
+                <input type="number" th:field="*{distanceKm}" placeholder="Distance(km) 0.00">
+            </p>
+            <p>
+                <!--<input type="date" th:field="*{date}">-->
+                <input type="text" th:field="*{date}">
+            </p>
+            <p>
+                <textarea name="Text1" th:field="*{info}" cols="18" rows="5"></textarea>
+            </p>
+            <p>
+                <!--                Убрать номер айдишника администратора!!!-->
+                <label text="Organizer ID">Organizer id (убрать)</label>
+                <input type="text" th:field="*{organizerId}" placeholder="organizer id">
+            </p>
+
+            <input type="submit" value="Обновить">
+
+        </form>
+    </div>
+</main>
+<footer>
+    <div th:replace="/fragments/footer :: footer"></div>
+</footer>
+</body>
+</html>

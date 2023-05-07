@@ -5,9 +5,7 @@ import com.epam.racecup.services.RaceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping
@@ -27,13 +25,40 @@ public class RaceController {
     }
 
     @GetMapping("/new_race")
-    public String createRaceForm(Race race) {
+    public String createRaceForm(@ModelAttribute("race") Race race) {
         return "new_race";
     }
 
     @PostMapping("/new_race")
-    public String createRace(Race race) {
+    public String createRace(@ModelAttribute("race") Race race) {
         raceService.saveRace(race);
+        //Продумать редирект на "success create race" page
         return "redirect:/schedule";
     }
+
+    @GetMapping("/race/delete/{id}")
+    public String deleteRace(@PathVariable("id") int id) {
+        raceService.deleteRaceById(id);
+        //Продумать редирект на "success delete race" page
+        //Продумать подтверждение удаления
+        return "redirect:/schedule";
+    }
+
+    @GetMapping("/race/edit/{id}")
+    public String editRace(@PathVariable("id") int id,
+                           Model model) {
+        model.addAttribute("race", raceService.getRaceById(id));
+        return "edit_race";
+    }
+
+
+    @PostMapping("/race/edit/{id}")
+    public String editRace(Race race) {
+        raceService.saveRace(race);
+        //Продумать редирект на "success edit race" page
+        return "redirect:/schedule";
+    }
+
+
+
 }
