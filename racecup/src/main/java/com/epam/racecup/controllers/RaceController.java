@@ -58,6 +58,13 @@ public class RaceController {
         //Продумать редирект на "success edit race" page
         return "redirect:/schedule";
     }
+    @GetMapping("/race/about/{id}")
+    public String aboutRace(@PathVariable("id") int id,
+                            Model model) {
+        model.addAttribute("race", raceService.getRaceById(id));
+        return "about_race";
+
+    }
 
 
 

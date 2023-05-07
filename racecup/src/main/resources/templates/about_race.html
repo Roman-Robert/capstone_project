@@ -10,15 +10,13 @@
     <div th:replace="/fragments/header :: header"></div>
 </header>
 <main>
-    <!-- Основное содержимое страницы здесь -->
 
     <div>
-        <p>
-            <a href="#">Вход в личный кабинет</a>
-        </p>
-        <p>
-            <a href="#">Зарегистрироваться</a>
-        </p>
+        <h1 th:text="${race.name}">Название гонки</h1>
+        <h4 th:text="${race.location}">Место</h4>
+        <h4 th:text="${race.date}">Дата</h4>
+        <h4 th:text="${race.raceType}">Тип гонки</h4>
+        <p th:text="${race.info}">Информация о гонке</p>
     </div>
 
 </main>
