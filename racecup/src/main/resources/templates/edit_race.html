@@ -17,7 +17,11 @@
             <h3>Изменение информации</h3>
             <p>
                 <!--        Подумать как реализовать ENUM-->
-                <input type="text" th:field="*{raceType}" placeholder="Race type">
+<!--                <input type="text" th:field="*{raceType}" placeholder="Race type">-->
+                <select th:field="*{raceType}">
+                    <option th:each="raceType : ${T(com.epam.racecup.models.RaceType).values()}"
+                            th:value="${raceType}" th:text="${raceType.getDisplayRaceType()}"></option>
+                </select>
             </p>
             <p>
                 <input type="text" th:field="*{name}" placeholder="Race name">
@@ -26,11 +30,11 @@
                 <input type="text" th:field="*{location}" placeholder="Location">
             </p>
             <p>
-                <input type="number" th:field="*{distanceKm}" placeholder="Distance(km) 0.00">
+                <input type="number" step="0.01" min="0" th:field="*{distanceKm}" placeholder="Distance(km) 0.00">
             </p>
             <p>
                 <!--<input type="date" th:field="*{date}">-->
-                <input type="text" th:field="*{date}">
+                <input type="date" th:field="*{date}">
             </p>
             <p>
                 <textarea name="Text1" th:field="*{info}" cols="18" rows="5"></textarea>

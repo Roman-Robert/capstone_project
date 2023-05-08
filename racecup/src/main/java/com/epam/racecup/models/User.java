@@ -3,29 +3,28 @@ package com.epam.racecup.models;
 import javax.persistence.*;
 
 @Entity
-@Table(name="user")
+@Table(name = "user")
 public class User {
     @Id
-    @Column(name="id")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(name="username")
+    @Column(name = "username")
     private String username;
-    @Column(name="first_name")
+    @Column(name = "first_name")
     private String firstName;
-    @Column(name="last_name")
+    @Column(name = "last_name")
     private String lastName;
-    @Column(name="email", unique = true)
+    @Column(name = "email", unique = true)
     private String email;
-    @Column(name="password")
+    @Column(name = "password")
     private String password;
-    @Column(name="is_active")
+    @Column(name = "is_active")
     private boolean isActive;
-    @Column(name="role")
+    @Column(name = "role")
     private String role;
 
     public User() {
-
     }
 
     public int getId() {

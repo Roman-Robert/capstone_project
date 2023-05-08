@@ -1,6 +1,7 @@
 package com.epam.racecup.models;
 
 import javax.persistence.*;
+import java.sql.Date;
 
 @Entity
 @Table(name = "race")
@@ -10,7 +11,7 @@ public class Race {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(name = "race_type")
-    private String raceType;
+    private RaceType raceType;
     @Column(name = "name")
     private String name;
     @Column(name = "location")
@@ -19,7 +20,7 @@ public class Race {
     private Double distanceKm;
     //    @Column(name="date_time", columnDefinition = "DATE")
     @Column(name = "date_time")
-    private String date;
+    private Date date;
     @Column(name = "info")
     private String info;
     @Column(name = "organizer_id")
@@ -36,11 +37,11 @@ public class Race {
         this.id = id;
     }
 
-    public String getRaceType() {
+    public RaceType getRaceType() {
         return raceType;
     }
 
-    public void setRaceType(String raceType) {
+    public void setRaceType(RaceType raceType) {
         this.raceType = raceType;
     }
 
@@ -68,11 +69,11 @@ public class Race {
         this.distanceKm = distanceKm;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 

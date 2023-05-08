@@ -1,20 +1,18 @@
 package com.epam.racecup.models;
 
 public enum RaceType {
-    ROAD,
-    GRAVEL,
-    CROSS_COUNTRY;
+    ROAD("Road race"),
+    GRAVEL("Gravel race"),
+    CROSS_COUNTRY("CrossCountry race");
 
-    public String toString() {
-        switch (this) {
-            case ROAD:
-                return "Road";
-            case GRAVEL:
-                return "Gravel";
-            case CROSS_COUNTRY:
-                return "Cross Country";
-        }
-        return "";
+    private final String raceType;
+
+    private RaceType(String raceType) {
+        this.raceType=raceType;
+    }
+
+    public String getDisplayRaceType() {
+        return raceType;
     }
 }
 
