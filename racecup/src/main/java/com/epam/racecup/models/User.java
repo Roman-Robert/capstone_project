@@ -1,6 +1,8 @@
 package com.epam.racecup.models;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "user")
@@ -9,18 +11,33 @@ public class User {
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @NotEmpty(message = "Field can't be empty")
     @Column(name = "username")
     private String username;
+
+    @NotEmpty(message = "Field can't be empty")
     @Column(name = "first_name")
     private String firstName;
+
+    @NotEmpty(message = "Field can't be empty")
     @Column(name = "last_name")
     private String lastName;
+
+    @Email(message = "Email should be valid")
+    @NotEmpty(message = "Field can't be empty")
     @Column(name = "email", unique = true)
     private String email;
+
+    @NotEmpty(message = "Field can't be empty")
     @Column(name = "password")
     private String password;
+
+    //Реализовать автозаполнение "1"
     @Column(name = "is_active")
-    private boolean isActive;
+    private int isActive;
+
+    //Реализовать автозаполнение "user"
     @Column(name = "role")
     private String role;
 
@@ -75,12 +92,12 @@ public class User {
         this.password = password;
     }
 
-    public boolean isActive() {
+    public int getIsActive() {
         return isActive;
     }
 
-    public void setActive(boolean active) {
-        isActive = active;
+    public void setIsActive(int isActive) {
+        this.isActive = isActive;
     }
 
     public String getRole() {

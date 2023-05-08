@@ -5,7 +5,10 @@ import com.epam.racecup.services.RaceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping
@@ -30,7 +33,11 @@ public class RaceController {
     }
 
     @PostMapping("/new_race")
-    public String createRace(@ModelAttribute("race") Race race) {
+    public String createRace(@ModelAttribute("race") @Valid Race race,
+                             BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "new_race";
+        }
         raceService.saveRace(race);
         //Продумать редирект на "success create race" page
         return "redirect:/schedule";
@@ -53,7 +60,10 @@ public class RaceController {
 
 
     @PostMapping("/race/edit/{id}")
-    public String editRace(Race race) {
+    public String editRace(@Valid Race race, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "edit_race";
+        }
         raceService.saveRace(race);
         //Продумать редирект на "success edit race" page
         return "redirect:/schedule";
@@ -63,9 +73,5 @@ public class RaceController {
                             Model model) {
         model.addAttribute("race", raceService.getRaceById(id));
         return "about_race";
-
     }
-
-
-
 }
