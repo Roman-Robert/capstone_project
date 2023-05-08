@@ -2,8 +2,8 @@
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>RaceCup</title>
-    <link th:href="@{/style.css}" rel="stylesheet" >
+    <title>Create new race</title>
+    <link th:href="@{/style.css}" rel="stylesheet">
 </head>
 <body>
 <header>
@@ -13,7 +13,7 @@
     <!-- Основное содержимое страницы здесь -->
     <div>
         <!-- Форма создания гонки -->
-        <form th:action="@{new_race}" th:object="${race}" th:method="POST">
+        <form th:action="@{new}" th:object="${race}" th:method="POST">
             <h3>Новая гонка</h3>
             <p>
                 <select th:field="*{raceType}">
@@ -31,20 +31,19 @@
                 <input type="number" step="0.01" min="0" th:field="*{distanceKm}" placeholder="Distance(km) 0.00">
             </p>
             <p>
-                <!--<input type="date" th:field="*{date}">-->
                 <input type="date" th:field="*{date}">
             </p>
             <p>
                 <textarea name="Text1" th:field="*{info}" cols="18" rows="5"></textarea>
             </p>
             <p>
-<!--                Убрать номер айдишника администратора!!!-->
+                <!--                Убрать номер айдишника администратора!!!-->
                 <label text="Organizer ID">Organizer id (убрать)</label>
                 <input type="text" th:field="*{organizerId}" placeholder="organizer id">
             </p>
 
-
             <input type="submit" value="Зарегистрировать гонку">
+
         </form>
     </div>
 

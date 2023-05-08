@@ -2,7 +2,7 @@
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>RaceCup</title>
+    <title>List of all races</title>
     <link th:href="@{/style.css}" rel="stylesheet" >
 </head>
 <body>
@@ -20,7 +20,7 @@
                 <th>Место</th>
                 <th>Дистанция(км)</th>
             </tr>
-            <tr th:each="race:${schedule}">
+            <tr th:each="race:${race}">
                 <td th:text="${race.date}">Дата и время</td>
                 <td th:text="${race.raceType}">Тип</td>
                 <td th:text="${race.name}">Название</td>
@@ -34,7 +34,7 @@
             </tr>
         </table>
         <p>
-            <a href="/new_race">Создать новую гонку</a>
+            <a href="/race/new">Создать новую гонку</a>
         </p>
     </div>
 

@@ -1,7 +1,6 @@
 package com.epam.racecup.models;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
 import java.sql.Date;
 
 @Entity
@@ -15,28 +14,23 @@ public class Race {
     @Column(name = "race_type")
     private RaceType raceType;
 
-    @NotEmpty
     @Column(name = "name")
     private String name;
 
-    @NotEmpty
     @Column(name = "location")
     private String location;
 
-    @NotEmpty
     @Column(name = "distanceKm")
     private Double distanceKm;
 
-    @NotEmpty
     @Column(name = "date")
     private Date date;
 
-    @NotEmpty
+
     @Column(name = "info")
     private String info;
 
     //Реализовать применение id организатора
-    @NotEmpty
     @Column(name = "organizer_id")
     private int organizerId;
 

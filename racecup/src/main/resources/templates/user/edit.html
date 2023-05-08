@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit user info</title>
+    <link th:href="@{/style.css}" rel="stylesheet">
+</head>
+<body>
+<header>
+    <div th:replace="/fragments/header :: header"></div>
+</header>
+<main>
+
+    <div>
+        <form th:action="@{{id}(id=${user.getId()})}" th:object="${user}" th:method="PATCH">
+            <h3>Изменение информации пользователя</h3>
+
+            <p>
+                <input type="text" th:field="*{username}" placeholder="Username">
+            </p>
+            <p>
+                <input type="email" th:field="*{email}" placeholder="Email">
+            </p>
+            <p>
+                <input type="password" th:field="*{password}" placeholder="Password">
+            </p>
+            <!--<p>
+                <input type="password" placeholder="Confirm password">
+            </p>-->
+            <p>
+                <input type="text" th:field="*{firstName}"placeholder="First name">
+            </p>
+            <p>
+                <input type="text" th:field="*{lastName}" placeholder="Last name">
+            </p>
+            <p>
+                <input type="submit" value="Изменить">
+            </p>
+        </form>
+    </div>
+
+</main>
+<footer>
+    <div th:replace="/fragments/footer :: footer"></div>
+</footer>
+</body>
+</html>

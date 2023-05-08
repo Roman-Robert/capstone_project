@@ -2,7 +2,7 @@
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>RaceCup</title>
+    <title>List of all users</title>
     <link th:href="@{/style.css}" rel="stylesheet" >
 </head>
 <body>
@@ -32,8 +32,15 @@
                 <!--<th>Password</th>-->
                 <td th:text="${user.isActive}">Status</td>
                 <td th:text="${user.role}">Role</td>
+                <td><a th:href="@{/user/edit/{userId}(userId=${user.id})}">Редактировать</a></td>
+                <td><a th:href="@{/user/delete/{userId}(userId=${user.id})}">Удалить</a></td>
             </tr>
         </table>
+
+        <p>
+            <a href="/user/new">Создать нового пользователя</a>
+        </p>
+
     </div>
 
 </main>

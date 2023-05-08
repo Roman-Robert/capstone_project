@@ -16,8 +16,6 @@
         <form th:method="PATCH" th:action="@{{id}(id=${race.getId()})}" th:object="${race}">
             <h3>Изменение информации</h3>
             <p>
-                <!--        Подумать как реализовать ENUM-->
-<!--                <input type="text" th:field="*{raceType}" placeholder="Race type">-->
                 <select th:field="*{raceType}">
                     <option th:each="raceType : ${T(com.epam.racecup.models.RaceType).values()}"
                             th:value="${raceType}" th:text="${raceType.getDisplayRaceType()}"></option>

@@ -5,10 +5,7 @@ import com.epam.racecup.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/user")
@@ -27,11 +24,7 @@ public class UserController {
     }
 
     @PostMapping("/new")
-    public String createUser(@ModelAttribute("user") @Valid User user,
-                             BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return "user/new";
-        }
+    public String createUser(@ModelAttribute("user") User user) {
         userService.saveUser(user);
         return "redirect:/user/all";
     }
@@ -57,16 +50,13 @@ public class UserController {
     }
 
     @PostMapping("/edit/{id}")
-    public String editUser(@PathVariable("id") @Valid User user,
-                           BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return "user/edit";
-        }
+    public String editUser(User user) {
         userService.saveUser(user);
-        return "redirect:/account";
+//        return "redirect:/account";
+        return "redirect:/user/all";
     }
 
-    @GetMapping("/delete")
+    @GetMapping("/delete/{id}")
     public String deleteUser(@PathVariable("id") int id) {
         //Продумать редирект на "success delete user" page
         //менять только статус юзера is_active, а не удалять
