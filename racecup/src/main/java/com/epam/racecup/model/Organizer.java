@@ -2,23 +2,12 @@ package com.epam.racecup.model;
 
 public class Organizer extends User{
 
-    private int id;
-    private int user_id;
+    private long user_id;
     private String mobilePhone;
 
     public Organizer() {}
 
-    @Override
-    public int getId() {
-        return id;
-    }
-
-    @Override
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getUser_id() {
+    public long getUser_id() {
         return user_id;
     }
 
@@ -37,8 +26,7 @@ public class Organizer extends User{
     @Override
     public String toString() {
         return "Organizer{" +
-                "id=" + id +
-                ", user_id=" + user_id +
+                "user_id=" + user_id +
                 ", mobilePhone='" + mobilePhone + '\'' +
                 '}';
     }

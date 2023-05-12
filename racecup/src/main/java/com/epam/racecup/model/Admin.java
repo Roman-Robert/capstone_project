@@ -1,36 +1,23 @@
 package com.epam.racecup.model;
 
 public class Admin extends User{
-
-    private int id;
-    private int user_id;
+    private long user_id;
 
     public Admin() {
     }
 
-    @Override
-    public int getId() {
-        return id;
-    }
-
-    @Override
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getUser_id() {
+    public long getUserId() {
         return user_id;
     }
 
-    public void setUser_id(int user_id) {
+    public void setUserId(long user_id) {
         this.user_id = user_id;
     }
 
     @Override
     public String toString() {
         return "Admin{" +
-                "id=" + id +
-                ", user_id=" + user_id +
+                "user_id=" + user_id +
                 '}';
     }
 }

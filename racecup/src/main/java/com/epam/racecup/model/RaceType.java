@@ -1,9 +1,9 @@
 package com.epam.racecup.model;
 
 public enum RaceType {
-    ROAD("Road race"),
-    GRAVEL("Gravel race"),
-    CROSS_COUNTRY("CrossCountry race");
+    ROAD("Road"),
+    GRAVEL("Gravel"),
+    CROSS_COUNTRY("CrossCountry");
 
     private final String raceType;
 
