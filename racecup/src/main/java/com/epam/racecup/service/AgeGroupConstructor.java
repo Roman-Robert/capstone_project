@@ -21,7 +21,7 @@ public class AgeGroupConstructor {
         } else if (age >= 45) {
             group +="45+";
         } else {
-            logger.error("Athlete " + athlete.getId() + "is too young for races.");
+            logger.error("Athlete " + athlete.getUser().getId() + "is too young for races.");
         }
         return group;
     }

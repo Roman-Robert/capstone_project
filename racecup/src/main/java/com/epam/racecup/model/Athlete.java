@@ -1,64 +1,38 @@
 package com.epam.racecup.model;
 
+import lombok.Data;
+
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
-//@Entity
-//@Table(name = "athlete")
-public class Athlete extends User {
+@Entity
+@Data
+@Table(name = "athlete")
+public class Athlete implements Serializable {
 
-//    @Column(name = "birthday")
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+
+    @Column(name = "birthday")
     private Date birthday;
-//    @Column(name = "gender")
-//    @Enumerated(EnumType.STRING)
+
+    @Column(name = "gender")
+    @Enumerated(EnumType.STRING)
     private Gender gender;
-//    @Column(name = "country")
+
+    @Column(name = "country")
     private String country;
-//    @Column(name = "city")
+
+    @Column(name = "city")
     private String city;
-//    @Column(name = "team")
+
+    @Column(name = "team")
     private String team;
-
-
-    public Athlete() {
-    }
-
-    public Date getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
-    }
-
-    public Gender getGender() {
-        return gender;
-    }
-
-    public void setGender(Gender gender) {
-        this.gender = gender;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getTeam() {
-        return team;
-    }
-
-    public void setTeam(String team) {
-        this.team = team;
-    }
 }

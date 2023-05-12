@@ -22,7 +22,6 @@ public class User {
     @Column(name = "last_name")
     private String lastName;
 
-
     @Column(name = "email", unique = true)
     private String email;
 
@@ -36,4 +35,7 @@ public class User {
     //Реализовать автозаполнение "user"
     @Column(name = "role")
     private String role;
+
+    @OneToOne(mappedBy = "user")
+    private Athlete athlete;
 }

@@ -12,8 +12,12 @@
 <main>
 
     <div>
-        <p><h3 th:text="${user.username}">username</h3></p>
-        <p><a style="color: grey;" th:text="${user.role}">role</a></p>
+        <p>
+            <h3 th:text="${user.username}">username</h3>
+        </p>
+        <p>
+            <a style="color: grey;" th:text="${user.role}">role</a>
+        </p>
         <p>
             <a th:text="${user.firstName}">first name</a>
             <a th:text="${user.lastName}">last name</a>
@@ -21,6 +25,7 @@
         <p><a th:text="${user.email}">email</a></p>
 
 <!--        Implement this ref-->
+        <p><a href="#">Register as athlete</a></p>
         <p><a href="#">List of my results</a></p>
         <p><a th:href="@{/user/edit/{id}(id=${user.id})}">Edit personal info</a></p>
         <p><a th:href="@{/user/delete/{id}(id=${user.id})}">Delete account</a></p>
