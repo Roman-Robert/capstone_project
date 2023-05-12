@@ -1,7 +1,7 @@
-package com.epam.racecup.controllers;
+package com.epam.racecup.controller;
 
-import com.epam.racecup.models.Race;
-import com.epam.racecup.services.RaceService;
+import com.epam.racecup.model.Race;
+import com.epam.racecup.service.RaceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

@@ -1,16 +1,11 @@
-package com.epam.racecup.models;
+package com.epam.racecup.model;
 
 import java.util.Date;
 
 //@Entity
 //@Table(name = "athlete")
 public class Athlete extends User {
-//    @Id
-//    @Column(name = "id")
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-//    @Column(name = "user_id")
-    private int user_id;
+
 //    @Column(name = "birthday")
     private Date birthday;
 //    @Column(name = "gender")
@@ -25,24 +20,6 @@ public class Athlete extends User {
 
 
     public Athlete() {
-    }
-
-    @Override
-    public int getId() {
-        return id;
-    }
-
-    @Override
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
     }
 
     public Date getBirthday() {
@@ -83,18 +60,5 @@ public class Athlete extends User {
 
     public void setTeam(String team) {
         this.team = team;
-    }
-
-    @Override
-    public String toString() {
-        return "Athlete{" +
-                "id=" + id +
-                ", user_id=" + user_id +
-                ", birthday=" + birthday +
-                ", gender=" + gender +
-                ", country='" + country + '\'' +
-                ", city='" + city + '\'' +
-                ", team='" + team + '\'' +
-                '}';
     }
 }

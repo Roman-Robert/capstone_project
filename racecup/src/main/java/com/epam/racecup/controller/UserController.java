@@ -1,7 +1,7 @@
-package com.epam.racecup.controllers;
+package com.epam.racecup.controller;
 
-import com.epam.racecup.models.User;
-import com.epam.racecup.services.UserService;
+import com.epam.racecup.model.User;
+import com.epam.racecup.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -63,7 +63,6 @@ public class UserController {
         userService.deleteUserById(id);
         return "redirect:/user/all";
     }
-
 
 }
 

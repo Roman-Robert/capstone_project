@@ -17,7 +17,7 @@
             <h3>Изменение информации</h3>
             <p>
                 <select th:field="*{raceType}">
-                    <option th:each="raceType : ${T(com.epam.racecup.models.RaceType).values()}"
+                    <option th:each="raceType : ${T(com.epam.racecup.model.RaceType).values()}"
                             th:value="${raceType}" th:text="${raceType.getDisplayRaceType()}"></option>
                 </select>
             </p>
@@ -39,8 +39,8 @@
             </p>
             <p>
                 <!--                Убрать номер айдишника администратора!!!-->
-                <label text="Organizer ID">Organizer id (убрать)</label>
-                <input type="text" th:field="*{organizerId}" placeholder="organizer id">
+                <!--<label text="Organizer ID">Organizer id (убрать)</label>
+                <input type="text" th:field="*{organizerId}" placeholder="organizer id">-->
             </p>
 
             <input type="submit" value="Обновить">

@@ -17,7 +17,7 @@
             <h3>Новая гонка</h3>
             <p>
                 <select th:field="*{raceType}">
-                    <option th:each="raceType : ${T(com.epam.racecup.models.RaceType).values()}"
+                    <option th:each="raceType : ${T(com.epam.racecup.model.RaceType).values()}"
                             th:value="${raceType}" th:text="${raceType.getDisplayRaceType()}"></option>
                 </select>
             </p>
@@ -36,11 +36,11 @@
             <p>
                 <textarea name="Text1" th:field="*{info}" cols="18" rows="5"></textarea>
             </p>
-            <p>
-                <!--                Убрать номер айдишника администратора!!!-->
-                <label text="Organizer ID">Organizer id (убрать)</label>
-                <input type="text" th:field="*{organizerId}" placeholder="organizer id">
-            </p>
+            <!--<p>
+                &lt;!&ndash;                Убрать номер айдишника администратора!!!&ndash;&gt;
+                &lt;!&ndash;<label text="Organizer ID">Organizer id (убрать)</label>
+                <input type="text" th:field="*{organizerId}" placeholder="organizer id">&ndash;&gt;
+            </p>-->
 
             <input type="submit" value="Зарегистрировать гонку">
 

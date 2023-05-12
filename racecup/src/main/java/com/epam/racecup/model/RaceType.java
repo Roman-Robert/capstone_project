@@ -1,4 +1,4 @@
-package com.epam.racecup.models;
+package com.epam.racecup.model;
 
 public enum RaceType {
     ROAD("Road race"),

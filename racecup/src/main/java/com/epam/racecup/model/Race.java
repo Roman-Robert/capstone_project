@@ -1,4 +1,4 @@
-package com.epam.racecup.models;
+package com.epam.racecup.model;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -20,7 +20,7 @@ public class Race {
     @Column(name = "location")
     private String location;
 
-    @Column(name = "distanceKm")
+    @Column(name = "distance_km")
     private Double distanceKm;
 
     @Column(name = "date")
@@ -30,7 +30,6 @@ public class Race {
     @Column(name = "info")
     private String info;
 
-    //Реализовать применение id организатора
     @Column(name = "organizer_id")
     private int organizerId;
 
@@ -98,20 +97,7 @@ public class Race {
     }
 
     public void setOrganizerId(int organizerId) {
-        this.organizerId = organizerId;
+        this.organizerId = 1;
     }
 
-    @Override
-    public String toString() {
-        return "Race{" +
-                "id=" + id +
-                ", raceType=" + raceType +
-                ", name='" + name + '\'' +
-                ", location='" + location + '\'' +
-                ", distanceKM=" + distanceKm +
-                ", dateTime=" + date +
-                ", info='" + info + '\'' +
-                ", organizerId=" + organizerId +
-                '}';
-    }
 }

@@ -1,6 +1,6 @@
-package com.epam.racecup.services;
+package com.epam.racecup.service;
 
-import com.epam.racecup.models.Athlete;
+import com.epam.racecup.model.Athlete;
 import org.apache.log4j.Logger;
 
 import java.sql.Date;
@@ -9,21 +9,20 @@ public class AgeGroupConstructor {
     Logger logger = Logger.getLogger(AgeGroupConstructor.class);
 
     public String getAge(Athlete athlete, Date raceDate) {
-
-        String gender = athlete.getGender().toString();
+        String group=athlete.getGender().toString();
         int age = athlete.getBirthday().getYear() - raceDate.getYear();
 
         if (age >=18 && age<25) {
-            return gender + "18";
+            group += "18";
         } else if (age >=25 && age < 35) {
-            return gender + "25";
+            group +="25";
         } else if (age >=35 && age < 45) {
-            return gender + "35";
+            group +="35";
         } else if (age >= 45) {
-            return gender + "45+";
+            group +="45+";
         } else {
             logger.error("Athlete " + athlete.getId() + "is too young for races.");
         }
-        return "?";
+        return group;
     }
 }

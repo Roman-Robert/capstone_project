@@ -1,4 +1,4 @@
-package com.epam.racecup.models;
+package com.epam.racecup.model;
 
 import javax.persistence.*;
 import java.sql.Time;

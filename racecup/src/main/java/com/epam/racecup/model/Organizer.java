@@ -1,12 +1,12 @@
-package com.epam.racecup.models;
+package com.epam.racecup.model;
 
-public class Admin extends User{
+public class Organizer extends User{
 
     private int id;
     private int user_id;
+    private String mobilePhone;
 
-    public Admin() {
-    }
+    public Organizer() {}
 
     @Override
     public int getId() {
@@ -26,11 +26,20 @@ public class Admin extends User{
         this.user_id = user_id;
     }
 
+    public String getMobilePhone() {
+        return mobilePhone;
+    }
+
+    public void setMobilePhone(String mobilePhone) {
+        this.mobilePhone = mobilePhone;
+    }
+
     @Override
     public String toString() {
-        return "Admin{" +
+        return "Organizer{" +
                 "id=" + id +
                 ", user_id=" + user_id +
+                ", mobilePhone='" + mobilePhone + '\'' +
                 '}';
     }
 }

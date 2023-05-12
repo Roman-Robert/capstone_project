@@ -1,7 +1,7 @@
-package com.epam.racecup.services;
+package com.epam.racecup.service;
 
 import com.epam.racecup.dao.UserRepository;
-import com.epam.racecup.models.User;
+import com.epam.racecup.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,10 +27,6 @@ public class UserService {
 
     public User getUserById(int id) {
         return userRepository.getOne(id);
-    }
-
-    public void updateUser(User user) {
-
     }
 
     public void deleteUserById(int id) {

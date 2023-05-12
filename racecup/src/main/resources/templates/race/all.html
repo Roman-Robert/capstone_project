@@ -22,7 +22,7 @@
             </tr>
             <tr th:each="race:${race}">
                 <td th:text="${race.date}">Дата и время</td>
-                <td th:text="${race.raceType}">Тип</td>
+                <td th:text="${race.raceType.getDisplayRaceType()}">Тип</td>
                 <td th:text="${race.name}">Название</td>
                 <td th:text="${race.location}">Место</td>
                 <td th:text="${race.distanceKm}">Дистанция</td>
