@@ -9,7 +9,7 @@ public class Race {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
 
     @Column(name = "race_type")
     private RaceType raceType;
@@ -33,14 +33,18 @@ public class Race {
     @Column(name = "organizer_id")
     private int organizerId;
 
+    @Column(name = "is_actual")
+    private int isActual;
+
+
     public Race() {
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -100,4 +104,11 @@ public class Race {
         this.organizerId = 1;
     }
 
+    public int getIsActual() {
+        return isActual;
+    }
+
+    public void setIsActual(int isActual) {
+        this.isActual = isActual;
+    }
 }

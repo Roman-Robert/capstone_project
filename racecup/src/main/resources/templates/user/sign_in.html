@@ -1,42 +1,37 @@
 <!DOCTYPE html>
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>RaceCup</title>
-  <link th:href="@{/style.css}" rel="stylesheet" >
+    <meta charset="UTF-8">
+    <title>RaceCup</title>
+    <link th:href="@{/style.css}" rel="stylesheet">
 </head>
 <body>
 <header>
-  <div th:replace="/fragments/header :: header"></div>
+    <div th:replace="/fragments/header :: header"></div>
 </header>
 <main>
-  <!-- Основное содержимое страницы здесь -->
 
-  <div>
-
-    <!-- Форма входа -->
-    <form>
-      <h3>Вход</h3>
-
-      <p>
-        <input type="text" placeholder="Username">
-      </p>
-      <p>
-        <input type="password" placeholder="Password">
-      </p>
-      <p>
-        <button>Войти</button>
-      </p>
-      <p>
-        <a href="/user/new" >Зарегистрироваться</a>
-      </p>
-    </form>
-
-  </div>
+    <div>
+        <form>
+            <h3>Login</h3>
+            <p>
+                <input type="text" placeholder="Username">
+            </p>
+            <p>
+                <input type="password" placeholder="Password">
+            </p>
+            <p>
+                <button>Sign in</button>
+            </p>
+            <p>
+                <a href="/user/new">Register</a>
+            </p>
+        </form>
+    </div>
 
 </main>
 <footer>
-  <div th:replace="/fragments/footer :: footer"></div>
+    <div th:replace="/fragments/footer :: footer"></div>
 </footer>
 </body>
 </html>

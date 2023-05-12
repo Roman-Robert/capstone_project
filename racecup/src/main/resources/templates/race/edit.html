@@ -10,11 +10,9 @@
     <div th:replace="/fragments/header :: header"></div>
 </header>
 <main>
-    <!-- Основное содержимое страницы здесь -->
     <div>
-        <!-- Форма создания гонки -->
         <form th:method="PATCH" th:action="@{{id}(id=${race.getId()})}" th:object="${race}">
-            <h3>Изменение информации</h3>
+            <h3>Edit race info</h3>
             <p>
                 <select th:field="*{raceType}">
                     <option th:each="raceType : ${T(com.epam.racecup.model.RaceType).values()}"
@@ -31,16 +29,10 @@
                 <input type="number" step="0.01" min="0" th:field="*{distanceKm}" placeholder="Distance(km) 0.00">
             </p>
             <p>
-                <!--<input type="date" th:field="*{date}">-->
                 <input type="date" th:field="*{date}">
             </p>
             <p>
                 <textarea name="Text1" th:field="*{info}" cols="18" rows="5"></textarea>
-            </p>
-            <p>
-                <!--                Убрать номер айдишника администратора!!!-->
-                <!--<label text="Organizer ID">Organizer id (убрать)</label>
-                <input type="text" th:field="*{organizerId}" placeholder="organizer id">-->
             </p>
 
             <input type="submit" value="Обновить">

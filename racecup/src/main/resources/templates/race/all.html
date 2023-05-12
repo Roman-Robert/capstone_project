@@ -10,31 +10,30 @@
     <div th:replace="/fragments/header :: header"></div>
 </header>
 <main>
-    <!-- Основное содержимое страницы здесь -->
     <div>
         <table>
             <tr>
-                <th>Дата</th>
-                <th>Тип</th>
-                <th>Название</th>
-                <th>Место</th>
-                <th>Дистанция(км)</th>
+                <th>Date</th>
+                <th>Type</th>
+                <th>Race name</th>
+                <th>Location</th>
+                <th>Distance(km)</th>
             </tr>
             <tr th:each="race:${race}">
-                <td th:text="${race.date}">Дата и время</td>
-                <td th:text="${race.raceType.getDisplayRaceType()}">Тип</td>
-                <td th:text="${race.name}">Название</td>
-                <td th:text="${race.location}">Место</td>
-                <td th:text="${race.distanceKm}">Дистанция</td>
-                <td><a th:href="@{/race/about/{raceId}(raceId=${race.id})}">Информация</a></td>
-                <td><a th:href="@{/race/results/{raceId}(raceId=${race.id})}">Результаты</a></td>
-                <td><a th:href="@{/race/registration/{raceId}(raceId=${race.id})}">Участвовать</a></td>
-                <td><a th:href="@{/race/edit/{raceId}(raceId=${race.id})}">Редактировать</a></td>
-                <td><a th:href="@{/race/delete/{raceId}(raceId=${race.id})}">Удалить</a></td>
+                <td th:text="${race.date}">Date</td>
+                <td th:text="${race.raceType.getDisplayRaceType()}">Type</td>
+                <td th:text="${race.name}">Race name</td>
+                <td th:text="${race.location}">Location</td>
+                <td th:text="${race.distanceKm}">Distance</td>
+                <td><a th:href="@{/race/about/{raceId}(raceId=${race.id})}">Info</a></td>
+                <td><a th:href="@{/race/results/{raceId}(raceId=${race.id})}">Results</a></td>
+                <td><a th:href="@{/race/registration/{raceId}(raceId=${race.id})}">Participate</a></td>
+                <td><a th:href="@{/race/edit/{raceId}(raceId=${race.id})}">Edit</a></td>
+                <td><a th:href="@{/race/delete/{raceId}(raceId=${race.id})}">Delete</a></td>
             </tr>
         </table>
         <p>
-            <a href="/race/new">Создать новую гонку</a>
+            <a href="/race/new">Create new race</a>
         </p>
     </div>
 

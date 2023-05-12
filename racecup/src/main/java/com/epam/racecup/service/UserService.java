@@ -25,11 +25,11 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public User getUserById(int id) {
+    public User getUserById(long id) {
         return userRepository.getOne(id);
     }
 
-    public void deleteUserById(int id) {
+    public void deleteUserById(long id) {
         userRepository.deleteById(id);
     }
 }

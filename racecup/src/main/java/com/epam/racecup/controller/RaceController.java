@@ -33,7 +33,7 @@ public class RaceController {
     public String createRace(@ModelAttribute("race") Race race) {
         raceService.saveRace(race);
         //Продумать редирект на "success create race" page
-        return "redirect:/race/all";
+        return "race/success_create_race";
     }
 
     @GetMapping("/delete/{id}")
@@ -41,7 +41,7 @@ public class RaceController {
         raceService.deleteRaceById(id);
         //Продумать редирект на "success delete race" page
         //Продумать подтверждение удаления
-        return "redirect:/race/all";
+        return "race/success_delete_race";
     }
 
     @GetMapping("/edit/{id}")
@@ -51,12 +51,11 @@ public class RaceController {
         return "race/edit";
     }
 
-
     @PostMapping("/edit/{id}")
     public String editRace(Race race) {
         raceService.saveRace(race);
         //Продумать редирект на "success edit race" page
-        return "redirect:/race/all";
+        return "race/success_edit_race";
     }
     @GetMapping("/about/{id}")
     public String aboutRace(@PathVariable("id") int id,

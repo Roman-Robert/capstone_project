@@ -24,11 +24,11 @@ public class RaceService {
         return raceRepository.findAll();
     }
 
-    public Race getRaceById(int id) {
+    public Race getRaceById(long id) {
         return raceRepository.getOne(id);
     }
 
-    public void deleteRaceById(int id) {
+    public void deleteRaceById(long id) {
         raceRepository.deleteById(id);
     }
 
