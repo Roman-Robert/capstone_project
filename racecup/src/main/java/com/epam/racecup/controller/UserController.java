@@ -25,7 +25,7 @@ public class UserController {
     @PostMapping("/new")
     public String createUser(@ModelAttribute("user") User user) {
         userService.saveUser(user);
-        return "redirect:/user/all";
+        return "user/success_create_user";
     }
 
     @GetMapping("/all")
@@ -35,14 +35,14 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public String getUserById(@PathVariable("id") int id,
+    public String getUserById(@PathVariable("id") long id,
                               Model model) {
         model.addAttribute("user", userService.getUserById(id));
         return "user/id";
     }
 
     @GetMapping("/edit/{id}")
-    public String editUserForm(@PathVariable("id") int id,
+    public String editUserForm(@PathVariable("id") long id,
                            Model model) {
         model.addAttribute("user", userService.getUserById(id));
         return "user/edit";
@@ -52,15 +52,21 @@ public class UserController {
     public String editUser(User user) {
         userService.saveUser(user);
 //        return "redirect:/account";
-        return "redirect:/user/all";
+        return "user/success_edit_user";
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteUser(@PathVariable("id") int id) {
+    public String deleteUser(@PathVariable("id") long id) {
         //Продумать редирект на "success delete user" page
         //менять только статус юзера is_active, а не удалять
         userService.deleteUserById(id);
-        return "redirect:/user/all";
+        return "user/success_delete_user";
+    }
+
+    @GetMapping("/{id}/account")
+    public String userAccount(@PathVariable("id") long id, Model model) {
+        model.addAttribute("user", userService.getUserById(id));
+        return "user/account";
     }
 
 }

@@ -12,8 +12,15 @@
 <main>
 
     <div>
-        <h2>Results of past races</h2>
-        <p>Select race:</p>
+        <h3>Race results</h3>
+        <form th:action="@{/result/${selectedRace.id}}" method="GET">
+            <select name="selectedRace" onchange="window.location.href=this.value;">
+                <option value="">Select a past race</option>
+                <th:block th:each="race : ${races}">
+                    <option th:value="@{/result/{id}(id=${race.id})}" th:text="${race.name}"></option>
+                </th:block>
+            </select>
+        </form>
     </div>
 
 </main>

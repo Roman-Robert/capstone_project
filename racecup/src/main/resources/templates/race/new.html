@@ -17,24 +17,15 @@
             <p>
                 <select th:field="*{raceType}">
                     <option th:each="raceType : ${T(com.epam.racecup.model.RaceType).values()}"
-                            th:value="${raceType}" th:text="${raceType.getDisplayRaceType()}"></option>
+                            th:value="${raceType}"
+                            th:text="${raceType.getDisplayRaceType()}"></option>
                 </select>
             </p>
-            <p>
-                <input type="text" th:field="*{name}" placeholder="Race name">
-            </p>
-            <p>
-                <input type="text" th:field="*{location}" placeholder="Location">
-            </p>
-            <p>
-                <input type="number" step="0.01" min="0" th:field="*{distanceKm}" placeholder="Distance(km) 0.00">
-            </p>
-            <p>
-                <input type="date" th:field="*{date}">
-            </p>
-            <p>
-                <textarea name="Text1" th:field="*{info}" cols="18" rows="5"></textarea>
-            </p>
+            <p><input type="text" th:field="*{name}" placeholder="Race name"></p>
+            <p><input type="text" th:field="*{location}" placeholder="Location"></p>
+            <p><input type="number" step="0.01" min="0" th:field="*{distanceKm}" placeholder="Distance(km) 0.00"></p>
+            <p><input type="date" th:field="*{date}"></p>
+            <p><textarea name="Text1" th:field="*{info}" cols="18" rows="5"></textarea></p>
 
             <input type="submit" value="Create race">
 

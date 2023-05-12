@@ -31,6 +31,4 @@ public class RaceService {
     public void deleteRaceById(long id) {
         raceRepository.deleteById(id);
     }
-
-
 }

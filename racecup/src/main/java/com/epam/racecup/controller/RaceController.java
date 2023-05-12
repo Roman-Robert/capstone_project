@@ -37,7 +37,7 @@ public class RaceController {
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteRace(@PathVariable("id") int id) {
+    public String deleteRace(@PathVariable("id") long id) {
         raceService.deleteRaceById(id);
         //Продумать редирект на "success delete race" page
         //Продумать подтверждение удаления
@@ -45,8 +45,7 @@ public class RaceController {
     }
 
     @GetMapping("/edit/{id}")
-    public String editRace(@PathVariable("id") int id,
-                           Model model) {
+    public String editRace(@PathVariable("id") long id, Model model) {
         model.addAttribute("race", raceService.getRaceById(id));
         return "race/edit";
     }
@@ -58,9 +57,9 @@ public class RaceController {
         return "race/success_edit_race";
     }
     @GetMapping("/about/{id}")
-    public String aboutRace(@PathVariable("id") int id,
-                            Model model) {
+    public String aboutRace(@PathVariable("id") long id, Model model) {
         model.addAttribute("race", raceService.getRaceById(id));
         return "race/about";
     }
+
 }

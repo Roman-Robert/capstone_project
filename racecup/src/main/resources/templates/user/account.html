@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>RaceCup</title>
+    <link th:href="@{/style.css}" rel="stylesheet" >
+</head>
+<body>
+<header>
+    <div th:replace="/fragments/header :: header"></div>
+</header>
+<main>
+
+    <div>
+        <p><h3 th:text="${user.username}">username</h3></p>
+        <p><a style="color: grey;" th:text="${user.role}">role</a></p>
+        <p>
+            <a th:text="${user.firstName}">first name</a>
+            <a th:text="${user.lastName}">last name</a>
+        </p>
+        <p><a th:text="${user.email}">email</a></p>
+
+<!--        Implement this ref-->
+        <p><a href="#">List of my results</a></p>
+        <p><a th:href="@{/user/edit/{id}(id=${user.id})}">Edit personal info</a></p>
+        <p><a th:href="@{/user/delete/{id}(id=${user.id})}">Delete account</a></p>
+    </div>
+
+</main>
+<footer>
+    <div th:replace="/fragments/footer :: footer"></div>
+</footer>
+</body>
+</html>
