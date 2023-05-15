@@ -17,7 +17,6 @@ public class Athlete {
 
     @Id
     @Column(name = "id")
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column(name = "birthday")

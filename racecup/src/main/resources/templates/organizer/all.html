@@ -2,7 +2,7 @@
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>All athletes</title>
+  <title>All organizers</title>
   <link th:href="@{/style.css}" rel="stylesheet" >
 </head>
 <body>
@@ -16,14 +16,12 @@
       <tr>
         <th>First name</th>
         <th>Last name</th>
-        <th>Team</th>
-        <th>Country</th>
+        <th>Contact</th>
       </tr>
-      <tr th:each="athlete:${athletes}">
-        <td th:text="${athlete.getUser().getFirstName()}">First name</td>
-        <td th:text="${athlete.getUser().getLastName()}">Last name</td>
-        <td th:text="${athlete.getTeam()}">Team</td>
-        <td th:text="${athlete.getCountry()}">Country</td>
+      <tr th:each="organizer:${organizers}">
+        <td th:text="${organizer.getUser().getFirstName()}">First name</td>
+        <td th:text="${organizer.getUser().getLastName()}">Last name</td>
+        <td th:text="${organizer.getMobilePhone()}">Phone</td>
       </tr>
     </table>
   </div>

@@ -16,7 +16,6 @@ public class Organizer {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column(name="mobile_phone")

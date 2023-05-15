@@ -3,6 +3,7 @@ package com.epam.racecup.model;
 public enum Role {
     USER("User"),
     ATHLETE("Athlete"),
+    ORGANIZER("Organizer"),
     ADMIN("Administrator");
 
     private final String role;

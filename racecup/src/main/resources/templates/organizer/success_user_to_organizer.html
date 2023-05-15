@@ -2,7 +2,7 @@
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>RaceCup</title>
+  <title>Success registration</title>
   <link th:href="@{/style.css}" rel="stylesheet" >
 </head>
 <body>
@@ -12,10 +12,10 @@
 <main>
 
   <div>
-    <h3>You have successfully registered as athlete!</h3>
-    <h3>Now you can take a part in races</h3>
+    <h3>You have successfully registered as organizer!</h3>
+    <h3>Now you can create races</h3>
     <p>
-      <a th:href="@{/user/{id}/account (id=${athlete.id})}">Back to account</a>
+      <a th:href="@{/user/{id}/account (id=${organizer.id})}">Back to account</a>
     </p>
   </div>
 
