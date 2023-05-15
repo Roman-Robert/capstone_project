@@ -8,16 +8,21 @@ import java.sql.Time;
 @Data
 @Table(name="race_result")
 public class RaceResult {
+
     @Id
     @Column(name="id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int resultId;
+    private long resultId;
+
     @Column(name = "athlete_id")
-    private int athleteId;
+    private long athleteId;
+
     @Column(name="race_id")
-    private int raceId;
+    private long raceId;
+
     @Column(name = "transit_time", columnDefinition = "TIME")
     private Time transitTime;
+
     @Column(name="status")
-    private Status status;
+    private ResultStatus resultStatus;
 }

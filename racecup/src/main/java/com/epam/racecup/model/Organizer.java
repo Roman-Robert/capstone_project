@@ -1,33 +1,24 @@
 package com.epam.racecup.model;
 
-public class Organizer extends User{
+import lombok.Data;
 
-    private long user_id;
+import javax.persistence.*;
+
+@Entity
+@Data
+@Table(name="organizer")
+@DiscriminatorValue("organizer")
+public class Organizer {
+
+    @OneToOne
+    @JoinColumn(name = "id", referencedColumnName = "id")
+    private User user;
+
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+
+    @Column(name="mobile_phone")
     private String mobilePhone;
-
-    public Organizer() {}
-
-    public long getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
-    }
-
-    public String getMobilePhone() {
-        return mobilePhone;
-    }
-
-    public void setMobilePhone(String mobilePhone) {
-        this.mobilePhone = mobilePhone;
-    }
-
-    @Override
-    public String toString() {
-        return "Organizer{" +
-                "user_id=" + user_id +
-                ", mobilePhone='" + mobilePhone + '\'' +
-                '}';
-    }
 }

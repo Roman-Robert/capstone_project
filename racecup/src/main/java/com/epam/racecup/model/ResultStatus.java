@@ -1,6 +1,6 @@
 package com.epam.racecup.model;
 
-public enum Status {
+public enum ResultStatus {
     DNS,
     DNF,
     DSQ

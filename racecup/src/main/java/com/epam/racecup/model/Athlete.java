@@ -3,16 +3,16 @@ package com.epam.racecup.model;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Data
 @Table(name = "athlete")
-public class Athlete implements Serializable {
+@DiscriminatorValue("athlete")
+public class Athlete {
 
     @OneToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "id", referencedColumnName = "id")
     private User user;
 
     @Id

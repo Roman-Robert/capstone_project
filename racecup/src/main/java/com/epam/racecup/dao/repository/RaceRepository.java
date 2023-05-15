@@ -1,4 +1,4 @@
-package com.epam.racecup.dao;
+package com.epam.racecup.dao.repository;
 
 import com.epam.racecup.model.Race;
 import org.springframework.data.jpa.repository.JpaRepository;

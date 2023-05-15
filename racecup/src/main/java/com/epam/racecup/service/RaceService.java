@@ -1,6 +1,6 @@
 package com.epam.racecup.service;
 
-import com.epam.racecup.dao.RaceRepository;
+import com.epam.racecup.dao.repository.RaceRepository;
 import com.epam.racecup.model.Race;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>RaceCup</title>
-    <link th:href="@{/style.css}" rel="stylesheet" >
+    <link th:href="@{/style.css}" rel="stylesheet">
 </head>
 <body>
 <header>
@@ -15,13 +15,12 @@
         <h1 th:text="${race.name}">Race name</h1>
         <h4 th:text="${race.location}">Location</h4>
         <h4 th:text="${race.date}">Date</h4>
-        <h4 th:text="${race.raceType}">Type</h4>
-        <h4 th:text="${race.distanceKm}">Distance</h4>
+        <h4 th:text="${race.raceType.getDisplayRaceType()}">Type</h4>
+        <h4 th:text="${race.distanceKm + ' km'}">Distance</h4>
         <p th:text="${race.info}">Info</p>
 
         <a href="/race/all">Back to race list</a>
     </div>
-
 
 
 </main>

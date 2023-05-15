@@ -5,11 +5,14 @@ import com.epam.racecup.service.RaceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/race")
-public class RaceController {
+public class RaceController{
 
     private final RaceService raceService;
 
@@ -30,16 +33,19 @@ public class RaceController {
     }
 
     @PostMapping("/new")
-    public String createRace(@ModelAttribute("race") Race race) {
+    public String createRace(@ModelAttribute("race") @Valid Race race,
+                             BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors()) {
+            return "race/new";
+        }
         raceService.saveRace(race);
-        //Продумать редирект на "success create race" page
         return "race/success_create_race";
     }
 
     @GetMapping("/delete/{id}")
     public String deleteRace(@PathVariable("id") long id) {
         raceService.deleteRaceById(id);
-        //Продумать редирект на "success delete race" page
         //Продумать подтверждение удаления
         return "race/success_delete_race";
     }
@@ -51,9 +57,12 @@ public class RaceController {
     }
 
     @PostMapping("/edit/{id}")
-    public String editRace(Race race) {
+    public String editRace(@Valid Race race, BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors()) {
+            return "user/edit";
+        }
         raceService.saveRace(race);
-        //Продумать редирект на "success edit race" page
         return "race/success_edit_race";
     }
     @GetMapping("/about/{id}")

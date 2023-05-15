@@ -5,16 +5,21 @@ import com.epam.racecup.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/user")
 public class UserController {
     private final UserService userService;
+//    private final UserValidator userValidator;
 
     @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
+//        this.userValidator = userValidator;
     }
 
     @GetMapping("/new")
@@ -23,7 +28,12 @@ public class UserController {
     }
 
     @PostMapping("/new")
-    public String createUser(@ModelAttribute("user") User user) {
+    public String createUser(@ModelAttribute("user") @Valid User user,
+                             BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors()) {
+            return "user/new";
+        }
         userService.saveUser(user);
         return "user/success_create_user";
     }
@@ -49,24 +59,33 @@ public class UserController {
     }
 
     @PostMapping("/edit/{id}")
-    public String editUser(User user) {
+    public String editUser(@Valid User user,
+                           BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors()) {
+            return "user/edit";
+        }
         userService.saveUser(user);
-//        return "redirect:/account";
         return "user/success_edit_user";
     }
 
     @GetMapping("/delete/{id}")
     public String deleteUser(@PathVariable("id") long id) {
-        //Продумать редирект на "success delete user" page
         //менять только статус юзера is_active, а не удалять
         userService.deleteUserById(id);
         return "user/success_delete_user";
     }
 
     @GetMapping("/{id}/account")
-    public String userAccount(@PathVariable("id") long id, Model model) {
+    public String userAccount(@PathVariable("id") long id,
+                              Model model) {
         model.addAttribute("user", userService.getUserById(id));
         return "user/account";
+    }
+
+    @GetMapping("/sign_in")
+    public String signIn() {
+        return "user/sign_in";
     }
 
 }

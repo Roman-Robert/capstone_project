@@ -1,23 +1,21 @@
 package com.epam.racecup.model;
 
-public class Admin extends User{
-    private long user_id;
+import lombok.Data;
 
-    public Admin() {
-    }
+import javax.persistence.*;
 
-    public long getUserId() {
-        return user_id;
-    }
+@Entity
+@Data
+@Table(name = "admin")
+@DiscriminatorValue("admin")
+public class Admin {
 
-    public void setUserId(long user_id) {
-        this.user_id = user_id;
-    }
+    @OneToOne
+    @JoinColumn(name = "id", referencedColumnName = "id")
+    private User user;
 
-    @Override
-    public String toString() {
-        return "Admin{" +
-                "user_id=" + user_id +
-                '}';
-    }
+    @Id
+    @Column(name="id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 }
