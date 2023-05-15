@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User -> Athlete</title>
+    <link th:href="@{/style.css}" rel="stylesheet">
+</head>
+<body>
+<header>
+    <div th:replace="/fragments/header :: header"></div>
+</header>
+<main>
+
+    <div>
+        <form th:action="@{/athlete/{id}/new (id=${athlete.id})}" th:object="${athlete}" th:method="POST">
+            <h3>Athlete registration form</h3>
+            <p>
+                <label>Enter birthday: </label>
+                <input type="date" th:field="*{birthday}">
+            </p>
+            <p>
+                <label>Choose gender: </label>
+                <select th:field="*{gender}">
+                    <option th:each="gender : ${T(com.epam.racecup.model.Gender).values()}"
+                            th:value="${gender}"
+                            th:text="${gender.getValue()}"></option>
+                </select>
+            </p>
+            <p>
+                <label>Enter country: </label>
+                <input type="text" th:field="*{country}" placeholder="Country">
+            </p>
+            <p>
+                <label>Enter city: </label>
+                <input type="text" th:field="*{city}" placeholder="City">
+            </p>
+            <p>
+                <label>Enter team: </label>
+                <input type="text" th:field="*{team}" placeholder="Team">
+            </p>
+            <p>
+                <input type="submit" value="Register">
+            </p>
+        </form>
+    </div>
+
+</main>
+<footer>
+    <div th:replace="/fragments/footer :: footer"></div>
+</footer>
+</body>
+</html>

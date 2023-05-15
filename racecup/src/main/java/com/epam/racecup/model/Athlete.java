@@ -3,7 +3,7 @@ package com.epam.racecup.model;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.sql.Date;
 
 @Entity
 @Data
@@ -17,7 +17,7 @@ public class Athlete {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column(name = "birthday")
