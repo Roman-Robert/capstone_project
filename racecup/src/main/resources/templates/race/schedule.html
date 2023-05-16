@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>List of all races</title>
+  <link th:href="@{/style.css}" rel="stylesheet" >
+</head>
+<body>
+<header>
+  <div th:replace="/fragments/header :: header"></div>
+</header>
+<main>
+  <div>
+    <table>
+      <tr>
+        <th>Date</th>
+        <th>Type</th>
+        <th>Race name</th>
+        <th>Location</th>
+        <th>Distance(km)</th>
+      </tr>
+      <tr th:each="race:${races}">
+        <td th:text="${race.date}">Date</td>
+        <td th:text="${race.raceType.getDisplayRaceType()}">Type</td>
+        <td th:text="${race.name}">Race name</td>
+        <td th:text="${race.location}">Location</td>
+        <td th:text="${race.distanceKm}">Distance</td>
+        <td><a th:href="@{/race/about/{raceId}(raceId=${race.id})}">Info</a></td>
+        <td><a th:href="@{/result/{raceId}(raceId=${race.id})}">Results</a></td>
+        <td><a th:href="@{/race/registration/{raceId}(raceId=${race.id})}">Participate</a></td>
+        <td><a th:href="@{/race/edit/{raceId}(raceId=${race.id})}">Edit</a></td>
+        <td><a th:href="@{/race/delete/{raceId}(raceId=${race.id})}">Delete</a></td>
+      </tr>
+    </table>
+    <p>
+      <a href="/race/new">Create new race</a>
+    </p>
+  </div>
+
+
+</main>
+<footer>
+  <div th:replace="/fragments/footer :: footer"></div>
+</footer>
+</body>
+</html>

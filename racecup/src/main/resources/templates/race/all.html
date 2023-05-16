@@ -25,6 +25,7 @@
                 <td th:text="${race.name}">Race name</td>
                 <td th:text="${race.location}">Location</td>
                 <td th:text="${race.distanceKm}">Distance</td>
+
                 <td><a th:href="@{/race/about/{raceId}(raceId=${race.id})}">Info</a></td>
                 <td><a th:href="@{/result/{raceId}(raceId=${race.id})}">Results</a></td>
                 <td><a th:href="@{/race/registration/{raceId}(raceId=${race.id})}">Participate</a></td>

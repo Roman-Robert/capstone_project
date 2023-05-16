@@ -5,6 +5,7 @@ import com.epam.racecup.model.Race;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
 import java.util.List;
 
 @Service
@@ -26,6 +27,14 @@ public class RaceService {
 
     public Race getRaceById(long id) {
         return raceRepository.getOne(id);
+    }
+
+    public List<Race> findByDateAfter(Date date) {
+        return raceRepository.findByDateAfter(date);
+    }
+
+    public List<Race> findByDateBefore(Date date) {
+        return raceRepository.findByDateBefore(date);
     }
 
     public void deleteRaceById(long id) {

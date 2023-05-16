@@ -9,6 +9,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.sql.Date;
+import java.time.LocalDate;
 
 @Controller
 @RequestMapping("/race")
@@ -22,9 +24,16 @@ public class RaceController {
     }
 
     @GetMapping("/all")
-    public String getAllRacesForSchedule(Model model) {
+    public String getAllRaces(Model model) {
         model.addAttribute("race", raceService.getAllRaces());
         return "race/all";
+    }
+
+    @GetMapping("/schedule")
+    public String getAllRacesForSchedule(Model model) {
+        Date today = Date.valueOf(LocalDate.now());
+        model.addAttribute("races", raceService.findByDateAfter(today));
+        return "race/schedule";
     }
 
     @GetMapping("/new")

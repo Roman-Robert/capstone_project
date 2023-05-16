@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.sql.Date;
+import java.time.LocalDate;
+
 @Controller
 @RequestMapping("/result")
 public class ResultController {
@@ -27,7 +30,8 @@ public class ResultController {
 
     @GetMapping("")
     public String result(Model model) {
-        model.addAttribute("races", raceService.getAllRaces());
+        Date today = Date.valueOf(LocalDate.now());
+        model.addAttribute("races", raceService.findByDateBefore(today));
         return "result/result";
     }
 

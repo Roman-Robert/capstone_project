@@ -15,7 +15,6 @@
 
         <table>
             <tr>
-                <th>result_id</th>
                 <th>Place</th>
                 <th>athlete_id</th>
                 <th>Name</th>
@@ -24,7 +23,6 @@
                 <th>status</th>
             </tr>
             <tr th:each="result:${results}">
-                <td th:text="${result.resultId}"></td>
                 <td>Place</td>
                 <td th:text="${result.athleteId}"></td>
                 <td>FullName</td>
