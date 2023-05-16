@@ -12,7 +12,7 @@ import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/race")
-public class RaceController{
+public class RaceController {
 
     private final RaceService raceService;
 
@@ -45,8 +45,10 @@ public class RaceController{
 
     @GetMapping("/delete/{id}")
     public String deleteRace(@PathVariable("id") long id) {
-        raceService.deleteRaceById(id);
-        //Продумать подтверждение удаления
+        ////Changing Race "is_actual" status 1->0
+        Race race = raceService.getRaceById(id);
+        race.setIsActual(0);
+        raceService.saveRace(race);
         return "race/success_delete_race";
     }
 
@@ -57,14 +59,21 @@ public class RaceController{
     }
 
     @PostMapping("/edit/{id}")
-    public String editRace(@Valid Race race, BindingResult bindingResult) {
+    public String editRace(@PathVariable("id") Long id,
+                           @ModelAttribute("race") @Valid Race race,
+                           BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
             return "user/edit";
         }
+        //Saving old "organizer_id", "is_actual"
+        Race oldRace = raceService.getRaceById(id);
+        race.setOrganizerId(oldRace.getOrganizerId());
+        race.setIsActual(oldRace.getIsActual());
         raceService.saveRace(race);
         return "race/success_edit_race";
     }
+
     @GetMapping("/about/{id}")
     public String aboutRace(@PathVariable("id") long id, Model model) {
         model.addAttribute("race", raceService.getRaceById(id));

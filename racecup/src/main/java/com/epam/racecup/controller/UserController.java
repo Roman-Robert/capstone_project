@@ -52,27 +52,34 @@ public class UserController {
     }
 
     @GetMapping("/edit/{id}")
-    public String editUserForm(@PathVariable("id") long id,
-                           Model model) {
+    public String editUserForm(@PathVariable("id") long id, Model model) {
         model.addAttribute("user", userService.getUserById(id));
         return "user/edit";
     }
 
     @PostMapping("/edit/{id}")
-    public String editUser(@Valid User user,
+    public String editUser(@PathVariable("id") long id,
+                           @ModelAttribute("user") @Valid User user,
                            BindingResult bindingResult) {
-
         if (bindingResult.hasErrors()) {
             return "user/edit";
         }
+        //Saving old password, isActive, role
+        User oldUser = userService.getUserById(id);
+        user.setPassword(oldUser.getPassword());
+        user.setIsActive(oldUser.getIsActive());
+        user.setRole(oldUser.getRole());
+
         userService.saveUser(user);
         return "user/success_edit_user";
     }
 
     @GetMapping("/delete/{id}")
     public String deleteUser(@PathVariable("id") long id) {
-        //менять только статус юзера is_active, а не удалять
-        userService.deleteUserById(id);
+        //Changing User status 1->0
+        User user = userService.getUserById(id);
+        user.setIsActive(0);
+        userService.saveUser(user);
         return "user/success_delete_user";
     }
 

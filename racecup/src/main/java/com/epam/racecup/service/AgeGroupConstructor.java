@@ -9,7 +9,7 @@ public class AgeGroupConstructor {
     Logger logger = Logger.getLogger(AgeGroupConstructor.class);
 
     public String getAge(Athlete athlete, Date raceDate) {
-        String group=athlete.getGender().toString();
+        String group=athlete.getGender().getValue();
         int age = athlete.getBirthday().getYear() - raceDate.getYear();
 
         if (age >=18 && age<25) {
