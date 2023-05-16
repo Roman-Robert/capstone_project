@@ -1,6 +1,8 @@
 package com.epam.racecup.controller;
 
+import com.epam.racecup.service.AthleteService;
 import com.epam.racecup.service.RaceService;
+import com.epam.racecup.service.ResultService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,11 +15,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ResultController {
 
     private final RaceService raceService;
-//    private final ResultService resultService;
+    private final ResultService resultService;
+    private final AthleteService athleteService;
 
     @Autowired
-    public ResultController(RaceService raceService) {
+    public ResultController(RaceService raceService, ResultService resultService, AthleteService athleteService) {
         this.raceService = raceService;
+        this.resultService = resultService;
+        this.athleteService = athleteService;
     }
 
     @GetMapping("")
@@ -29,7 +34,8 @@ public class ResultController {
     @GetMapping("/{id}")
     public String getResultByRaceId(@PathVariable("id") long id, Model model) {
         model.addAttribute("race", raceService.getRaceById(id));
-        return "result/id";
+        model.addAttribute("results", resultService.getRaceResultsByRaceId(id));
+        return "result/race_id";
     }
 
 }

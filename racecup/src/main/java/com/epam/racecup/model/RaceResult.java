@@ -10,7 +10,7 @@ import java.sql.Time;
 public class RaceResult {
 
     @Id
-    @Column(name="id")
+    @Column(name="result_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long resultId;
 

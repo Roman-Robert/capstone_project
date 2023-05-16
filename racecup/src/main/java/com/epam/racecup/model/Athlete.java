@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.List;
 
 @Entity
 @Data
@@ -34,4 +35,10 @@ public class Athlete {
 
     @Column(name = "team")
     private String team;
+
+    @ManyToMany
+    @JoinTable(name = "race_result",
+            joinColumns = @JoinColumn(name = "athlete_id"),
+            inverseJoinColumns = @JoinColumn(name = "race_id"))
+    private List<Race> races;
 }

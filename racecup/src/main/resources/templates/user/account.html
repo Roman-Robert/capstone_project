@@ -24,10 +24,15 @@
         </p>
         <p><a th:text="${user.email}">email</a></p>
 
-<!--        Implement this ref-->
+<!--        Implement for users only-->
         <p><a th:href="@{/athlete/{id}/new (id=${user.id})}">Register as athlete</a></p>
+
         <p><a th:href="@{/organizer/{id}/new (id=${user.id})}">Register as organizer</a></p>
+<!--        Implement for athletes only-->
+        <p><a th:href="@{/result/participate/athlete_id={athlete_id} (athlete_id=${user.id})}">Take part in race</a></p>
+<!--        Implement this ref-->
         <p><a href="#">List of my results</a></p>
+
         <p><a th:href="@{/user/edit/{id}(id=${user.id})}">Edit personal info</a></p>
         <p><a th:href="@{/user/delete/{id}(id=${user.id})}">Delete account</a></p>
     </div>

@@ -6,6 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import java.sql.Date;
+import java.util.List;
 
 @Entity
 @Data
@@ -44,7 +45,9 @@ public class Race {
     @Column(name = "organizer_id")
     private long organizerId = 1;
 
-    //реализовать автозаполнение на 1
     @Column(name = "is_actual")
     private int isActual = 1;
+
+    @ManyToMany(mappedBy = "races")
+    private List<Athlete> athletes;
 }

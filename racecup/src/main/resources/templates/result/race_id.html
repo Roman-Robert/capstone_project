@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Show race results by race ID</title>
+    <link th:href="@{/style.css}" rel="stylesheet">
+</head>
+<body>
+<header>
+    <div th:replace="/fragments/header :: header"></div>
+</header>
+<main>
+    <div>
+        <h2>Result of "<span th:text="${race.name}"></span>" race</h2>
+
+        <table>
+            <tr>
+                <th>result_id</th>
+                <th>Place</th>
+                <th>athlete_id</th>
+                <th>Name</th>
+                <th>Group</th>
+                <th>transit_time</th>
+                <th>status</th>
+            </tr>
+            <tr th:each="result:${results}">
+                <td th:text="${result.resultId}"></td>
+                <td>Place</td>
+                <td th:text="${result.athleteId}"></td>
+                <td>FullName</td>
+                <td>Group</td>
+                <td th:text="${result.transitTime}"></td>
+                <td th:text="${result.resultStatus}"></td>
+            </tr>
+        </table>
+
+        <p><a href="/result">Back to results</a></p>
+    </div>
+</main>
+<footer>
+    <div th:replace="/fragments/footer :: footer"></div>
+</footer>
+</body>
+</html>
