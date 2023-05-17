@@ -41,7 +41,7 @@ public class OrganizerController {
 
         //change status user->organizer
         User updatedUser = userService.getUserById(id);
-        updatedUser.setRole(Role.ORGANIZER.getRole());
+        updatedUser.setRole(Role.ROLE_ORGANIZER.getRole());
         userService.saveUser(updatedUser);
         return "organizer/success_user_to_organizer";
     }

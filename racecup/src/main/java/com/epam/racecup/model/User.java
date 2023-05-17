@@ -45,7 +45,7 @@ public class User {
     private int isActive = 1;
 
     @Column(name = "role")
-    private String role = Role.USER.getRole();
+    private String role = Role.ROLE_USER.getRole();
 
 
     //////////////////////////////////////////////

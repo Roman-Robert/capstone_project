@@ -1,14 +1,14 @@
 package com.epam.racecup.controller;
 
+import com.epam.racecup.model.Race;
+import com.epam.racecup.model.RaceResult;
 import com.epam.racecup.service.AthleteService;
 import com.epam.racecup.service.RaceService;
 import com.epam.racecup.service.ResultService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
 import java.time.LocalDate;
@@ -35,6 +35,8 @@ public class ResultController {
         return "result/result";
     }
 
+
+    //implement the output of the full name, the calculation of the age group, assignment of places
     @GetMapping("/{id}")
     public String getResultByRaceId(@PathVariable("id") long id, Model model) {
         model.addAttribute("race", raceService.getRaceById(id));
@@ -42,4 +44,20 @@ public class ResultController {
         return "result/race_id";
     }
 
+    //page for enter race result by id
+    @GetMapping("/{id}/set_result")
+    public String setRaceResultsForm(@PathVariable("id") Long id, Model model) {
+        model.addAttribute("race", raceService.getRaceById(id));
+        model.addAttribute("results", resultService.getRaceResultsByRaceId(id));
+        return "/result/set_result";
+    }
+
+    //Post mapping method doesn't work!!
+    @PostMapping("/{id}/set_result")
+    public String setRaceResults(@PathVariable("id") Long id,
+                                 @ModelAttribute("race") Race race,
+                                 @ModelAttribute("results") RaceResult raceResult) {
+        resultService.saveResult(raceResult);
+        return "redirect:/result/"+race.getId();
+    }
 }

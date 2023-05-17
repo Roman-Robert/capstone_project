@@ -33,5 +33,8 @@ public class ResultService {
         return athlete.getUser().getFirstName() + " " + athlete.getUser().getLastName();
     }
 
+    public void saveResult(RaceResult raceResult) {
+        resultRepository.save(raceResult);
+    }
 }
 

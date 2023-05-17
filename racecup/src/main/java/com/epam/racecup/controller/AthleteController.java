@@ -40,7 +40,7 @@ public class AthleteController {
 
         //change status user->athlete
         User updatedUser = userService.getUserById(id);
-        updatedUser.setRole(Role.ATHLETE.getRole());
+        updatedUser.setRole(Role.ROLE_ATHLETE.getRole());
         userService.saveUser(updatedUser);
         return "athlete/success_user_to_athlete";
     }

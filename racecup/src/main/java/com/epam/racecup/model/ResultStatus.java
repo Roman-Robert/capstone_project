@@ -5,13 +5,13 @@ public enum ResultStatus {
     DNF("DNF"),
     DSQ("DSQ");
 
-    private final String value;
+    private final String resultStatus;
 
-    ResultStatus(String value) {
-        this.value = value;
+    private ResultStatus(String resultStatus) {
+        this.resultStatus = resultStatus;
     }
 
     public String getValue() {
-        return value;
+        return resultStatus;
     }
 }
