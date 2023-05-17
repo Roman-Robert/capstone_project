@@ -46,3 +46,28 @@
       padding: 10px;
     }
 
+    .pagination {
+        display: inline-block;
+        margin-top: 10px;
+    }
+
+    .pagination span {
+        margin-right: 5px;
+    }
+
+    .pagination a {
+        display: inline-block;
+        padding: 5px;
+        margin-right: 5px;
+        text-decoration: none;
+        color: #000;
+    }
+
+    .pagination a.active {
+        font-weight: bold;
+    }
+
+    .pagination a.inactive {
+        color: #ccc;
+    }
+

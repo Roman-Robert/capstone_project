@@ -34,9 +34,26 @@
             </tr>
         </table>
 
-        <p>
-            <a href="/user/new">Create new user</a>
-        </p>
+        <div th:if="${users.totalPages > 0}" class="pagination">
+            <span>Page:</span>
+            <th:block th:each="pageNumber : ${pageNumbers}">
+                <a th:href="@{/user/all(size=${users.size}, page=${pageNumber})}"
+                   th:text="${pageNumber}"
+                   th:class="${pageNumber == users.number + 1} ? 'active' : 'inactive'">
+                </a>
+            </th:block>
+        </div>
+
+        <div>
+            <form th:action="@{/user/all}" method="get">
+                <label for="pageSize">Items per page:</label>
+                <select id="pageSize" name="size" onchange="this.form.submit()">
+                    <option value="5" th:selected="${users.size == 5}">5</option>
+                    <option value="10" th:selected="${users.size == 10}">10</option>
+                    <option value="20" th:selected="${users.size == 20}">20</option>
+                </select>
+            </form>
+        </div>
 
     </div>
 
