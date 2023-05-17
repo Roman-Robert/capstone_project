@@ -10,7 +10,6 @@
     <div th:replace="/fragments/header :: header"></div>
 </header>
 <main>
-
     <div>
         <table>
             <tr>
@@ -46,7 +45,7 @@
 
         <div>
             <form th:action="@{/user/all}" method="get">
-                <label for="pageSize">Items per page:</label>
+                <label for="pageSize">Users per page:</label>
                 <select id="pageSize" name="size" onchange="this.form.submit()">
                     <option value="5" th:selected="${users.size == 5}">5</option>
                     <option value="10" th:selected="${users.size == 10}">10</option>
@@ -54,9 +53,7 @@
                 </select>
             </form>
         </div>
-
     </div>
-
 </main>
 <footer>
     <div th:replace="/fragments/footer :: footer"></div>

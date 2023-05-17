@@ -3,6 +3,8 @@ package com.epam.racecup.service;
 import com.epam.racecup.dao.repository.RaceRepository;
 import com.epam.racecup.model.Race;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
@@ -21,16 +23,16 @@ public class RaceService {
     public void saveRace(Race race) {
         raceRepository.save(race);
     }
-    public List<Race> getAllRaces() {
-        return raceRepository.findAll();
+    public Page<Race> getAllRaces(Pageable pageable) {
+        return raceRepository.findAll(pageable);
     }
 
     public Race getRaceById(long id) {
         return raceRepository.getOne(id);
     }
 
-    public List<Race> findByDateAfter(Date date) {
-        return raceRepository.findByDateAfter(date);
+    public Page<Race> findByDateAfter(Date date, Pageable pageable) {
+        return raceRepository.findByDateAfter(date, pageable);
     }
 
     public List<Race> findByDateBefore(Date date) {

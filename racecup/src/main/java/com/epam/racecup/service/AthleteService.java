@@ -3,9 +3,9 @@ package com.epam.racecup.service;
 import com.epam.racecup.dao.repository.AthleteRepository;
 import com.epam.racecup.model.Athlete;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class AthleteService {
@@ -21,8 +21,8 @@ public class AthleteService {
         athleteRepository.save(athlete);
     }
 
-    public List<Athlete> getAllAthletes() {
-        return athleteRepository.findAll();
+    public Page<Athlete> getAllAthletes(Pageable pageable) {
+        return athleteRepository.findAll(pageable);
     }
 
     public Athlete getAthleteByUserId(long id) {

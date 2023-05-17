@@ -3,6 +3,8 @@ package com.epam.racecup.controller;
 import com.epam.racecup.model.Race;
 import com.epam.racecup.service.RaceService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -11,6 +13,10 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Controller
 @RequestMapping("/race")
@@ -24,15 +30,45 @@ public class RaceController {
     }
 
     @GetMapping("/all")
-    public String getAllRaces(Model model) {
-        model.addAttribute("race", raceService.getAllRaces());
+    public String getAllRaces(Model model,
+                              @RequestParam("page") Optional<Integer> page,
+                              @RequestParam("size") Optional<Integer> size) {
+        int currentPage = page.orElse(1);
+        int pageSize = size.orElse(10);
+
+        Page<Race> allRacesPaged = raceService.getAllRaces(PageRequest.of(currentPage - 1, pageSize));
+
+        model.addAttribute("races", allRacesPaged);
+
+        int totalPages = allRacesPaged.getTotalPages();
+
+        if (totalPages > 0) {
+            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
+                    .boxed()
+                    .collect(Collectors.toList());
+            model.addAttribute("pageNumbers", pageNumbers);
+        }
         return "race/all";
     }
 
     @GetMapping("/schedule")
-    public String getAllRacesForSchedule(Model model) {
+    public String getAllRacesForSchedule(Model model,
+                                         @RequestParam("page") Optional<Integer> page,
+                                         @RequestParam("size") Optional<Integer> size) {
+        int currentPage = page.orElse(1);
+        int pageSize = size.orElse(10);
         Date today = Date.valueOf(LocalDate.now());
-        model.addAttribute("races", raceService.findByDateAfter(today));
+        Page<Race> allRacesPaged = raceService.findByDateAfter(today, PageRequest.of(currentPage - 1, pageSize));
+        model.addAttribute("races", allRacesPaged);
+
+        int totalPages = allRacesPaged.getTotalPages();
+
+        if (totalPages > 0) {
+            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
+                    .boxed()
+                    .collect(Collectors.toList());
+            model.addAttribute("pageNumbers", pageNumbers);
+        }
         return "race/schedule";
     }
 

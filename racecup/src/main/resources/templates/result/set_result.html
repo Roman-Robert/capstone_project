@@ -16,16 +16,14 @@
             <table>
                 <tr>
                     <th>Place</th>
-                    <th>athlete_id</th>
                     <th>Name</th>
                     <th>Group</th>
-                    <th>transit_time</th>
+                    <th>Transit time</th>
                     <th>status</th>
                 </tr>
                 <tr th:each="result:${results}">
                     <td>Place</td>
-                    <td th:text="${result.athleteId}"></td>
-                    <td>FullName</td>
+                    <td th:text="${result.athlete.getUser().getFirstName()}+' '+${result.athlete.getUser().getLastName()}"></td>
                     <td>Group</td>
                     <td>
                         <input type="text" th:value="${result.transitTime}" placeholder="Time format hh:mm:ss">

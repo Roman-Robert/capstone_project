@@ -26,6 +26,27 @@
         <td th:text="${athlete.getCountry()}">Country</td>
       </tr>
     </table>
+
+    <div th:if="${athletes.totalPages > 0}" class="pagination">
+      <span>Page:</span>
+      <th:block th:each="pageNumber : ${pageNumbers}">
+        <a th:href="@{/athlete/all(size=${athletes.size}, page=${pageNumber})}"
+           th:text="${pageNumber}"
+           th:class="${pageNumber == athletes.number + 1} ? 'active' : 'inactive'">
+        </a>
+      </th:block>
+    </div>
+
+    <div>
+      <form th:action="@{/athlete/all}" method="get">
+        <label for="pageSize">Athletes per page:</label>
+        <select id="pageSize" name="size" onchange="this.form.submit()">
+          <option value="5" th:selected="${athletes.size == 5}">5</option>
+          <option value="10" th:selected="${athletes.size == 10}">10</option>
+          <option value="20" th:selected="${athletes.size == 20}">20</option>
+        </select>
+      </form>
+    </div>
   </div>
 
 </main>

@@ -23,4 +23,8 @@ public class MainController {
         return "/user/sign_in";
     }
 
+    @GetMapping("/err")
+    public String error() {
+        return "error_page";
+    }
 }

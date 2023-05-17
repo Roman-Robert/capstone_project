@@ -19,7 +19,7 @@
                 <th>Location</th>
                 <th>Distance(km)</th>
             </tr>
-            <tr th:each="race:${race}">
+            <tr th:each="race:${races}">
                 <td th:text="${race.date}">Date</td>
                 <td th:text="${race.raceType.getDisplayRaceType()}">Type</td>
                 <td th:text="${race.name}">Race name</td>
@@ -33,6 +33,28 @@
                 <td><a th:href="@{/race/delete/{raceId}(raceId=${race.id})}">Delete</a></td>
             </tr>
         </table>
+
+        <div th:if="${races.totalPages > 0}" class="pagination">
+            <span>Page:</span>
+            <th:block th:each="pageNumber : ${pageNumbers}">
+                <a th:href="@{/race/all(size=${races.size}, page=${pageNumber})}"
+                   th:text="${pageNumber}"
+                   th:class="${pageNumber == races.number + 1} ? 'active' : 'inactive'">
+                </a>
+            </th:block>
+        </div>
+
+        <div>
+            <form th:action="@{/race/all}" method="get">
+                <label for="pageSize">Users per page:</label>
+                <select id="pageSize" name="size" onchange="this.form.submit()">
+                    <option value="5" th:selected="${races.size == 5}">5</option>
+                    <option value="10" th:selected="${races.size == 10}">10</option>
+                    <option value="20" th:selected="${races.size == 20}">20</option>
+                </select>
+            </form>
+        </div>
+
         <p>
             <a href="/race/new">Create new race</a>
         </p>
