@@ -7,7 +7,7 @@ import java.sql.Date;
 import java.util.List;
 
 public interface RaceRepository extends JpaRepository<Race, Long> {
-    List<Race> findByDateAfter(Date date);
-    List<Race> findByDateBefore(Date date);
+    List<Race> findByDateAfter(Date date); //add status "is_actual" check (should be =1)
+    List<Race> findByDateBefore(Date date); //add status "is_actual" check (should be =1)
 
 }
