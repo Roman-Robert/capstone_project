@@ -8,7 +8,7 @@ import java.sql.Date;
 public class AgeGroupConstructor {
     Logger logger = Logger.getLogger(AgeGroupConstructor.class);
 
-    public String getAge(Athlete athlete, Date raceDate) {
+    public String getGroup(Athlete athlete, Date raceDate) {
         String group=athlete.getGender().getValue();
         int age = athlete.getBirthday().getYear() - raceDate.getYear();
 

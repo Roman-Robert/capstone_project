@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.Comparator;
+import java.util.List;
 
 @Controller
 @RequestMapping("/result")
@@ -22,7 +24,9 @@ public class ResultController {
     private final AthleteService athleteService;
 
     @Autowired
-    public ResultController(RaceService raceService, ResultService resultService, AthleteService athleteService) {
+    public ResultController(RaceService raceService,
+                            ResultService resultService,
+                            AthleteService athleteService) {
         this.raceService = raceService;
         this.resultService = resultService;
         this.athleteService = athleteService;
@@ -36,11 +40,19 @@ public class ResultController {
     }
 
 
-    //implement the output of the full name, the calculation of the age group, assignment of places
+    //implement the output of the calculation of the
+    // age group, assignment of places
     @GetMapping("/{id}")
     public String getResultByRaceId(@PathVariable("id") long id, Model model) {
+        List<RaceResult> results = resultService.getRaceResultsByRaceId(id);
+        results.sort(Comparator.comparing(RaceResult::getTransitTime));
+
+//        for (RaceResult result : results) {
+//            AgeGroupConstructor constructor = new AgeGroupConstructor();
+//            String group=constructor.getGroup(result.getAthlete(), result.getRace().getDate());
+//        }
         model.addAttribute("race", raceService.getRaceById(id));
-        model.addAttribute("results", resultService.getRaceResultsByRaceId(id));
+        model.addAttribute("results", results);
         return "result/race_id";
     }
 
@@ -58,6 +70,6 @@ public class ResultController {
                                  @ModelAttribute("race") Race race,
                                  @ModelAttribute("results") RaceResult raceResult) {
         resultService.saveResult(raceResult);
-        return "redirect:/result/"+race.getId();
+        return "redirect:/result/" + race.getId();
     }
 }

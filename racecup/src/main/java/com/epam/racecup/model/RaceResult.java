@@ -14,15 +14,17 @@ public class RaceResult {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long resultId;
 
-    @Column(name = "athlete_id")
-    private long athleteId;
-
-    @Column(name="race_id")
-    private long raceId;
-
     @Column(name = "transit_time", columnDefinition = "TIME")
     private Time transitTime;
 
     @Column(name="status")
     private ResultStatus resultStatus;
+
+    @ManyToOne
+    @JoinColumn(name="athlete_id")
+    private Athlete athlete;
+
+    @ManyToOne
+    @JoinColumn(name="race_id")
+    private Race race;
 }
