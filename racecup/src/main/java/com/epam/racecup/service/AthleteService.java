@@ -1,7 +1,7 @@
 package com.epam.racecup.service;
 
 import com.epam.racecup.dao.repository.AthleteRepository;
-import com.epam.racecup.model.Athlete;
+import com.epam.racecup.model.entity.AthleteEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,11 +17,11 @@ public class AthleteService {
         this.athleteRepository = athleteRepository;
     }
 
-    public void saveAthlete(Athlete athlete) {
+    public void saveAthlete(AthleteEntity athlete) {
         athleteRepository.save(athlete);
     }
 
-    public Page<Athlete> getAllAthletes(Pageable pageable) {
+    public Page<AthleteEntity> getAllAthletes(Pageable pageable) {
         return athleteRepository.findAll(pageable);
     }
 

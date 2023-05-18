@@ -1,14 +1,14 @@
-package com.epam.racecup.service;
+package com.epam.racecup.util;
 
-import com.epam.racecup.model.Athlete;
+import com.epam.racecup.model.entity.AthleteEntity;
 
 import java.sql.Date;
 
-public class AgeGroupConstructor {
+public class AgeGroupUtil {
 
-    public String getGroup(Athlete athlete, Date raceDate) {
-        String group = athlete.getGender().getValue();
-        int age = athlete.getBirthday().getYear() - raceDate.getYear();
+    public static String getGroup(AthleteEntity athleteEntity, Date raceDate) {
+        String group = athleteEntity.getGender().getValue();
+        int age = athleteEntity.getBirthday().getYear() - raceDate.getYear();
 
         if (age >= 18 && age < 25) {
             group += "18";

@@ -1,7 +1,7 @@
 package com.epam.racecup.controller;
 
-import com.epam.racecup.model.Race;
-import com.epam.racecup.model.RaceResult;
+import com.epam.racecup.model.entity.RaceEntity;
+import com.epam.racecup.model.entity.RaceResultEntity;
 import com.epam.racecup.service.AthleteService;
 import com.epam.racecup.service.RaceService;
 import com.epam.racecup.service.ResultService;
@@ -55,11 +55,11 @@ public class ResultController {
         int currentPage = page.orElse(1);
         int pageSize = size.orElse(10);
 
-        Page<RaceResult> resultsPaged = resultService
+        Page<RaceResultEntity> resultsPaged = resultService
                 .getRaceResultsByRaceId(id, PageRequest.of(currentPage - 1,
                         pageSize, Sort.by(Sort.Direction.ASC, "transitTime")));
 
-        for (RaceResult result:resultsPaged) {
+        for (RaceResultEntity result:resultsPaged) {
             //group calculation
         }
 
@@ -77,7 +77,6 @@ public class ResultController {
         return "result/race_id";
     }
 
-    //page for enter race result by id
     @GetMapping("/{id}/set_result")
     public String setRaceResultsForm(@PathVariable("id") Long id, Model model) {
         model.addAttribute("race", raceService.getRaceById(id));
@@ -88,8 +87,8 @@ public class ResultController {
     //Post mapping method doesn't work!!
     @PostMapping("/{id}/set_result")
     public String setRaceResults(@PathVariable("id") Long id,
-                                 @ModelAttribute("race") Race race,
-                                 @ModelAttribute("results") RaceResult raceResult) {
+                                 @ModelAttribute("race") RaceEntity race,
+                                 @ModelAttribute("results") RaceResultEntity raceResult) {
         resultService.saveResult(raceResult);
         return "redirect:/result/" + race.getId();
     }

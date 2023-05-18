@@ -1,7 +1,7 @@
 package com.epam.racecup.service;
 
 import com.epam.racecup.dao.repository.OrganizerRepository;
-import com.epam.racecup.model.Organizer;
+import com.epam.racecup.model.entity.OrganizerEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,15 +17,15 @@ public class OrganizerService {
         this.organizerRepository = organizerRepository;
     }
 
-    public void saveOrganizer(Organizer organizer) {
+    public void saveOrganizer(OrganizerEntity organizer) {
         organizerRepository.save(organizer);
     }
 
-    public List<Organizer> getAllOrganizers() {
+    public List<OrganizerEntity> getAllOrganizers() {
         return organizerRepository.findAll();
     }
 
-    public Organizer getOrganizerById(long id) {
+    public OrganizerEntity getOrganizerById(long id) {
         return organizerRepository.getOne(id);
     }
 }

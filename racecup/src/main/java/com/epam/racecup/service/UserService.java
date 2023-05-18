@@ -1,7 +1,7 @@
 package com.epam.racecup.service;
 
 import com.epam.racecup.dao.repository.UserRepository;
-import com.epam.racecup.model.User;
+import com.epam.racecup.model.entity.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,16 +21,16 @@ public class UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public void saveUser(User user) {
+    public void saveUser(UserEntity user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
     }
 
-    public Page<User> getAllUsers(Pageable pageable) {
+    public Page<UserEntity> getAllUsers(Pageable pageable) {
         return userRepository.findAll(pageable);
     }
 
-    public User getUserById(long id) {
+    public UserEntity getUserById(long id) {
         return userRepository.getOne(id);
     }
 }

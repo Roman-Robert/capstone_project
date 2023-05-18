@@ -22,9 +22,4 @@ public class MainController {
     public String login() {
         return "/user/sign_in";
     }
-
-    @GetMapping("/err")
-    public String error() {
-        return "error_page";
-    }
 }

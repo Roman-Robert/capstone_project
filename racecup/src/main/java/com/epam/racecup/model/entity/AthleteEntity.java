@@ -1,5 +1,6 @@
-package com.epam.racecup.model;
+package com.epam.racecup.model.entity;
 
+import com.epam.racecup.model.Gender;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -10,11 +11,11 @@ import java.util.List;
 @Data
 @Table(name = "athlete")
 @DiscriminatorValue("athlete")
-public class Athlete {
+public class AthleteEntity {
 
     @OneToOne
     @JoinColumn(name = "id", referencedColumnName = "id")
-    private User user;
+    private UserEntity user;
 
     @Id
     @Column(name = "id")
@@ -40,5 +41,5 @@ public class Athlete {
     @JoinTable(name = "race_result",
             joinColumns = @JoinColumn(name = "athlete_id"),
             inverseJoinColumns = @JoinColumn(name = "race_id"))
-    private List<Race> races;
+    private List<RaceEntity> races;
 }

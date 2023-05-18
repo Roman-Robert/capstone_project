@@ -1,4 +1,4 @@
-package com.epam.racecup.model;
+package com.epam.racecup.model.entity;
 
 import lombok.Data;
 
@@ -8,11 +8,11 @@ import javax.persistence.*;
 @Data
 @Table(name = "admin")
 @DiscriminatorValue("admin")
-public class Admin {
+public class AdminEntity {
 
     @OneToOne
     @JoinColumn(name = "id", referencedColumnName = "id")
-    private User user;
+    private UserEntity user;
 
     @Id
     @Column(name = "id")

@@ -27,13 +27,8 @@
                         <input type="time" step="1" th:value="${result.transitTime}">
                     </td>
                     <td>
-<!--                        This form doesn't work-->
+<!--                        Implement fallen list of statuses (enum)-->
                         <input type="text" th:value="${result.resultStatus}" placeholder="Status">
-<!--                        <select th:field="*{resultStatus}">-->
-<!--                            <option th:each="resultStatus : ${T(com.epam.racecup.model.ResultStatus).values()}"-->
-<!--                                    th:value="${resultStatus}"-->
-<!--                                    th:text="${resultStatus.getValue()}"></option>-->
-<!--                        </select>-->
                     </td>
                 </tr>
             </table>

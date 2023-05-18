@@ -1,7 +1,7 @@
 package com.epam.racecup.service;
 
 import com.epam.racecup.dao.repository.ResultRepository;
-import com.epam.racecup.model.RaceResult;
+import com.epam.racecup.model.entity.RaceResultEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,15 +19,15 @@ public class ResultService {
         this.resultRepository = resultRepository;
     }
 
-    public Page<RaceResult> getRaceResultsByRaceId(Long race_id, Pageable pageable) {
+    public Page<RaceResultEntity> getRaceResultsByRaceId(Long race_id, Pageable pageable) {
         return resultRepository.findByRaceId(race_id, pageable);
     }
 
-    public List<RaceResult> getRaceResultsByRaceId(Long race_id) {
+    public List<RaceResultEntity> getRaceResultsByRaceId(Long race_id) {
         return resultRepository.findByRaceId(race_id);
     }
 
-    public void saveResult(RaceResult raceResult) {
+    public void saveResult(RaceResultEntity raceResult) {
         resultRepository.save(raceResult);
     }
 }

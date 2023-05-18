@@ -1,5 +1,6 @@
-package com.epam.racecup.model;
+package com.epam.racecup.model.entity;
 
+import com.epam.racecup.model.ResultStatus;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -8,7 +9,7 @@ import java.sql.Time;
 @Entity
 @Data
 @Table(name = "race_result")
-public class RaceResult {
+public class RaceResultEntity {
 
     @Id
     @Column(name = "result_id")
@@ -23,9 +24,9 @@ public class RaceResult {
 
     @ManyToOne
     @JoinColumn(name = "athlete_id")
-    private Athlete athlete;
+    private AthleteEntity athlete;
 
     @ManyToOne
     @JoinColumn(name = "race_id")
-    private Race race;
+    private RaceEntity race;
 }
