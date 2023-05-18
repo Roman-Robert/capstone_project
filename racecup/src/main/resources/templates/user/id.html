@@ -19,7 +19,6 @@
                 <th>First name</th>
                 <th>Last name</th>
                 <th>Email</th>
-                <!--<th>Password</th>-->
                 <th>Status</th>
                 <th>Role</th>
             </tr>
@@ -29,12 +28,10 @@
                 <td th:text="${user.firstName}">First name</td>
                 <td th:text="${user.lastName}">Last name</td>
                 <td th:text="${user.email}">Email</td>
-                <!--<th>Password</th>-->
                 <td th:text="${user.isActive}">Status</td>
                 <td th:text="${user.role}">Role</td>
             </tr>
         </table>
-
         <a href="/race/all">Back to user list</a>
     </div>
 

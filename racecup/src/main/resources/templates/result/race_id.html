@@ -22,9 +22,9 @@
                 <th>status</th>
             </tr>
             <tr th:each="result,index:${results}">
-                <td>Place</td>
+                <td th:text="${result.getPlace()}">Place</td>
                 <td th:text="${result.athlete.getUser().getFirstName()}+' '+${result.athlete.getUser().getLastName()}"></td>
-                <td>Group</td>
+                <td th:text="${result.getGroup()}"></td>
                 <td th:text="${result.transitTime}"></td>
                 <td th:text="${result.resultStatus}"></td>
             </tr>

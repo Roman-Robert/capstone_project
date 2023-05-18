@@ -1,14 +1,14 @@
 package com.epam.racecup.controller;
 
+import com.epam.racecup.model.dto.ResultDTO;
 import com.epam.racecup.model.entity.RaceEntity;
-import com.epam.racecup.model.entity.RaceResultEntity;
+import com.epam.racecup.model.entity.ResultEntity;
 import com.epam.racecup.service.AthleteService;
 import com.epam.racecup.service.RaceService;
 import com.epam.racecup.service.ResultService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -55,13 +55,8 @@ public class ResultController {
         int currentPage = page.orElse(1);
         int pageSize = size.orElse(10);
 
-        Page<RaceResultEntity> resultsPaged = resultService
-                .getRaceResultsByRaceId(id, PageRequest.of(currentPage - 1,
-                        pageSize, Sort.by(Sort.Direction.ASC, "transitTime")));
-
-        for (RaceResultEntity result:resultsPaged) {
-            //group calculation
-        }
+        Page<ResultDTO> resultsPaged = resultService
+                .getRaceResultsByRaceId(id, PageRequest.of(currentPage - 1, pageSize));
 
         int totalPages = resultsPaged.getTotalPages();
 
@@ -88,7 +83,7 @@ public class ResultController {
     @PostMapping("/{id}/set_result")
     public String setRaceResults(@PathVariable("id") Long id,
                                  @ModelAttribute("race") RaceEntity race,
-                                 @ModelAttribute("results") RaceResultEntity raceResult) {
+                                 @ModelAttribute("results") ResultEntity raceResult) {
         resultService.saveResult(raceResult);
         return "redirect:/result/" + race.getId();
     }

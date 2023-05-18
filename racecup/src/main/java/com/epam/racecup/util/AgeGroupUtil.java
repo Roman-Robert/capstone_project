@@ -1,14 +1,15 @@
 package com.epam.racecup.util;
 
 import com.epam.racecup.model.entity.AthleteEntity;
+import com.epam.racecup.model.entity.RaceEntity;
+import org.springframework.stereotype.Component;
 
-import java.sql.Date;
-
+@Component
 public class AgeGroupUtil {
 
-    public static String getGroup(AthleteEntity athleteEntity, Date raceDate) {
-        String group = athleteEntity.getGender().getValue();
-        int age = athleteEntity.getBirthday().getYear() - raceDate.getYear();
+    public static String getGroup(AthleteEntity athlete, RaceEntity race) {
+        String group = athlete.getGender().getValue();
+        int age = race.getDate().getYear() - athlete.getBirthday().getYear();
 
         if (age >= 18 && age < 25) {
             group += "18";
@@ -18,6 +19,8 @@ public class AgeGroupUtil {
             group += "35";
         } else if (age >= 45) {
             group += "45+";
+        } else {
+            group += "???";
         }
         return group;
     }

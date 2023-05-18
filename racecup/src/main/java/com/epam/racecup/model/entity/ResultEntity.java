@@ -1,15 +1,18 @@
 package com.epam.racecup.model.entity;
 
 import com.epam.racecup.model.ResultStatus;
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import java.sql.Time;
 
 @Entity
 @Data
+@Builder
+@AllArgsConstructor(access = AccessLevel.PACKAGE)
+@NoArgsConstructor(access = AccessLevel.PACKAGE)
 @Table(name = "race_result")
-public class RaceResultEntity {
+public class ResultEntity {
 
     @Id
     @Column(name = "result_id")
