@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @Entity
 @Data
-@Table(name="organizer")
+@Table(name = "organizer")
 @DiscriminatorValue("organizer")
 public class Organizer {
 
@@ -18,6 +18,6 @@ public class Organizer {
     @Column(name = "id")
     private long id;
 
-    @Column(name="mobile_phone")
+    @Column(name = "mobile_phone")
     private String mobilePhone;
 }

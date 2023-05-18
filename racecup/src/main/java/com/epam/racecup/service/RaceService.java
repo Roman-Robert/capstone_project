@@ -23,6 +23,7 @@ public class RaceService {
     public void saveRace(Race race) {
         raceRepository.save(race);
     }
+
     public Page<Race> getAllRaces(Pageable pageable) {
         return raceRepository.findAll(pageable);
     }
@@ -37,9 +38,5 @@ public class RaceService {
 
     public List<Race> findByDateBefore(Date date) {
         return raceRepository.findByDateBefore(date);
-    }
-
-    public void deleteRaceById(long id) {
-        raceRepository.deleteById(id);
     }
 }

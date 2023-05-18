@@ -28,8 +28,4 @@ public class OrganizerService {
     public Organizer getOrganizerById(long id) {
         return organizerRepository.getOne(id);
     }
-
-    public void deleteOrganizerById(long id) {
-        organizerRepository.deleteById(id);
-    }
 }

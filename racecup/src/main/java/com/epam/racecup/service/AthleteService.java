@@ -25,14 +25,4 @@ public class AthleteService {
         return athleteRepository.findAll(pageable);
     }
 
-    public Athlete getAthleteByUserId(long id) {
-        return athleteRepository.getOne(id);
-    }
-
-    //Change user status only 1->0
-    public void deleteAthleteByUserId(long id) {
-        athleteRepository.deleteById(id);
-    }
-
-
 }

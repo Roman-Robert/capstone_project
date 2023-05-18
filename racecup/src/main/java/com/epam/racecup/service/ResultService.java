@@ -29,8 +29,6 @@ public class ResultService {
 
     public void saveResult(RaceResult raceResult) {
         resultRepository.save(raceResult);
-        var i = 10;
-        var b=i;
     }
 }
 

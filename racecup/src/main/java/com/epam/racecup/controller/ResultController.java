@@ -56,11 +56,12 @@ public class ResultController {
         int pageSize = size.orElse(10);
 
         Page<RaceResult> resultsPaged = resultService
-                .getRaceResultsByRaceId(id, PageRequest.of(currentPage - 1, pageSize,
-                        Sort.by(Sort.Direction.ASC, "transitTime")));
+                .getRaceResultsByRaceId(id, PageRequest.of(currentPage - 1,
+                        pageSize, Sort.by(Sort.Direction.ASC, "transitTime")));
 
-        model.addAttribute("results", resultsPaged);
-        model.addAttribute("race", raceService.getRaceById(id));
+        for (RaceResult result:resultsPaged) {
+            //group calculation
+        }
 
         int totalPages = resultsPaged.getTotalPages();
 
@@ -70,6 +71,9 @@ public class ResultController {
                     .collect(Collectors.toList());
             model.addAttribute("pageNumbers", pageNumbers);
         }
+
+        model.addAttribute("results", resultsPaged);
+        model.addAttribute("race", raceService.getRaceById(id));
         return "result/race_id";
     }
 

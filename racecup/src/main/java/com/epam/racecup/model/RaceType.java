@@ -8,7 +8,7 @@ public enum RaceType {
     private final String raceType;
 
     private RaceType(String raceType) {
-        this.raceType=raceType;
+        this.raceType = raceType;
     }
 
     public String getDisplayRaceType() {

@@ -15,32 +15,30 @@
             <h2>Result of "<span th:text="${race.name}"></span>" race</h2>
             <table>
                 <tr>
-                    <th>Place</th>
                     <th>Name</th>
                     <th>Group</th>
                     <th>Transit time</th>
                     <th>status</th>
                 </tr>
                 <tr th:each="result:${results}">
-                    <td>Place</td>
                     <td th:text="${result.athlete.getUser().getFirstName()}+' '+${result.athlete.getUser().getLastName()}"></td>
                     <td>Group</td>
                     <td>
-                        <input type="text" th:value="${result.transitTime}" placeholder="Time format hh:mm:ss">
+                        <input type="time" step="1" th:value="${result.transitTime}">
                     </td>
                     <td>
 <!--                        This form doesn't work-->
                         <input type="text" th:value="${result.resultStatus}" placeholder="Status">
-                        <!--<select th:field="*{resultStatus}">
-                            <option th:each="resultStatus : ${T(com.epam.racecup.model.ResultStatus).values()}"
-                                    th:value="${resultStatus}"
-                                    th:text="${resultStatus.getValue()}"></option>
-                        </select>-->
+<!--                        <select th:field="*{resultStatus}">-->
+<!--                            <option th:each="resultStatus : ${T(com.epam.racecup.model.ResultStatus).values()}"-->
+<!--                                    th:value="${resultStatus}"-->
+<!--                                    th:text="${resultStatus.getValue()}"></option>-->
+<!--                        </select>-->
                     </td>
                 </tr>
             </table>
             <p><input type="submit" value="Submit result"></p>
-            <p><a th:href="@{/result/{id}(id=race.id)}">Back to results</a></p>
+            <p><a th:href="@{/result/{id}(id=${race.id})}">Back to results</a></p>
         </form>
     </div>
 </main>

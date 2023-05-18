@@ -49,7 +49,6 @@ public class User {
 
 
     //////////////////////////////////////////////
-    /////////Поля для связей
     @OneToOne(mappedBy = "user")
     private Athlete athlete;
 

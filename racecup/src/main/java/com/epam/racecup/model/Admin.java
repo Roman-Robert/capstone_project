@@ -15,6 +15,6 @@ public class Admin {
     private User user;
 
     @Id
-    @Column(name="id")
+    @Column(name = "id")
     private long id;
 }
