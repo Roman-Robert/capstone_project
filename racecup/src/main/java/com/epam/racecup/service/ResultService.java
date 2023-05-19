@@ -82,10 +82,21 @@ public class ResultService {
     }
 
     public List<ResultDTO> getRaceResultsByAthleteID(Long id) {
+        List<ResultDTO> fullResultList = getAllResultsListWithPlaces();
+        List<ResultDTO> athleteResultsList = new ArrayList<>();
+
+        for (ResultDTO result : fullResultList) {
+            if (result.getAthlete().getId() == id) {
+                athleteResultsList.add(result);
+            }
+        }
+        return athleteResultsList;
+    }
+
+    public List<ResultDTO> getAllResultsListWithPlaces() {
         List<ResultDTO> resultDTOs = new ArrayList<>();
         //List of all results
         List<ResultEntity> resultEntityList = resultRepository.findAll();
-
         //Getting list of unique race id
         List<Long> listRaceId = resultEntityList
                 .stream()
@@ -95,34 +106,29 @@ public class ResultService {
                 .collect(Collectors.toList());
 
         for (long raceId : listRaceId) {
+            //getting list of results for each race id
+            List<ResultEntity> resultEntities = resultRepository.findByRaceId(raceId);
+            //comparing results by transit time
             try {
-                //getting list of results for each race id
-                List<ResultEntity> resultEntities = resultRepository.findByRaceId(raceId);
-                //comparing results by transit time
                 resultEntities.sort(Comparator.nullsLast(Comparator.comparing(ResultEntity::getTransitTime)));
-                //Entity->DTO
-                List<ResultDTO> resultDtoOneRace = resultEntities
-                        .stream()
-                        .map(mapper::entityToDto)
-                        .collect(Collectors.toList());
-                //assigning a place by index in the list of results
-                for (ResultDTO resultDTO : resultDtoOneRace) {
-                    resultDTO.setPlace(resultDtoOneRace.indexOf(resultDTO) + 1);
-                    //Adding to exit list if athlete id equals parameter id
-                    if (resultDTO.getAthlete().getId() == id) {
-                        resultDTOs.add(resultDTO);
-                    }
-                }
             } catch (NullPointerException e) {
                 System.out.println("Error in comparator - null value of time!");
+            }
+            //Entity->DTO
+            List<ResultDTO> resultDtoOneRace = resultEntities
+                    .stream()
+                    .map(mapper::entityToDto)
+                    .collect(Collectors.toList());
+            //assigning a place by index in the list of results
+            for (ResultDTO resultDTO : resultDtoOneRace) {
+                //Setting place in this race
+                resultDTO.setPlace(resultDtoOneRace.indexOf(resultDTO) + 1);
+                //Adding to exit list if athlete id equals parameter id
+                resultDTOs.add(resultDTO);
             }
         }
         return resultDTOs;
     }
-
-
-    //Метод получает гонку, сортирует по времени и присваивает место каждому гонщику
-    //Возвращает List<ResultDTO>
 
 }
 

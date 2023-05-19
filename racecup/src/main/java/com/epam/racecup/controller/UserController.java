@@ -31,7 +31,7 @@ public class UserController {
     }
 
     @PostMapping("/new")
-    public String createUser(@ModelAttribute("user")UserDTO user) {
+    public String createUser(@ModelAttribute("user") UserDTO user) {
         userService.saveUser(user);
         return "user/success_create_user";
     }
@@ -73,9 +73,8 @@ public class UserController {
     @PostMapping("/edit/{id}")
     public String editUser(@PathVariable("id") long id,
                            @ModelAttribute("user") UserDTO user) {
-        //Saving old password, isActive, role
         UserDTO oldUser = userService.getUserById(id);
-
+        //Saving old password, isActive, role
         user.setPassword(oldUser.getPassword());
         user.setIsActive(oldUser.getIsActive());
         user.setRole(oldUser.getRole());

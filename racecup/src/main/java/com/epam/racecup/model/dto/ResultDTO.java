@@ -20,4 +20,5 @@ public class ResultDTO {
 
     private long place;
     private String group;
+    private int rating;
 }
