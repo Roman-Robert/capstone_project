@@ -1,16 +1,15 @@
 package com.epam.racecup.controller;
 
-import com.epam.racecup.model.entity.UserEntity;
+import com.epam.racecup.model.dto.UserDTO;
 import com.epam.racecup.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -22,22 +21,17 @@ public class UserController {
     private final UserService userService;
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserService userService, PasswordEncoder passwordEncoder) {
         this.userService = userService;
     }
 
     @GetMapping("/new")
-    public String createUserForm(@ModelAttribute("user") UserEntity user) {
+    public String createUserForm(@ModelAttribute("user") UserDTO user) {
         return "user/new";
     }
 
     @PostMapping("/new")
-    public String createUser(@ModelAttribute("user") @Valid UserEntity user,
-                             BindingResult bindingResult) {
-
-        if (bindingResult.hasErrors()) {
-            return "user/new";
-        }
+    public String createUser(@ModelAttribute("user")UserDTO user) {
         userService.saveUser(user);
         return "user/success_create_user";
     }
@@ -47,9 +41,9 @@ public class UserController {
                               @RequestParam("page") Optional<Integer> page,
                               @RequestParam("size") Optional<Integer> size) {
         int currentPage = page.orElse(1);
-        int pageSize = size.orElse(10);
+        int pageSize = size.orElse(20);
 
-        Page<UserEntity> allUserPaged = userService.getAllUsers(PageRequest.of(currentPage - 1, pageSize));
+        Page<UserDTO> allUserPaged = userService.getAllUsers(PageRequest.of(currentPage - 1, pageSize));
         model.addAttribute("users", allUserPaged);
 
         int totalPages = allUserPaged.getTotalPages();
@@ -78,27 +72,21 @@ public class UserController {
 
     @PostMapping("/edit/{id}")
     public String editUser(@PathVariable("id") long id,
-                           @ModelAttribute("user") @Valid UserEntity user,
-                           BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return "user/edit";
-        }
+                           @ModelAttribute("user") UserDTO user) {
         //Saving old password, isActive, role
-        UserEntity oldUser = userService.getUserById(id);
+        UserDTO oldUser = userService.getUserById(id);
+
         user.setPassword(oldUser.getPassword());
         user.setIsActive(oldUser.getIsActive());
         user.setRole(oldUser.getRole());
-
-        userService.saveUser(user);
+        userService.updateUser(user);
         return "user/success_edit_user";
     }
 
     @GetMapping("/delete/{id}")
     public String deleteUser(@PathVariable("id") long id) {
-        //Changing User status 1->0
-        UserEntity user = userService.getUserById(id);
-        user.setIsActive(0);
-        userService.saveUser(user);
+        UserDTO user = userService.getUserById(id);
+        userService.deleteUser(user);
         return "user/success_delete_user";
     }
 

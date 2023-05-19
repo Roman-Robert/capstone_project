@@ -34,17 +34,18 @@ public class ResultService {
         List<ResultEntity> resultEntities = resultRepository.findByRaceId(race_id);
         List<ResultDTO> resultDTOs = new ArrayList<>();
 
-        //Сортировка по времени
-        resultEntities.sort(Comparator.comparing(ResultEntity::getTransitTime));
+        //Sorting by transit time ASC
+        try {
+            resultEntities.sort(Comparator.nullsLast(Comparator.comparing(ResultEntity::getTransitTime)));
+        } catch (NullPointerException e) {
+            System.out.println("Error in comparator - null value of time!");
+        }
 
         for (ResultEntity resultEntity : resultEntities) {
-            //мапим в дто
             ResultDTO resultDTO = mapper.entityToDto(resultEntity);
-            //присваиваем место
+
             resultDTO.setPlace(resultEntities.indexOf(resultEntity) + 1);
-            //присваиваем группу
             resultDTO.setGroup(AgeGroupUtil.getGroup(resultEntity.getAthlete(), resultEntity.getRace()));
-            //кладем в лист
             resultDTOs.add(resultDTO);
         }
 
@@ -60,10 +61,11 @@ public class ResultService {
             pageResults = resultDTOs.subList(startItem, toIndex);
         }
 
-        // Создаем объект Page<ResultDTO> с использованием информации о пагинации
         return new PageImpl<>(pageResults, pageable, resultDTOs.size());
     }
 
+
+    //Method without pagination to set all results of race
     public List<ResultDTO> getRaceResultsByRaceId(Long race_id) {
         List<ResultEntity> resultEntities = resultRepository.findByRaceId(race_id);
         return resultEntities
@@ -72,8 +74,8 @@ public class ResultService {
                 .collect(Collectors.toList());
     }
 
-    public void saveResult(ResultEntity raceResult) {
-        resultRepository.save(raceResult);
+    public void saveResult(ResultDTO raceResult) {
+        resultRepository.save(mapper.dtoToEntity(raceResult));
     }
 }
 

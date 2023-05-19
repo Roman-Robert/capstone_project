@@ -1,14 +1,16 @@
 package com.epam.racecup.model.dto;
 
 import com.epam.racecup.model.Gender;
-import com.epam.racecup.model.entity.UserEntity;
-import lombok.Data;
+import lombok.*;
 
 import java.sql.Date;
 
 @Data
+@Builder
+@AllArgsConstructor(access = AccessLevel.PUBLIC)
+@NoArgsConstructor(access = AccessLevel.PUBLIC)
 public class AthleteDTO {
-    private UserEntity userEntity;
+    private UserDTO user;
     private long id;
     private Date birthday;
     private Gender gender;
@@ -16,7 +18,7 @@ public class AthleteDTO {
     private String city;
     private String team;
 
-    //-----------------
+    //fields to calculation
     private int place;
     private String group;
 

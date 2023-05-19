@@ -1,9 +1,7 @@
 package com.epam.racecup.controller;
 
+import com.epam.racecup.model.dto.RaceDTO;
 import com.epam.racecup.model.dto.ResultDTO;
-import com.epam.racecup.model.entity.RaceEntity;
-import com.epam.racecup.model.entity.ResultEntity;
-import com.epam.racecup.service.AthleteService;
 import com.epam.racecup.service.RaceService;
 import com.epam.racecup.service.ResultService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,15 +24,12 @@ public class ResultController {
 
     private final RaceService raceService;
     private final ResultService resultService;
-    private final AthleteService athleteService;
 
     @Autowired
     public ResultController(RaceService raceService,
-                            ResultService resultService,
-                            AthleteService athleteService) {
+                            ResultService resultService) {
         this.raceService = raceService;
         this.resultService = resultService;
-        this.athleteService = athleteService;
     }
 
     @GetMapping("")
@@ -45,8 +40,6 @@ public class ResultController {
     }
 
 
-    //implement the output of the calculation of the
-    // age group, assignment of places
     @GetMapping("/{id}")
     public String getResultByRaceId(@PathVariable("id") long id,
                                     Model model,
@@ -73,7 +66,8 @@ public class ResultController {
     }
 
     @GetMapping("/{id}/set_result")
-    public String setRaceResultsForm(@PathVariable("id") Long id, Model model) {
+    public String setRaceResultsForm(@PathVariable("id") Long id,
+                                     Model model) {
         model.addAttribute("race", raceService.getRaceById(id));
         model.addAttribute("results", resultService.getRaceResultsByRaceId(id));
         return "/result/set_result";
@@ -82,8 +76,8 @@ public class ResultController {
     //Post mapping method doesn't work!!
     @PostMapping("/{id}/set_result")
     public String setRaceResults(@PathVariable("id") Long id,
-                                 @ModelAttribute("race") RaceEntity race,
-                                 @ModelAttribute("results") ResultEntity raceResult) {
+                                 @ModelAttribute("race") RaceDTO race,
+                                 @ModelAttribute("results") ResultDTO raceResult) {
         resultService.saveResult(raceResult);
         return "redirect:/result/" + race.getId();
     }

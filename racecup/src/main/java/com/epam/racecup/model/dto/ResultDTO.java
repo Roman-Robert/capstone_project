@@ -3,13 +3,14 @@ package com.epam.racecup.model.dto;
 import com.epam.racecup.model.entity.AthleteEntity;
 import com.epam.racecup.model.entity.RaceEntity;
 import com.epam.racecup.model.ResultStatus;
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 
 import java.sql.Time;
 
 @Data
 @Builder
+@AllArgsConstructor(access = AccessLevel.PUBLIC)
+@NoArgsConstructor(access = AccessLevel.PUBLIC)
 public class ResultDTO {
     private long resultId;
     private Time transitTime;

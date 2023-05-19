@@ -1,12 +1,15 @@
 package com.epam.racecup.model.entity;
 
 import com.epam.racecup.model.Role;
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
 @Data
+@Builder
+@AllArgsConstructor(access = AccessLevel.PUBLIC)
+@NoArgsConstructor(access = AccessLevel.PUBLIC)
 @Table(name = "user")
 public class UserEntity {
 
@@ -47,12 +50,12 @@ public class UserEntity {
 
 
     //////////////////////////////////////////////
-    @OneToOne(mappedBy = "user")
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private AthleteEntity athlete;
 
-    @OneToOne(mappedBy = "user")
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private AdminEntity admin;
 
-    @OneToOne(mappedBy = "user")
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private OrganizerEntity organizer;
 }

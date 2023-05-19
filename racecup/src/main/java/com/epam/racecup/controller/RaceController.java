@@ -1,6 +1,6 @@
 package com.epam.racecup.controller;
 
-import com.epam.racecup.model.entity.RaceEntity;
+import com.epam.racecup.model.dto.RaceDTO;
 import com.epam.racecup.service.RaceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -36,7 +36,7 @@ public class RaceController {
         int currentPage = page.orElse(1);
         int pageSize = size.orElse(10);
 
-        Page<RaceEntity> allRacesPaged = raceService.getAllRaces(PageRequest.of(currentPage - 1, pageSize));
+        Page<RaceDTO> allRacesPaged = raceService.getAllRaces(PageRequest.of(currentPage - 1, pageSize));
 
         model.addAttribute("races", allRacesPaged);
 
@@ -58,7 +58,7 @@ public class RaceController {
         int currentPage = page.orElse(1);
         int pageSize = size.orElse(10);
         Date today = Date.valueOf(LocalDate.now());
-        Page<RaceEntity> allRacesPaged = raceService.findByDateAfter(today, PageRequest.of(currentPage - 1, pageSize));
+        Page<RaceDTO> allRacesPaged = raceService.findByDateAfter(today, PageRequest.of(currentPage - 1, pageSize));
         model.addAttribute("races", allRacesPaged);
 
         int totalPages = allRacesPaged.getTotalPages();
@@ -73,12 +73,12 @@ public class RaceController {
     }
 
     @GetMapping("/new")
-    public String createRaceForm(@ModelAttribute("race") RaceEntity race) {
+    public String createRaceForm(@ModelAttribute("race") RaceDTO race) {
         return "race/new";
     }
 
     @PostMapping("/new")
-    public String createRace(@ModelAttribute("race") @Valid RaceEntity race,
+    public String createRace(@ModelAttribute("race") @Valid RaceDTO race,
                              BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
@@ -91,7 +91,7 @@ public class RaceController {
     @GetMapping("/delete/{id}")
     public String deleteRace(@PathVariable("id") long id) {
         ////Changing Race "is_actual" status 1->0
-        RaceEntity race = raceService.getRaceById(id);
+        RaceDTO race = raceService.getRaceById(id);
         race.setIsActual(0);
         raceService.saveRace(race);
         return "race/success_delete_race";
@@ -105,14 +105,14 @@ public class RaceController {
 
     @PostMapping("/edit/{id}")
     public String editRace(@PathVariable("id") Long id,
-                           @ModelAttribute("race") @Valid RaceEntity race,
+                           @ModelAttribute("race") @Valid RaceDTO race,
                            BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
             return "user/edit";
         }
         //Saving old "organizer_id", "is_actual"
-        RaceEntity oldRaceEntity = raceService.getRaceById(id);
+        RaceDTO oldRaceEntity = raceService.getRaceById(id);
         race.setOrganizerId(oldRaceEntity.getOrganizerId());
         race.setIsActual(oldRaceEntity.getIsActual());
         raceService.saveRace(race);

@@ -1,7 +1,7 @@
 package com.epam.racecup.model.entity;
 
 import com.epam.racecup.model.RaceType;
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -9,6 +9,9 @@ import java.util.List;
 
 @Entity
 @Data
+@Builder
+@AllArgsConstructor(access = AccessLevel.PUBLIC)
+@NoArgsConstructor(access = AccessLevel.PUBLIC)
 @Table(name = "race")
 public class RaceEntity {
     @Id
@@ -47,6 +50,6 @@ public class RaceEntity {
     @Column(name = "is_actual")
     private int isActual = 1;
 
-    @ManyToMany(mappedBy = "races")
+    @ManyToMany(mappedBy = "races", cascade = CascadeType.ALL)
     private List<AthleteEntity> athletes;
 }

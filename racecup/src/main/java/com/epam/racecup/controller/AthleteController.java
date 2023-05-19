@@ -1,8 +1,6 @@
 package com.epam.racecup.controller;
 
-import com.epam.racecup.model.entity.AthleteEntity;
-import com.epam.racecup.model.Role;
-import com.epam.racecup.model.entity.UserEntity;
+import com.epam.racecup.model.dto.AthleteDTO;
 import com.epam.racecup.service.AthleteService;
 import com.epam.racecup.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,33 +20,23 @@ import java.util.stream.IntStream;
 public class AthleteController {
 
     private final AthleteService athleteService;
-    private final UserService userService;
 
     @Autowired
     public AthleteController(AthleteService athleteService, UserService userService) {
         this.athleteService = athleteService;
-        this.userService = userService;
     }
 
     @GetMapping("{id}/new")
     public String createAthleteForm(@PathVariable("id") Long id,
                                     Model model) {
-        AthleteEntity athlete = new AthleteEntity();
-        athlete.setId(id);
-        model.addAttribute("athlete", athlete);
+        model.addAttribute("athlete", AthleteDTO.builder().id(id).build());
         return "athlete/new";
     }
 
     @PostMapping("{id}/new")
     public String createAthlete(@PathVariable("id") Long id,
-                                @ModelAttribute("athlete") AthleteEntity athlete) {
-        athlete.setId(id);
+                                @ModelAttribute("athlete") AthleteDTO athlete) {
         athleteService.saveAthlete(athlete);
-
-        UserEntity updatedUser = userService.getUserById(id);
-
-        updatedUser.setRole(Role.ROLE_ATHLETE.getRole());
-        userService.saveUser(updatedUser);
         return "athlete/success_user_to_athlete";
     }
 
@@ -59,7 +47,7 @@ public class AthleteController {
         int currentPage = page.orElse(1);
         int pageSize = size.orElse(10);
 
-        Page<AthleteEntity> allAthletesPaged = athleteService.getAllAthletes(PageRequest.of(currentPage - 1, pageSize));
+        Page<AthleteDTO> allAthletesPaged = athleteService.getAllAthletes(PageRequest.of(currentPage - 1, pageSize));
         model.addAttribute("athletes", allAthletesPaged);
 
         int totalPages = allAthletesPaged.getTotalPages();

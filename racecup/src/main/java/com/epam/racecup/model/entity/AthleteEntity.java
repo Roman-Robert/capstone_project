@@ -1,7 +1,7 @@
 package com.epam.racecup.model.entity;
 
 import com.epam.racecup.model.Gender;
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -9,11 +9,14 @@ import java.util.List;
 
 @Entity
 @Data
+@Builder
+@AllArgsConstructor(access = AccessLevel.PUBLIC)
+@NoArgsConstructor(access = AccessLevel.PUBLIC)
 @Table(name = "athlete")
 @DiscriminatorValue("athlete")
 public class AthleteEntity {
 
-    @OneToOne
+    @OneToOne (cascade = CascadeType.ALL)
     @JoinColumn(name = "id", referencedColumnName = "id")
     private UserEntity user;
 
@@ -37,7 +40,7 @@ public class AthleteEntity {
     @Column(name = "team")
     private String team;
 
-    @ManyToMany
+    @ManyToMany (cascade = CascadeType.ALL)
     @JoinTable(name = "race_result",
             joinColumns = @JoinColumn(name = "athlete_id"),
             inverseJoinColumns = @JoinColumn(name = "race_id"))

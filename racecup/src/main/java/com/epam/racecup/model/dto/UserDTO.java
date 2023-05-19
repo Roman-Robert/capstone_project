@@ -1,9 +1,11 @@
 package com.epam.racecup.model.dto;
 
-import com.epam.racecup.model.Role;
-import lombok.Data;
+import lombok.*;
 
 @Data
+@Builder
+@AllArgsConstructor(access = AccessLevel.PUBLIC)
+@NoArgsConstructor(access = AccessLevel.PUBLIC)
 public class UserDTO {
     private long id;
     private String username;
@@ -11,6 +13,6 @@ public class UserDTO {
     private String lastName;
     private String email;
     private String password;
-    private int isActive = 1;
-    private String role = Role.ROLE_USER.getRole();
+    private int isActive;
+    private String role;
 }
