@@ -45,4 +45,8 @@ public class AthleteService {
         return athleteEntities.map(mapper::entityToDto);
     }
 
+    public AthleteDTO getAthleteById(long id) {
+        return mapper.entityToDto(athleteRepository.getOne(id));
+    }
+
 }

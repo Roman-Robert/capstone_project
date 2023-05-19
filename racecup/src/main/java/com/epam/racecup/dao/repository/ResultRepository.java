@@ -10,4 +10,5 @@ import java.util.List;
 public interface ResultRepository extends JpaRepository<ResultEntity, Long> {
     Page<ResultEntity> findByRaceId(Long id, Pageable pageable);
     List<ResultEntity> findByRaceId(Long id);
+    List<ResultEntity> findByAthleteId(Long id);
 }

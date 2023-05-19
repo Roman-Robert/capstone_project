@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>List of my results</title>
+    <link th:href="@{/style.css}" rel="stylesheet">
+</head>
+<body>
+<header>
+    <div th:replace="/fragments/header :: header"></div>
+</header>
+<main>
+    <div>
+        <h2><span th:text="${athlete.getUser().getFirstName()}+' '+${athlete.getUser().getLastName()}"></span> results</h2>
+        <table>
+            <tr>
+                <th>Date</th>
+                <th>Race</th>
+                <th>Place</th>
+                <th>Transit time</th>
+                <th>Status</th>
+            </tr>
+            <tr th:each="result:${results}">
+                <td th:text="${result.getRace().getDate()}">Date</td>
+                <td th:text="${result.getRace().getName()}">Race</td>
+                <td th:text="${result.getPlace()}">Place</td>
+                <td th:text="${result.getTransitTime()}">Transit time</td>
+                <td th:text="${result.getResultStatus()}">Status</td>
+            </tr>
+        </table>
+
+        <p>
+            <a th:href="@{/user/{id}/account(id=${athlete.getId()})}">Back to account</a>
+        </p>
+
+    </div>
+</main>
+<footer>
+    <div th:replace="/fragments/footer :: footer"></div>
+</footer>
+</body>
+</html>

@@ -1,7 +1,9 @@
 package com.epam.racecup.controller;
 
+import com.epam.racecup.model.dto.AthleteDTO;
 import com.epam.racecup.model.dto.RaceDTO;
 import com.epam.racecup.model.dto.ResultDTO;
+import com.epam.racecup.service.AthleteService;
 import com.epam.racecup.service.RaceService;
 import com.epam.racecup.service.ResultService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,12 +26,14 @@ public class ResultController {
 
     private final RaceService raceService;
     private final ResultService resultService;
+    private final AthleteService athleteService;
 
     @Autowired
     public ResultController(RaceService raceService,
-                            ResultService resultService) {
+                            ResultService resultService, AthleteService athleteService) {
         this.raceService = raceService;
         this.resultService = resultService;
+        this.athleteService = athleteService;
     }
 
     @GetMapping("")
@@ -80,5 +84,14 @@ public class ResultController {
                                  @ModelAttribute("results") ResultDTO raceResult) {
         resultService.saveResult(raceResult);
         return "redirect:/result/" + race.getId();
+    }
+
+    @GetMapping("/my_result/{id}")
+    public String myResults(@PathVariable("id") Long id, Model model) {
+        List<ResultDTO> listOfResults = resultService.getRaceResultsByAthleteID(id);
+        AthleteDTO athlete = athleteService.getAthleteById(id);
+        model.addAttribute("athlete", athlete);
+        model.addAttribute("results", listOfResults);
+        return "/result/my_result";
     }
 }

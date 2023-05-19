@@ -3,6 +3,7 @@ package com.epam.racecup.service;
 import com.epam.racecup.dao.repository.ResultRepository;
 import com.epam.racecup.mapper.ResultMapper;
 import com.epam.racecup.model.dto.ResultDTO;
+import com.epam.racecup.model.entity.RaceEntity;
 import com.epam.racecup.model.entity.ResultEntity;
 import com.epam.racecup.util.AgeGroupUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,8 +75,54 @@ public class ResultService {
                 .collect(Collectors.toList());
     }
 
+
+    //Method doesn't work
     public void saveResult(ResultDTO raceResult) {
         resultRepository.save(mapper.dtoToEntity(raceResult));
     }
+
+    public List<ResultDTO> getRaceResultsByAthleteID(Long id) {
+        List<ResultDTO> resultDTOs = new ArrayList<>();
+        //List of all results
+        List<ResultEntity> resultEntityList = resultRepository.findAll();
+
+        //Getting list of unique race id
+        List<Long> listRaceId = resultEntityList
+                .stream()
+                .map(ResultEntity::getRace)
+                .map(RaceEntity::getId)
+                .distinct()
+                .collect(Collectors.toList());
+
+        for (long raceId : listRaceId) {
+            try {
+                //getting list of results for each race id
+                List<ResultEntity> resultEntities = resultRepository.findByRaceId(raceId);
+                //comparing results by transit time
+                resultEntities.sort(Comparator.nullsLast(Comparator.comparing(ResultEntity::getTransitTime)));
+                //Entity->DTO
+                List<ResultDTO> resultDtoOneRace = resultEntities
+                        .stream()
+                        .map(mapper::entityToDto)
+                        .collect(Collectors.toList());
+                //assigning a place by index in the list of results
+                for (ResultDTO resultDTO : resultDtoOneRace) {
+                    resultDTO.setPlace(resultDtoOneRace.indexOf(resultDTO) + 1);
+                    //Adding to exit list if athlete id equals parameter id
+                    if (resultDTO.getAthlete().getId() == id) {
+                        resultDTOs.add(resultDTO);
+                    }
+                }
+            } catch (NullPointerException e) {
+                System.out.println("Error in comparator - null value of time!");
+            }
+        }
+        return resultDTOs;
+    }
+
+
+    //Метод получает гонку, сортирует по времени и присваивает место каждому гонщику
+    //Возвращает List<ResultDTO>
+
 }
 
