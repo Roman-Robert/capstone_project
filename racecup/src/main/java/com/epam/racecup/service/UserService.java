@@ -39,13 +39,11 @@ public class UserService {
         userRepository.save(mapper.dtoToEntity(user));
     }
 
-
     public void deleteUser(UserDTO user) {
         //Changing User status 1->0
         user.setIsActive(0);
         userRepository.save(mapper.dtoToEntity(user));
     }
-
 
     public Page<UserDTO> getAllUsers(Pageable pageable) {
         Page<UserEntity> userEntities = userRepository.findAll(pageable);

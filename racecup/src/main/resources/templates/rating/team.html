@@ -2,7 +2,7 @@
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>Personal rating</title>
+  <title>Team rating</title>
   <link th:href="@{/style.css}" rel="stylesheet">
 </head>
 <body>
@@ -10,8 +10,28 @@
   <div th:replace="/fragments/header :: header"></div>
 </header>
 <main>
+  <div>
+    <h3>Team rating in the race cup</h3>
+    <table>
+      <tr>
+        <th>Place</th>
+        <th>Team</th>
+        <th>Total score</th>
+      </tr>
+      <tr th:each="rating, index : ${ratings}">
+        <td th:text="${index.index + 1}"></td>
+        <td th:text="${rating.key}"></td>
+        <td th:text="${rating.value}"></td>
+      </tr>
+      <!--с пагинацией
+      <tr th:each="result, index : ${results}">
+          <td th:text="${(pageable.pageNumber * pageable.pageSize) + index.index + 1}"></td>
+          <td th:text="${result.key}"></td>
+          <td th:text="${result.value}"></td>
+      </tr>-->
+    </table>
+  </div>
 
-  <h3>Team rating in the race cup</h3>
 
 </main>
 <footer>

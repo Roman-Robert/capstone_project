@@ -32,7 +32,7 @@ public class RatingController {
     @GetMapping("/team")
     public String getTeamRating(Model model) {
         model.addAttribute("ratings", ratingService.getTeamRating());
-        return "/rating/personal";
+        return "/rating/team";
     }
 
 }

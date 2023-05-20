@@ -58,7 +58,27 @@ public class RatingService {
 
     }
 
-    public List<ResultDTO> getTeamRating() {
-        return null;
+    public List<Map.Entry<String, Integer>> getTeamRating() {
+        List<ResultDTO> fullResultList = resultService.getAllResultsListWithPlaces();
+        //Calculating rating for each result
+        for (ResultDTO resultDTO : fullResultList) {
+            int place = (int) resultDTO.getPlace();
+            resultDTO.setRating(ratingCalculator.calculateRating(place));
+        }
+        //mapping result
+        Map<String, Integer> scoreMap = new HashMap<>();
+        for (ResultDTO result:fullResultList) {
+            String team = result.getAthlete().getTeam();
+            int score = result.getRating();
+            scoreMap.put(team, scoreMap.getOrDefault(team,0)+score);
+        }
+
+        List<Map.Entry<String, Integer>> sortedResults = scoreMap
+                .entrySet()
+                .stream()
+                .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+                .collect(Collectors.toList());
+
+        return sortedResults;
     }
 }
