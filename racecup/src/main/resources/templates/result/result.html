@@ -3,14 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Show race results by chosen race</title>
-    <link th:href="@{/style.css}" rel="stylesheet" >
+    <link th:href="@{/style.css}" rel="stylesheet">
 </head>
 <body>
 <header>
     <div th:replace="/fragments/header :: header"></div>
 </header>
 <main>
-
     <div>
         <h3>Race results</h3>
         <form th:action="@{/result/${selectedRace.id}}" method="GET">
@@ -18,12 +17,13 @@
             <select name="selectedRace" onchange="window.location.href=this.value;">
                 <option value="">Select a past race</option>
                 <th:block th:each="race : ${races}">
-                    <option th:value="@{/result/{id}(id=${race.id})}" th:text="${race.date}+' - '+${race.name}"></option>
+                    <option th:value="@{/result/{id}(id=${race.id})}"
+                            th:text="${race.date}+' - '+${race.name}"></option>
                 </th:block>
             </select>
         </form>
+        <p><a href="/result/all">All results</a></p>
     </div>
-
 </main>
 <footer>
     <div th:replace="/fragments/footer :: footer"></div>

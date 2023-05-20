@@ -10,41 +10,34 @@
     <div th:replace="/fragments/header :: header"></div>
 </header>
 <main>
-
     <div>
+        <h3>Registration form</h3>
         <form th:action="@{new}" th:object="${user}" th:method="POST">
-            <h3>Registration form</h3>
             <p>
                 <label>Enter username: </label>
                 <input type="text" th:field="*{username}" placeholder="Username">
             </p>
-            <p style="color:red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Error</p>
             <p>
                 <label>Enter email: </label>
                 <input type="email" th:field="*{email}" placeholder="Email">
             </p>
-            <p style="color:red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Error</p>
             <p>
                 <label>Enter password: </label>
                 <input type="password" th:field="*{password}" placeholder="Password">
             </p>
-            <p style="color:red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Error</p>
             <p>
                 <label>Enter firstname: </label>
                 <input type="text" th:field="*{firstName}" placeholder="First name">
             </p>
-            <p style="color:red" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">Error</p>
             <p>
                 <label>Enter lastname: </label>
                 <input type="text" th:field="*{lastName}" placeholder="Last name">
             </p>
-            <p style="color:red" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Error</p>
             <p>
                 <input type="submit" value="Register">
             </p>
         </form>
     </div>
-
 </main>
 <footer>
     <div th:replace="/fragments/footer :: footer"></div>

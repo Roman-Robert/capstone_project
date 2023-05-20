@@ -43,6 +43,11 @@ public class ResultController {
         return "result/result";
     }
 
+    @GetMapping("/all")
+    public String getAllResults(Model model) {
+        model.addAttribute("results", resultService.getAllResults());
+        return "/result/all";
+    }
 
     @GetMapping("/{id}")
     public String getResultByRaceId(@PathVariable("id") long id,

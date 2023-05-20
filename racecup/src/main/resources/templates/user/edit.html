@@ -10,11 +10,9 @@
     <div th:replace="/fragments/header :: header"></div>
 </header>
 <main>
-
     <div>
+        <h3>Edit user info</h3>
         <form th:action="@{{id}(id=${user.getId()})}" th:object="${user}" th:method="PATCH">
-            <h3>Edit user info</h3>
-
             <p>
                 <label>Enter username: </label>
                 <input type="text" th:field="*{username}" placeholder="Username">
@@ -29,7 +27,7 @@
             </p>-->
             <p>
                 <label>Enter firstname: </label>
-                <input type="text" th:field="*{firstName}"placeholder="First name">
+                <input type="text" th:field="*{firstName}" placeholder="First name">
             </p>
             <p>
                 <label>Enter lastname: </label>
@@ -40,7 +38,6 @@
             </p>
         </form>
     </div>
-
 </main>
 <footer>
     <div th:replace="/fragments/footer :: footer"></div>

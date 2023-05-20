@@ -2,7 +2,7 @@
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>List of my results</title>
+    <title>All results</title>
     <link th:href="@{/style.css}" rel="stylesheet">
 </head>
 <body>
@@ -11,27 +11,25 @@
 </header>
 <main>
     <div>
-        <h3><span th:text="${athlete.getUser().getFirstName()}+' '+${athlete.getUser().getLastName()}"></span> results</h3>
+        <h3>All results in the race cup</h3>
         <table>
             <tr>
                 <th>Date</th>
                 <th>Race</th>
+                <th>Full name</th>
+                <th>Team</th>
                 <th>Place</th>
-                <th>Transit time</th>
-                <th>Status</th>
+                <th>Score</th>
             </tr>
-            <tr th:each="result:${results}">
+            <tr th:each="result : ${results}">
                 <td th:text="${result.getRace().getDate()}">Date</td>
                 <td th:text="${result.getRace().getName()}">Race</td>
+                <td th:text="${result.athlete.getUser().getFirstName()}+' '+${result.athlete.getUser().getLastName()}">Full name</td>
+                <td th:text="${result.getAthlete().getTeam()}">Team</td>
                 <td th:text="${result.getPlace()}">Place</td>
-                <td th:text="${result.getTransitTime()}">Transit time</td>
-                <td th:text="${result.getResultStatus()}">Status</td>
+                <td th:text="${result.getRating()}">Score</td>
             </tr>
         </table>
-
-        <p>
-            <a th:href="@{/user/{id}/account(id=${athlete.getId()})}">Back to account</a>
-        </p>
     </div>
 </main>
 <footer>

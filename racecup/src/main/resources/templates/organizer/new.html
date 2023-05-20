@@ -10,10 +10,9 @@
     <div th:replace="/fragments/header :: header"></div>
 </header>
 <main>
-
     <div>
+        <h3>Organizer registration form</h3>
         <form th:action="@{/organizer/{id}/new (id=${organizer.id})}" th:object="${organizer}" th:method="POST">
-            <h3>Organizer registration form</h3>
             <p>
                 <label>Enter your phone number: </label>
                 <input type="text" th:field="*{mobilePhone}" placeholder="Phone number">
@@ -23,7 +22,6 @@
             </p>
         </form>
     </div>
-
 </main>
 <footer>
     <div th:replace="/fragments/footer :: footer"></div>

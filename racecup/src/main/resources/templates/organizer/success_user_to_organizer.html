@@ -1,27 +1,23 @@
 <!DOCTYPE html>
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>Success registration</title>
-  <link th:href="@{/style.css}" rel="stylesheet" >
+    <meta charset="UTF-8">
+    <title>Success registration</title>
+    <link th:href="@{/style.css}" rel="stylesheet">
 </head>
 <body>
 <header>
-  <div th:replace="/fragments/header :: header"></div>
+    <div th:replace="/fragments/header :: header"></div>
 </header>
 <main>
-
-  <div>
-    <h3>You have successfully registered as organizer!</h3>
-    <h3>Now you can create races</h3>
-    <p>
-      <a th:href="@{/user/{id}/account (id=${organizer.id})}">Back to account</a>
-    </p>
-  </div>
-
+    <div>
+        <h3>You have successfully registered as organizer!</h3>
+        <h4>Now you can create races</h4>
+        <p><a th:href="@{/user/{id}/account (id=${organizer.id})}">Back to account</a></p>
+    </div>
 </main>
 <footer>
-  <div th:replace="/fragments/footer :: footer"></div>
+    <div th:replace="/fragments/footer :: footer"></div>
 </footer>
 </body>
 </html>

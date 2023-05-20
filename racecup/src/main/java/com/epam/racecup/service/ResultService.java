@@ -6,6 +6,7 @@ import com.epam.racecup.model.dto.ResultDTO;
 import com.epam.racecup.model.entity.RaceEntity;
 import com.epam.racecup.model.entity.ResultEntity;
 import com.epam.racecup.util.AgeGroupUtil;
+import com.epam.racecup.util.RatingCalculatorUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -23,13 +24,23 @@ public class ResultService {
 
     private final ResultRepository resultRepository;
     private final ResultMapper mapper;
+    private final RatingCalculatorUtil ratingCalculator;
 
     @Autowired
-    public ResultService(ResultRepository resultRepository, ResultMapper mapper) {
+    public ResultService(ResultRepository resultRepository, ResultMapper mapper, RatingCalculatorUtil ratingCalculator) {
         this.resultRepository = resultRepository;
         this.mapper = mapper;
+        this.ratingCalculator = ratingCalculator;
     }
 
+    public List<ResultDTO> getAllResults() {
+        List<ResultDTO> resultsList = getAllResultsListWithPlaces();
+        for (ResultDTO result : resultsList) {
+            int place = (int) result.getPlace();
+            result.setRating(ratingCalculator.calculateRating(place));
+        }
+        return resultsList;
+    }
 
     public Page<ResultDTO> getRaceResultsByRaceId(Long race_id, Pageable pageable) {
         List<ResultEntity> resultEntities = resultRepository.findByRaceId(race_id);

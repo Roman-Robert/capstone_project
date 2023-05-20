@@ -11,6 +11,7 @@
 </header>
 <main>
     <div>
+        <h3>Setting results</h3>
         <form th:method="POST" th:action="@{set_result}" th:object="${results}">
             <h2>Result of "<span th:text="${race.name}"></span>" race</h2>
             <table>

@@ -10,10 +10,9 @@
     <div th:replace="/fragments/header :: header"></div>
 </header>
 <main>
-
     <div>
+        <h3>New race</h3>
         <form th:action="@{new}" th:object="${race}" th:method="POST">
-            <h3>New race</h3>
             <p>
                 <label>choose race type: </label>
                 <select th:field="*{raceType}">
@@ -44,10 +43,8 @@
             </p>
 
             <input type="submit" value="Create race">
-
         </form>
     </div>
-
 </main>
 <footer>
     <div th:replace="/fragments/footer :: footer"></div>

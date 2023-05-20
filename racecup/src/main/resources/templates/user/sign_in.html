@@ -10,25 +10,17 @@
     <div th:replace="/fragments/header :: header"></div>
 </header>
 <main>
-
     <div>
+        <h3>Sign in</h3>
         <form>
-            <h3>Sign in</h3>
-            <p>
-                <input type="text" placeholder="Username">
-            </p>
-            <p>
-                <input type="password" placeholder="Password">
-            </p>
+            <p><input type="text" placeholder="Username"></p>
+            <p><input type="password" placeholder="Password"></p>
             <p>
                 <button>Sign in</button>
             </p>
-            <p>
-                <a href="/user/new">Register</a>
-            </p>
+            <p><a href="/user/new">Register</a></p>
         </form>
     </div>
-
 </main>
 <footer>
     <div th:replace="/fragments/footer :: footer"></div>
