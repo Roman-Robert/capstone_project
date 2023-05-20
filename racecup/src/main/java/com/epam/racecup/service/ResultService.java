@@ -33,13 +33,27 @@ public class ResultService {
         this.ratingCalculator = ratingCalculator;
     }
 
-    public List<ResultDTO> getAllResults() {
+    public Page<ResultDTO> getAllResults(Pageable pageable) {
         List<ResultDTO> resultsList = getAllResultsListWithPlaces();
+
         for (ResultDTO result : resultsList) {
             int place = (int) result.getPlace();
             result.setRating(ratingCalculator.calculateRating(place));
         }
-        return resultsList;
+
+        int pageSize = pageable.getPageSize();
+        int currentPage = pageable.getPageNumber();
+        int startItem = currentPage * pageSize;
+        List<ResultDTO> pageResults;
+
+        if (resultsList.size() < startItem) {
+            pageResults = Collections.emptyList();
+        } else {
+            int toIndex = Math.min(startItem + pageSize, resultsList.size());
+            pageResults = resultsList.subList(startItem, toIndex);
+        }
+
+        return new PageImpl<>(pageResults, pageable, resultsList.size());
     }
 
     public Page<ResultDTO> getRaceResultsByRaceId(Long race_id, Pageable pageable) {
@@ -50,7 +64,7 @@ public class ResultService {
         try {
             resultEntities.sort(Comparator.nullsLast(Comparator.comparing(ResultEntity::getTransitTime)));
         } catch (NullPointerException e) {
-            System.out.println("Error in comparator - null value of time!");
+
         }
 
         for (ResultEntity resultEntity : resultEntities) {
@@ -123,7 +137,7 @@ public class ResultService {
             try {
                 resultEntities.sort(Comparator.nullsLast(Comparator.comparing(ResultEntity::getTransitTime)));
             } catch (NullPointerException e) {
-                System.out.println("Error in comparator - null value of time!");
+
             }
             //Entity->DTO
             List<ResultDTO> resultDtoOneRace = resultEntities
@@ -140,6 +154,8 @@ public class ResultService {
         }
         return resultDTOs;
     }
+
+
 
 }
 

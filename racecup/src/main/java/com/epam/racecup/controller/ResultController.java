@@ -44,8 +44,24 @@ public class ResultController {
     }
 
     @GetMapping("/all")
-    public String getAllResults(Model model) {
-        model.addAttribute("results", resultService.getAllResults());
+    public String getAllResults(Model model,
+                                @RequestParam("page") Optional<Integer> page,
+                                @RequestParam("size") Optional<Integer> size) {
+        int currentPage = page.orElse(1);
+        int pageSize = size.orElse(20);
+
+        Page<ResultDTO> resultsPaged = resultService.getAllResults(PageRequest.of(currentPage - 1, pageSize));
+
+        int totalPages = resultsPaged.getTotalPages();
+
+        if (totalPages > 0) {
+            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
+                    .boxed()
+                    .collect(Collectors.toList());
+            model.addAttribute("pageNumbers", pageNumbers);
+        }
+
+        model.addAttribute("results", resultsPaged);
         return "/result/all";
     }
 
@@ -98,5 +114,26 @@ public class ResultController {
         model.addAttribute("athlete", athlete);
         model.addAttribute("results", listOfResults);
         return "/result/my_result";
+    }
+
+    @GetMapping("/participate/athlete={id}")
+    public String getPartInRace(@PathVariable("id") long id,
+                                Model model) {
+        model.addAttribute("athlete", athleteService.getAthleteById(id));
+        model.addAttribute("races", raceService.findByDateAfter());
+        return "result/participate_in_race";
+    }
+
+    @PostMapping("/participate/athlete={id}")
+    public String getPartInRace(@PathVariable("id") long id,
+                                @RequestParam("race") long raceId,
+                                Model model) {
+        resultService.saveResult(ResultDTO
+                .builder()
+                .athlete(athleteService.getAthleteById(id))
+                .race(raceService.getRaceById(raceId))
+                .build());
+        model.addAttribute("id", id);
+        return "result/success_participate";
     }
 }

@@ -1,6 +1,9 @@
 package com.epam.racecup.controller;
 
+import com.epam.racecup.model.Role;
 import com.epam.racecup.model.dto.UserDTO;
+import com.epam.racecup.service.AthleteService;
+import com.epam.racecup.service.OrganizerService;
 import com.epam.racecup.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -18,10 +21,14 @@ import java.util.stream.IntStream;
 @RequestMapping("/user")
 public class UserController {
     private final UserService userService;
+    private final AthleteService athleteService;
+    private final OrganizerService organizerService;
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserService userService, AthleteService athleteService, OrganizerService organizerService) {
         this.userService = userService;
+        this.athleteService = athleteService;
+        this.organizerService = organizerService;
     }
 
     @GetMapping("/new")
@@ -72,11 +79,6 @@ public class UserController {
     @PostMapping("/edit/{id}")
     public String editUser(@PathVariable("id") long id,
                            @ModelAttribute("user") UserDTO user) {
-        UserDTO oldUser = userService.getUserById(id);
-        //Saving old password, isActive, role
-        user.setPassword(oldUser.getPassword());
-        user.setIsActive(oldUser.getIsActive());
-        user.setRole(oldUser.getRole());
         userService.updateUser(user);
         return "user/success_edit_user";
     }
@@ -91,8 +93,29 @@ public class UserController {
     @GetMapping("/{id}/account")
     public String userAccount(@PathVariable("id") long id,
                               Model model) {
-        model.addAttribute("user", userService.getUserById(id));
+        UserDTO user = userService.getUserById(id);
+        model.addAttribute("user", user);
+        //дополнительные поля аккаунта
+        if (user.getRole().equals(Role.ROLE_ATHLETE.getRole())) {
+            model.addAttribute("athlete", athleteService.getAthleteById(id));
+        } else if (user.getRole().equals(Role.ROLE_ORGANIZER.getRole())) {
+            model.addAttribute("organizer", organizerService.getOrganizerById(id));
+        }
         return "user/account";
+    }
+
+    @GetMapping("/set_role/{id}")
+    public String setRoleForm(@PathVariable("id") long id,
+                              Model model) {
+        model.addAttribute("user", userService.getUserById(id));
+        return "user/set_role";
+    }
+
+    @PostMapping("/set_role/{id}")
+    public String setRole(@PathVariable("id") long id,
+                          @ModelAttribute("user") UserDTO user) {
+            userService.updateUserRole(user);
+        return "user/success_edit_user";
     }
 
     @GetMapping("/sign_in")

@@ -1,7 +1,5 @@
 package com.epam.racecup.model.dto;
 
-import com.epam.racecup.model.entity.AthleteEntity;
-import com.epam.racecup.model.entity.RaceEntity;
 import com.epam.racecup.model.ResultStatus;
 import lombok.*;
 
@@ -15,8 +13,8 @@ public class ResultDTO {
     private long resultId;
     private Time transitTime;
     private ResultStatus resultStatus;
-    private AthleteEntity athlete;
-    private RaceEntity race;
+    private AthleteDTO athlete;
+    private RaceDTO race;
 
     private long place;
     private String group;

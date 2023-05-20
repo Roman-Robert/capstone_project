@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -42,6 +43,17 @@ public class RaceService {
         Page<RaceEntity> raceEntities = raceRepository.findByDateAfter(date, pageable);
         return raceEntities.map(mapper::entityToDto);
     }
+
+
+    public List<RaceDTO> findByDateAfter() {
+        Date today = Date.valueOf(LocalDate.now());
+        return raceRepository
+                .findByDateAfter(today)
+                .stream()
+                .map(mapper::entityToDto)
+                .collect(Collectors.toList());
+    }
+
 
     public List<RaceDTO> findByDateBefore(Date date) {
         return raceRepository.findByDateBefore(date)

@@ -11,20 +11,47 @@
 </header>
 <main>
     <div>
-        <p><h3 th:text="${user.username}">username</h3></p>
-        <p><a style="color: grey;" th:text="${user.role}">role</a></p>
+        <h3><span th:text="${user.firstName}+' '+${user.lastName}"></span></h3>
         <p>
-            <a th:text="${user.firstName}">First name</a>
-            <a th:text="${user.lastName}">Last name</a>
+            <a style="color: grey; font-style: italic;" th:text="${user.role}">role</a>
+            <span>@</span><a th:text="${user.username}">Username</a>
         </p>
-        <p><a th:text="${user.email}">Email</a></p>
+        <table>
+            <tr>
+                <td><label>Email:</label></td>
+                <td><a th:text="${user.email}">Email</a></td>
+            </tr>
+            <!--            Athlete info-->
+            <tr th:if="${athlete != null}">
+                <td><label>Birthday:</label></td>
+                <td><a th:text="${athlete.birthday}">Birthday</a></td>
+            </tr>
+            <tr th:if="${athlete != null}">
+                <td><label>Team:</label></td>
+                <td><a th:text="${athlete.team}">Team</a></td>
+            </tr>
+            <tr th:if="${athlete != null}">
+                <td><label>Country:</label></td>
+                <td><a th:text="${athlete.country}">Country</a></td>
+            </tr>
+            <tr th:if="${athlete != null}">
+                <td><label>City:</label></td>
+                <td><a th:text="${athlete.city}">City</a></td>
+            </tr>
+            <!--            Organizer info-->
+            <tr th:if="${organizer != null}">
+                <td><label>Contact:</label></td>
+                <td><a th:text="${organizer.mobilePhone}">Contact</a></td>
+            </tr>
+        </table>
+
 
         <!--        Implement for users only-->
         <p><a th:href="@{/athlete/{id}/new (id=${user.id})}">Register as athlete</a></p>
         <!--        Implement for users only-->
         <p><a th:href="@{/organizer/{id}/new (id=${user.id})}">Register as organizer</a></p>
         <!--        Implement for athletes only-->
-        <p><a th:href="@{/result/participate/athlete_id={athlete_id} (athlete_id=${user.id})}">Take part in race</a></p>
+        <p><a th:href="@{/result/participate/athlete={athlete_id}(athlete_id=${user.id})}">Take part in race</a></p>
         <!--        Implement for athletes only-->
         <p><a th:href="@{/result/my_result/{id}(id=${user.id})}">List of my results</a></p>
         <!--        For all users-->

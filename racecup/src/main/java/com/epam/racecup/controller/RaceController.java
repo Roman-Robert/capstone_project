@@ -7,10 +7,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
@@ -78,12 +76,7 @@ public class RaceController {
     }
 
     @PostMapping("/new")
-    public String createRace(@ModelAttribute("race") @Valid RaceDTO race,
-                             BindingResult bindingResult) {
-
-        if (bindingResult.hasErrors()) {
-            return "race/new";
-        }
+    public String createRace(@ModelAttribute("race") RaceDTO race) {
         raceService.saveRace(race);
         return "race/success_create_race";
     }
@@ -105,12 +98,7 @@ public class RaceController {
 
     @PostMapping("/edit/{id}")
     public String editRace(@PathVariable("id") Long id,
-                           @ModelAttribute("race") @Valid RaceDTO race,
-                           BindingResult bindingResult) {
-
-        if (bindingResult.hasErrors()) {
-            return "user/edit";
-        }
+                           @ModelAttribute("race") RaceDTO race) {
         //Saving old "organizer_id", "is_actual"
         RaceDTO oldRaceEntity = raceService.getRaceById(id);
         race.setOrganizerId(oldRaceEntity.getOrganizerId());

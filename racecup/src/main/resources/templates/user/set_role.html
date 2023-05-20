@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Set role for user</title>
+    <link th:href="@{/style.css}" rel="stylesheet">
+</head>
+<body>
+<header>
+    <div th:replace="/fragments/header :: header"></div>
+</header>
+<main>
+
+    <div>
+        <h3>Set role for user <span><a th:text="${user.getFirstName()}+' '+${user.getLastName()}"></a></span></h3>
+        <form th:method="PATCH" th:action="@{{id}(id=${user.getId()})}" th:object="${user}">
+            <p>
+                <select th:field="*{role}">
+                    <option th:each="role : ${T(com.epam.racecup.model.Role).values()}"
+                            th:value="${role.getRole()}" th:text="${role.getRole()}"></option>
+                </select>
+            </p>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
+</main>
+<footer>
+    <div th:replace="/fragments/footer :: footer"></div>
+</footer>
+</body>
+</html>

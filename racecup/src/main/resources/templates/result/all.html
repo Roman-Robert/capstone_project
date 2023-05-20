@@ -27,9 +27,30 @@
                 <td th:text="${result.athlete.getUser().getFirstName()}+' '+${result.athlete.getUser().getLastName()}">Full name</td>
                 <td th:text="${result.getAthlete().getTeam()}">Team</td>
                 <td th:text="${result.getPlace()}">Place</td>
-                <td th:text="${result.getRating()}">Score</td>
+                <td th:text="'+' + ${result.getRating()}">Score</td>
             </tr>
         </table>
+
+        <div th:if="${results.totalPages > 0}" class="pagination">
+            <span>Page:</span>
+            <th:block th:each="pageNumber : ${pageNumbers}">
+                <a th:href="@{/result/all(size=${results.size}, page=${pageNumber})}"
+                   th:text="${pageNumber}"
+                   th:class="${pageNumber == results.number + 1} ? 'active' : 'inactive'">
+                </a>
+            </th:block>
+        </div>
+
+        <div>
+            <form th:action="@{/result/all}" method="get">
+                <label for="pageSize">Results per page:</label>
+                <select id="pageSize" name="size" onchange="this.form.submit()">
+                    <option value="5" th:selected="${results.size == 5}">5</option>
+                    <option value="10" th:selected="${results.size == 10}">10</option>
+                    <option value="20" th:selected="${results.size == 20}">20</option>
+                </select>
+            </form>
+        </div>
     </div>
 </main>
 <footer>

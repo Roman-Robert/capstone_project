@@ -33,4 +33,8 @@ public class OrganizerService {
                 .map(mapper::entityToDto)
                 .collect(Collectors.toList());
     }
+
+    public OrganizerDTO getOrganizerById(long id) {
+        return mapper.entityToDto(organizerRepository.getOne(id));
+    }
 }

@@ -36,6 +36,11 @@ public class UserService {
     }
 
     public void updateUser(UserDTO user) {
+        UserDTO oldUser = getUserById(user.getId());
+        //Saving old password, isActive, role
+        user.setPassword(oldUser.getPassword());
+        user.setIsActive(oldUser.getIsActive());
+        user.setRole(oldUser.getRole());
         userRepository.save(mapper.dtoToEntity(user));
     }
 
@@ -52,5 +57,11 @@ public class UserService {
 
     public UserDTO getUserById(long id) {
         return mapper.entityToDto(userRepository.getOne(id));
+    }
+
+    public void updateUserRole(UserDTO user) {
+        UserDTO updatedUser = getUserById(user.getId());
+        updatedUser.setRole(user.getRole());
+        updateUser(updatedUser);
     }
 }

@@ -1,7 +1,5 @@
 package com.epam.racecup.service;
 
-import com.epam.racecup.dao.repository.ResultRepository;
-import com.epam.racecup.mapper.ResultMapper;
 import com.epam.racecup.model.dto.ResultDTO;
 import com.epam.racecup.util.RatingCalculatorUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,15 +14,11 @@ import java.util.stream.Collectors;
 @Service
 public class RatingService {
     public final ResultService resultService;
-    private final ResultRepository resultRepository;
-    private final ResultMapper mapper;
     private final RatingCalculatorUtil ratingCalculator;
 
     @Autowired
-    public RatingService(ResultService resultService, ResultRepository resultRepository, ResultMapper mapper, RatingCalculatorUtil ratingCalculator) {
+    public RatingService(ResultService resultService, RatingCalculatorUtil ratingCalculator) {
         this.resultService = resultService;
-        this.resultRepository = resultRepository;
-        this.mapper = mapper;
         this.ratingCalculator = ratingCalculator;
     }
 
@@ -39,23 +33,19 @@ public class RatingService {
 
         //mapping result
         Map<String, Integer> scoreMap = new HashMap<>();
-        for (ResultDTO result:fullResultList) {
-            String fullName = result.getAthlete().getUser().getFirstName()+" "+
+
+        for (ResultDTO result : fullResultList) {
+            String fullName = result.getAthlete().getUser().getFirstName() + " " +
                     result.getAthlete().getUser().getLastName();
             int score = result.getRating();
-            scoreMap.put(fullName, scoreMap.getOrDefault(fullName,0)+score);
+            scoreMap.put(fullName, scoreMap.getOrDefault(fullName, 0) + score);
         }
 
-        List<Map.Entry<String, Integer>> sortedResults = scoreMap
+        return scoreMap
                 .entrySet()
                 .stream()
                 .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
                 .collect(Collectors.toList());
-
-        return sortedResults;
-//        return fullResultList;
-
-
     }
 
     public List<Map.Entry<String, Integer>> getTeamRating() {
@@ -67,18 +57,17 @@ public class RatingService {
         }
         //mapping result
         Map<String, Integer> scoreMap = new HashMap<>();
-        for (ResultDTO result:fullResultList) {
+
+        for (ResultDTO result : fullResultList) {
             String team = result.getAthlete().getTeam();
             int score = result.getRating();
-            scoreMap.put(team, scoreMap.getOrDefault(team,0)+score);
+            scoreMap.put(team, scoreMap.getOrDefault(team, 0) + score);
         }
 
-        List<Map.Entry<String, Integer>> sortedResults = scoreMap
+        return scoreMap
                 .entrySet()
                 .stream()
                 .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
                 .collect(Collectors.toList());
-
-        return sortedResults;
     }
 }

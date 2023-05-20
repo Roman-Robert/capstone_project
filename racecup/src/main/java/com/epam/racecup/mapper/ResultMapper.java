@@ -6,13 +6,20 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ResultMapper {
+    private final AthleteMapper athleteMapper;
+    private final RaceMapper raceMapper;
+
+    public ResultMapper(AthleteMapper mapper, RaceMapper raceMapper) {
+        this.athleteMapper = mapper;
+        this.raceMapper = raceMapper;
+    }
 
     public ResultDTO entityToDto(ResultEntity resultEntity) {
 
         return ResultDTO.builder()
                 .resultId(resultEntity.getResultId())
-                .athlete(resultEntity.getAthlete())
-                .race(resultEntity.getRace())
+                .athlete(athleteMapper.entityToDto(resultEntity.getAthlete()))
+                .race(raceMapper.entityToDto(resultEntity.getRace()))
                 .transitTime(resultEntity.getTransitTime())
                 .resultStatus(resultEntity.getResultStatus())
                 .build();
@@ -21,8 +28,8 @@ public class ResultMapper {
     public ResultEntity dtoToEntity(ResultDTO resultDTO) {
         return ResultEntity.builder()
                 .resultId(resultDTO.getResultId())
-                .athlete(resultDTO.getAthlete())
-                .race(resultDTO.getRace())
+                .athlete(athleteMapper.dtoToEntity(resultDTO.getAthlete()))
+                .race(raceMapper.dtoToEntity(resultDTO.getRace()))
                 .transitTime(resultDTO.getTransitTime())
                 .resultStatus(resultDTO.getResultStatus())
                 .build();
