@@ -1,8 +1,6 @@
 package com.epam.racecup.controller;
 
-import com.epam.racecup.model.Role;
 import com.epam.racecup.model.dto.OrganizerDTO;
-import com.epam.racecup.model.dto.UserDTO;
 import com.epam.racecup.service.OrganizerService;
 import com.epam.racecup.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,13 +32,7 @@ public class OrganizerController {
     @PostMapping("{id}/new")
     public String createOrganizer(@PathVariable("id") Long id,
                                   @ModelAttribute("organizer") OrganizerDTO organizer) {
-        organizer.setId(id);
         organizerService.saveOrganizer(organizer);
-
-        //changing status user->organizer
-        UserDTO updatedUser = userService.getUserById(id);
-        updatedUser.setRole(Role.ROLE_ORGANIZER.getRole());
-        userService.saveUser(updatedUser);
         return "organizer/success_user_to_organizer";
     }
 

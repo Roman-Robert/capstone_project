@@ -1,6 +1,5 @@
 package com.epam.racecup.model.dto;
 
-import com.epam.racecup.model.entity.UserEntity;
 import lombok.*;
 
 @Data
@@ -8,7 +7,7 @@ import lombok.*;
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 public class OrganizerDTO {
-    private UserEntity user;
+    private UserDTO user;
     private long id;
     private String mobilePhone;
 }

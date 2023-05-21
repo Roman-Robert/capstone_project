@@ -29,7 +29,7 @@ public class AthleteService {
     }
 
     public void saveAthlete(AthleteDTO athlete) {
-        //changing user role to admin
+        //changing user role to athlete
         UserDTO user = userService.getUserById(athlete.getId());
         user.setRole(Role.ROLE_ATHLETE.getRole());
         userService.updateUser(user);

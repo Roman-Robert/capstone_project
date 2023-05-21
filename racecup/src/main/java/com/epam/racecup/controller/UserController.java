@@ -71,7 +71,8 @@ public class UserController {
     }
 
     @GetMapping("/edit/{id}")
-    public String editUserForm(@PathVariable("id") long id, Model model) {
+    public String editUserForm(@PathVariable("id") long id,
+                               Model model) {
         model.addAttribute("user", userService.getUserById(id));
         return "user/edit";
     }
@@ -85,8 +86,7 @@ public class UserController {
 
     @GetMapping("/delete/{id}")
     public String deleteUser(@PathVariable("id") long id) {
-        UserDTO user = userService.getUserById(id);
-        userService.deleteUser(user);
+        userService.deleteUser(userService.getUserById(id));
         return "user/success_delete_user";
     }
 

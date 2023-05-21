@@ -6,10 +6,15 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class OrganizerMapper {
+    private final UserMapper userMapper;
+
+    public OrganizerMapper(UserMapper userMapper) {
+        this.userMapper = userMapper;
+    }
 
     public OrganizerDTO entityToDto(OrganizerEntity organizerEntity) {
         return OrganizerDTO.builder()
-                .user(organizerEntity.getUser())
+                .user(userMapper.entityToDto(organizerEntity.getUser()))
                 .id(organizerEntity.getId())
                 .mobilePhone(organizerEntity.getMobilePhone())
                 .build();
@@ -17,7 +22,7 @@ public class OrganizerMapper {
 
     public OrganizerEntity dtoToEntity(OrganizerDTO organizerDTO) {
         return OrganizerEntity.builder()
-                .user(organizerDTO.getUser())
+                .user(userMapper.dtoToEntity(organizerDTO.getUser()))
                 .id(organizerDTO.getId())
                 .mobilePhone(organizerDTO.getMobilePhone())
                 .build();

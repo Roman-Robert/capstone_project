@@ -40,7 +40,6 @@ public class UserService {
         //Saving old password, isActive, role
         user.setPassword(oldUser.getPassword());
         user.setIsActive(oldUser.getIsActive());
-        user.setRole(oldUser.getRole());
         userRepository.save(mapper.dtoToEntity(user));
     }
 

@@ -23,7 +23,7 @@
             <tr th:each="result:${results}">
                 <td th:text="${result.getRace().getDate()}">Date</td>
                 <td th:text="${result.getRace().getName()}">Race</td>
-                <td th:text="${result.getPlace()}">Place</td>
+                <td th:text="${result.getTransitTime() != null ? result.getPlace() : ''}">Place</td>
                 <td th:text="${result.getTransitTime()}">Transit time</td>
                 <td th:text="${result.getResultStatus()}">Status</td>
             </tr>
