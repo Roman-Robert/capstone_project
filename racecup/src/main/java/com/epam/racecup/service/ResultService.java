@@ -92,16 +92,22 @@ public class ResultService {
 
 
     //Method without pagination to set all results of race
+    //Didn't sort results
     public List<ResultDTO> getRaceResultsByRaceId(Long race_id) {
         List<ResultEntity> resultEntities = resultRepository.findByRaceId(race_id);
-        return resultEntities
-                .stream()
-                .map(mapper::entityToDto)
-                .collect(Collectors.toList());
+        List<ResultDTO> resultDTOs=new ArrayList<>();
+
+        for (ResultEntity resultEntity : resultEntities) {
+            ResultDTO resultDTO = mapper.entityToDto(resultEntity);
+
+            resultDTO.setPlace(resultEntities.indexOf(resultEntity) + 1);
+            resultDTO.setGroup(AgeGroupUtil.getGroup(resultEntity.getAthlete(), resultEntity.getRace()));
+            resultDTOs.add(resultDTO);
+        }
+
+        return resultDTOs;
     }
 
-
-    //Method doesn't work
     public void saveResult(ResultDTO raceResult) {
         resultRepository.save(mapper.dtoToEntity(raceResult));
     }
@@ -155,7 +161,24 @@ public class ResultService {
         return resultDTOs;
     }
 
+    public void updateResult(List<ResultDTO> results) {
+        for (ResultDTO result : results) {
+            //getting result to update
+            ResultDTO updatedResult = getResultById(result.getResultId());
+            //updating status and transit time fields
+            updatedResult.setResultStatus(result.getResultStatus());
+            updatedResult.setTransitTime(result.getTransitTime());
+            //saving updated result
+            saveResult(updatedResult);
+        }
+    }
 
+    public ResultDTO getResultById(long id) {
+        return mapper.entityToDto(resultRepository.getOne(id));
+    }
 
+    public List<ResultDTO> sortResultListByTransitTime() {
+        return null;
+    }
 }
 

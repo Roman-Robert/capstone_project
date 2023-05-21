@@ -1,7 +1,6 @@
 package com.epam.racecup.service;
 
 import com.epam.racecup.dao.repository.AthleteRepository;
-import com.epam.racecup.dao.repository.UserRepository;
 import com.epam.racecup.mapper.AthleteMapper;
 import com.epam.racecup.model.Role;
 import com.epam.racecup.model.dto.AthleteDTO;
@@ -16,14 +15,12 @@ import org.springframework.stereotype.Service;
 public class AthleteService {
 
     private final AthleteRepository athleteRepository;
-    private final UserRepository userRepository;
     private final AthleteMapper mapper;
     private final UserService userService;
 
     @Autowired
-    public AthleteService(AthleteRepository athleteRepository, UserRepository userRepository, AthleteMapper mapper, UserService userService) {
+    public AthleteService(AthleteRepository athleteRepository, AthleteMapper mapper, UserService userService) {
         this.athleteRepository = athleteRepository;
-        this.userRepository = userRepository;
         this.mapper = mapper;
         this.userService = userService;
     }

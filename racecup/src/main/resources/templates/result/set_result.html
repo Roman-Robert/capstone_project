@@ -12,25 +12,23 @@
 <main>
     <div>
         <h3>Setting results</h3>
-        <form th:method="POST" th:action="@{set_result}" th:object="${results}">
+        <form th:method="POST" th:action="@{'/result/' + ${race.id} + '/set_result'}" th:object="${form}">
             <h2>Result of "<span th:text="${race.name}"></span>" race</h2>
             <table>
                 <tr>
                     <th>Name</th>
                     <th>Group</th>
                     <th>Transit time</th>
-                    <th>status</th>
+                    <th>Status</th>
                 </tr>
-                <tr th:each="result:${results}">
-                    <td th:text="${result.athlete.getUser().getFirstName()}+' '+${result.athlete.getUser().getLastName()}"></td>
-                    <td>Group</td>
+                <tr th:each="result, index : *{results}">
                     <td>
-                        <input type="time" step="1" th:value="${result.transitTime}">
+                        <input hidden th:name="|results[${index.index}].resultId|" th:value="${result.resultId}"/>
+                        <span th:text="${result.athlete.getUser().getFirstName()} + ' ' + ${result.athlete.getUser().getLastName()}"></span>
                     </td>
-                    <td>
-<!--                        Implement fallen list of statuses (enum)-->
-                        <input type="text" th:value="${result.resultStatus}" placeholder="Status">
-                    </td>
+                    <td><span th:text="${result.getGroup()}"></span></td>
+                    <td><input type="time" step="1" th:name="|results[${index.index}].transitTime|"  th:value="${result.transitTime}" /></td>
+                    <td><input type="text" th:name="|results[${index.index}].resultStatus|" th:value="${result.resultStatus}" placeholder="Status"/></td>
                 </tr>
             </table>
             <p><input type="submit" value="Submit result"></p>

@@ -1,7 +1,7 @@
 package com.epam.racecup.controller;
 
 import com.epam.racecup.model.dto.AthleteDTO;
-import com.epam.racecup.model.dto.RaceDTO;
+import com.epam.racecup.model.dto.ResultCreationDTO;
 import com.epam.racecup.model.dto.ResultDTO;
 import com.epam.racecup.service.AthleteService;
 import com.epam.racecup.service.RaceService;
@@ -91,26 +91,27 @@ public class ResultController {
     }
 
     @GetMapping("/{id}/set_result")
-    public String setRaceResultsForm(@PathVariable("id") Long id,
+    public String setRaceResultsForm(@PathVariable("id") Long raceId,
                                      Model model) {
-        model.addAttribute("race", raceService.getRaceById(id));
-        model.addAttribute("results", resultService.getRaceResultsByRaceId(id));
+        List<ResultDTO> results = resultService.getRaceResultsByRaceId(raceId);
+
+        model.addAttribute("race", raceService.getRaceById(raceId));
+        model.addAttribute("form", new ResultCreationDTO(results));
         return "/result/set_result";
     }
 
-    //Post mapping method doesn't work!!
     @PostMapping("/{id}/set_result")
-    public String setRaceResults(@PathVariable("id") Long id,
-                                 @ModelAttribute("race") RaceDTO race,
-                                 @ModelAttribute("results") ResultDTO raceResult) {
-        resultService.saveResult(raceResult);
-        return "redirect:/result/" + race.getId();
+    public String setRaceResults(@PathVariable("id") Long raceId,
+                                 @ModelAttribute("form") ResultCreationDTO resultsToUpdate) {
+        resultService.updateResult(resultsToUpdate.getResults());
+        return "redirect:/result/" + raceId;
     }
 
     @GetMapping("/my_result/{id}")
     public String myResults(@PathVariable("id") Long id, Model model) {
         List<ResultDTO> listOfResults = resultService.getRaceResultsByAthleteID(id);
         AthleteDTO athlete = athleteService.getAthleteById(id);
+
         model.addAttribute("athlete", athlete);
         model.addAttribute("results", listOfResults);
         return "/result/my_result";
@@ -133,6 +134,7 @@ public class ResultController {
                 .athlete(athleteService.getAthleteById(id))
                 .race(raceService.getRaceById(raceId))
                 .build());
+
         model.addAttribute("id", id);
         return "result/success_participate";
     }

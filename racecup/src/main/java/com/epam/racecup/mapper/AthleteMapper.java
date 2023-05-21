@@ -2,12 +2,14 @@ package com.epam.racecup.mapper;
 
 import com.epam.racecup.model.dto.AthleteDTO;
 import com.epam.racecup.model.entity.AthleteEntity;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class AthleteMapper {
     private final UserMapper mapper;
 
+    @Autowired
     public AthleteMapper(UserMapper mapper) {
         this.mapper = mapper;
     }

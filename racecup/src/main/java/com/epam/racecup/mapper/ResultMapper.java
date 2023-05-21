@@ -2,6 +2,7 @@ package com.epam.racecup.mapper;
 
 import com.epam.racecup.model.dto.ResultDTO;
 import com.epam.racecup.model.entity.ResultEntity;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -9,6 +10,7 @@ public class ResultMapper {
     private final AthleteMapper athleteMapper;
     private final RaceMapper raceMapper;
 
+    @Autowired
     public ResultMapper(AthleteMapper mapper, RaceMapper raceMapper) {
         this.athleteMapper = mapper;
         this.raceMapper = raceMapper;
