@@ -2,11 +2,13 @@ package com.epam.racecup.service;
 
 import com.epam.racecup.dao.repository.ResultRepository;
 import com.epam.racecup.mapper.ResultMapper;
+import com.epam.racecup.model.ResultStatus;
 import com.epam.racecup.model.dto.ResultDTO;
 import com.epam.racecup.model.entity.RaceEntity;
 import com.epam.racecup.model.entity.ResultEntity;
 import com.epam.racecup.util.AgeGroupUtil;
 import com.epam.racecup.util.RatingCalculatorUtil;
+import com.epam.racecup.util.TimeComparator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -14,8 +16,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -56,24 +58,8 @@ public class ResultService {
         return new PageImpl<>(pageResults, pageable, resultsList.size());
     }
 
-    public Page<ResultDTO> getRaceResultsByRaceId(Long race_id, Pageable pageable) {
-        List<ResultEntity> resultEntities = resultRepository.findByRaceId(race_id);
-        List<ResultDTO> resultDTOs = new ArrayList<>();
-
-        //Sorting by transit time ASC
-        try {
-            resultEntities.sort(Comparator.nullsLast(Comparator.comparing(ResultEntity::getTransitTime)));
-        } catch (NullPointerException e) {
-
-        }
-
-        for (ResultEntity resultEntity : resultEntities) {
-            ResultDTO resultDTO = mapper.entityToDto(resultEntity);
-
-            resultDTO.setPlace(resultEntities.indexOf(resultEntity) + 1);
-            resultDTO.setGroup(AgeGroupUtil.getGroup(resultEntity.getAthlete(), resultEntity.getRace()));
-            resultDTOs.add(resultDTO);
-        }
+    public Page<ResultDTO> getRaceResultsByRaceId(Long raceId, Pageable pageable) {
+        List<ResultDTO> resultDTOs = getRaceResultsByRaceId(raceId);
 
         int pageSize = pageable.getPageSize();
         int currentPage = pageable.getPageNumber();
@@ -91,11 +77,12 @@ public class ResultService {
     }
 
 
-    //Method without pagination to set all results of race
-    //Didn't sort results
+    //Method without pagination to set results of race
     public List<ResultDTO> getRaceResultsByRaceId(Long race_id) {
         List<ResultEntity> resultEntities = resultRepository.findByRaceId(race_id);
-        List<ResultDTO> resultDTOs=new ArrayList<>();
+        List<ResultDTO> resultDTOs = new ArrayList<>();
+
+        sortResultListByTransitTime(resultEntities);
 
         for (ResultEntity resultEntity : resultEntities) {
             ResultDTO resultDTO = mapper.entityToDto(resultEntity);
@@ -109,6 +96,12 @@ public class ResultService {
     }
 
     public void saveResult(ResultDTO raceResult) {
+        ResultStatus resultStatus = raceResult.getResultStatus();
+
+        if (Arrays.asList(ResultStatus.values()).contains(resultStatus)) {
+            raceResult.setTransitTime(null);
+        }
+
         resultRepository.save(mapper.dtoToEntity(raceResult));
     }
 
@@ -140,11 +133,7 @@ public class ResultService {
             //getting list of results for each race id
             List<ResultEntity> resultEntities = resultRepository.findByRaceId(raceId);
             //comparing results by transit time
-            try {
-                resultEntities.sort(Comparator.nullsLast(Comparator.comparing(ResultEntity::getTransitTime)));
-            } catch (NullPointerException e) {
-
-            }
+            sortResultListByTransitTime(resultEntities);
             //Entity->DTO
             List<ResultDTO> resultDtoOneRace = resultEntities
                     .stream()
@@ -177,8 +166,9 @@ public class ResultService {
         return mapper.entityToDto(resultRepository.getOne(id));
     }
 
-    public List<ResultDTO> sortResultListByTransitTime() {
-        return null;
+    public List<ResultEntity> sortResultListByTransitTime(List<ResultEntity> resultsList) {
+        resultsList.sort(new TimeComparator());
+        return resultsList;
     }
 }
 

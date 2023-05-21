@@ -23,12 +23,25 @@
                 </tr>
                 <tr th:each="result, index : *{results}">
                     <td>
-                        <input hidden th:name="|results[${index.index}].resultId|" th:value="${result.resultId}"/>
-                        <span th:text="${result.athlete.getUser().getFirstName()} + ' ' + ${result.athlete.getUser().getLastName()}"></span>
+                        <input hidden th:name="|results[${index.index}].resultId|"
+                               th:value="${result.resultId}"/>
+                        <span th:text="${result.athlete.getUser().getFirstName()} + ' '
+                        + ${result.athlete.getUser().getLastName()}"></span>
                     </td>
                     <td><span th:text="${result.getGroup()}"></span></td>
-                    <td><input type="time" step="1" th:name="|results[${index.index}].transitTime|"  th:value="${result.transitTime}" /></td>
-                    <td><input type="text" th:name="|results[${index.index}].resultStatus|" th:value="${result.resultStatus}" placeholder="Status"/></td>
+                    <td><input type="time" step="1" th:name="|results[${index.index}].transitTime|"
+                               th:value="${result.transitTime}" /></td>
+<!--                    <td><input type="text" th:name="|results[${index.index}].resultStatus|"-->
+<!--                               th:value="${result.resultStatus}" placeholder="Status"/></td>-->
+                    <td>
+                        <select th:name="|results[${index.index}].resultStatus|">
+                            <option value="">Select status</option>
+                            <option th:each="status : ${T(com.epam.racecup.model.ResultStatus).values()}"
+                                    th:value="${status}"
+                                    th:text="${status.getValue()}"
+                                    th:selected="${status == result.resultStatus}"></option>
+                        </select>
+                    </td>
                 </tr>
             </table>
             <p><input type="submit" value="Submit result"></p>
