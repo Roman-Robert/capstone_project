@@ -18,7 +18,7 @@
                 <option value="">Select a past race</option>
                 <th:block th:each="race : ${races}">
                     <option th:value="@{/result/{id}(id=${race.id})}"
-                            th:text="${race.date}+' - '+${race.name}"></option>
+                            th:text="${#dates.format(race.date, 'yyyy-MM-dd')}+' - '+${race.name}"></option>
                 </th:block>
             </select>
         </form>

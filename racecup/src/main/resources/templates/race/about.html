@@ -13,7 +13,7 @@
     <div>
         <h3 th:text="${race.name}">Race name</h3>
         <h4 th:text="${race.location}">Location</h4>
-        <h4 th:text="${race.date}">Date</h4>
+        <td th:text="${#dates.format(race.date, 'yyyy-MM-dd')}">Date</td>
         <h4 th:text="${race.raceType.getDisplayRaceType()}">Type</h4>
         <h4 th:text="${race.distanceKm + ' km'}">Distance</h4>
         <p th:text="${race.info}">Info</p>

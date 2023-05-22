@@ -2,6 +2,7 @@ package com.epam.racecup.controller;
 
 import com.epam.racecup.model.dto.RaceDTO;
 import com.epam.racecup.service.RaceService;
+import com.epam.racecup.util.RaceValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -28,10 +29,12 @@ import java.util.stream.IntStream;
 public class RaceController {
 
     private final RaceService raceService;
+    private final RaceValidator raceValidator;
 
     @Autowired
-    public RaceController(RaceService raceService) {
+    public RaceController(RaceService raceService, RaceValidator raceValidator) {
         this.raceService = raceService;
+        this.raceValidator = raceValidator;
     }
 
     @GetMapping("/all")
@@ -85,9 +88,12 @@ public class RaceController {
     @PostMapping("/new")
     public String createRace(@ModelAttribute("race") @Valid RaceDTO race,
                              BindingResult bindingResult) {
+        raceValidator.validate(race, bindingResult);
+
         if (bindingResult.hasErrors()) {
             return "race/new";
         }
+
         raceService.saveRace(race);
         return "race/success_create_race";
     }
@@ -111,6 +117,8 @@ public class RaceController {
     public String editRace(@PathVariable("id") Long raceId,
                            @ModelAttribute("race") @Valid RaceDTO race,
                            BindingResult bindingResult) {
+        raceValidator.validate(race, bindingResult);
+
         if (bindingResult.hasErrors()) {
             return "race/edit";
         }
@@ -123,5 +131,4 @@ public class RaceController {
         model.addAttribute("race", raceService.getRaceById(id));
         return "race/about";
     }
-
 }

@@ -27,20 +27,22 @@
                             th:text="${gender.getValue()}"></option>
                 </select>
             </p>
-            <p th:if="${#fields.hasErrors('gender')}" th:errorclass="error" th:errors="*{gender}">Username error</p>
+            <p th:if="${#fields.hasErrors('gender')}" th:errorclass="error" th:errors="*{gender}">Gender error</p>
             <p>
                 <label>Enter country: </label>
                 <input type="text" th:field="*{country}" placeholder="Country">
             </p>
-            <p th:if="${#fields.hasErrors('country')}" th:errorclass="error" th:errors="*{country}">Username error</p>
+            <p th:if="${#fields.hasErrors('country')}" th:errorclass="error" th:errors="*{country}">Country error</p>
             <p>
                 <label>Enter city: </label>
                 <input type="text" th:field="*{city}" placeholder="City">
             </p>
+            <p th:if="${#fields.hasErrors('city')}" th:errorclass="error" th:errors="*{city}">City error</p>
             <p>
                 <label>Enter team: </label>
                 <input type="text" th:field="*{team}" placeholder="Team">
             </p>
+            <p th:if="${#fields.hasErrors('team')}" th:errorclass="error" th:errors="*{team}">Team error</p>
             <p>
                 <input type="submit" value="Register">
             </p>

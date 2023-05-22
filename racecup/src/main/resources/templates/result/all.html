@@ -22,7 +22,7 @@
                 <th>Score</th>
             </tr>
             <tr th:each="result : ${results}">
-                <td th:text="${result.getRace().getDate()}">Date</td>
+                <td th:text="${#dates.format(result.getRace().getDate(), 'yyyy-MM-dd')}">Date</td>
                 <td th:text="${result.getRace().getName()}">Race</td>
                 <td th:text="${result.athlete.getUser().getFirstName()}+' '+${result.athlete.getUser().getLastName()}">Full name</td>
                 <td th:text="${result.getAthlete().getTeam()}">Team</td>

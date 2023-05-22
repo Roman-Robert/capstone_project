@@ -49,8 +49,8 @@ public class RaceDTO {
 
     //TODO: implement autofill on the admin id
     @NotNull(message = "OrganizerId can not be empty")
-    private long organizerId;
+    private long organizerId=1;
 
     @NotNull(message = "isActive can not be empty")
-    private int isActual;
+    private int isActual=1;
 }

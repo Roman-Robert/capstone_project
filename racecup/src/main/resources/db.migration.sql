@@ -1,5 +1,5 @@
 
-CREATE DATABASE IF NOT EXIST 'race_cup';
+CREATE DATABASE IF NOT EXISTS 'race_cup';
 
 USE 'race_cup';
 

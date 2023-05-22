@@ -42,9 +42,9 @@ public class UserDTO {
     @Size(min = 8, max = 255, message = "Password should be between 8 and 255 characters")
     private String password;
 
-    @NotNull
+
     private int isActive;
 
-    @NotNull
+
     private String role;
 }

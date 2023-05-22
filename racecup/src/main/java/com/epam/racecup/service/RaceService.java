@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -31,7 +32,6 @@ public class RaceService {
     }
 
     public void updateRace(RaceDTO race, long raceId) {
-        //Saving old "organizer_id", "is_actual"
         RaceDTO oldRaceEntity = getRaceById(raceId);
         race.setOrganizerId(oldRaceEntity.getOrganizerId());
         race.setIsActual(oldRaceEntity.getIsActual());
@@ -52,7 +52,6 @@ public class RaceService {
         return raceEntities.map(mapper::entityToDto);
     }
 
-
     public List<RaceDTO> findByDateAfter() {
         Date today = Date.valueOf(LocalDate.now());
         return raceRepository
@@ -62,11 +61,14 @@ public class RaceService {
                 .collect(Collectors.toList());
     }
 
-
     public List<RaceDTO> findByDateBefore(Date date) {
         return raceRepository.findByDateBefore(date)
                 .stream()
                 .map(mapper::entityToDto)
                 .collect(Collectors.toList());
+    }
+
+    public Optional<RaceEntity> getRaceByName(String name) {
+        return Optional.ofNullable(raceRepository.findByName(name));
     }
 }

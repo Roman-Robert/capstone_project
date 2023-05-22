@@ -5,6 +5,7 @@ import com.epam.racecup.model.dto.UserDTO;
 import com.epam.racecup.service.AthleteService;
 import com.epam.racecup.service.OrganizerService;
 import com.epam.racecup.service.UserService;
+import com.epam.racecup.util.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -30,12 +31,17 @@ public class UserController {
     private final UserService userService;
     private final AthleteService athleteService;
     private final OrganizerService organizerService;
+    private final UserValidator userValidator;
 
     @Autowired
-    public UserController(UserService userService, AthleteService athleteService, OrganizerService organizerService) {
+    public UserController(UserService userService,
+                          AthleteService athleteService,
+                          OrganizerService organizerService,
+                          UserValidator userValidator) {
         this.userService = userService;
         this.athleteService = athleteService;
         this.organizerService = organizerService;
+        this.userValidator = userValidator;
     }
 
     @GetMapping("/new")
@@ -46,9 +52,12 @@ public class UserController {
     @PostMapping("/new")
     public String createUser(@ModelAttribute("user") @Valid UserDTO user,
                              BindingResult bindingResult) {
+        userValidator.validate(user, bindingResult);
+
         if (bindingResult.hasErrors()) {
             return "user/new";
         }
+
         userService.saveUser(user);
         return "user/success_create_user";
     }
@@ -92,6 +101,8 @@ public class UserController {
     public String editUser(@PathVariable("id") long id,
                            @ModelAttribute("user") @Valid UserDTO user,
                            BindingResult bindingResult) {
+        userValidator.validate(user, bindingResult);
+
         if (bindingResult.hasErrors()) {
             return "user/edit";
         }

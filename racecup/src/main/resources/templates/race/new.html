@@ -14,7 +14,7 @@
         <h3>New race</h3>
         <form th:action="@{new}" th:object="${race}" th:method="POST">
             <p>
-                <label>choose race type: </label>
+                <label>Choose race type: </label>
                 <select th:field="*{raceType}">
                     <option th:each="raceType : ${T(com.epam.racecup.model.RaceType).values()}"
                             th:value="${raceType}"

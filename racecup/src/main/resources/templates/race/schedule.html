@@ -20,8 +20,8 @@
                 <th>Location</th>
                 <th>Distance(km)</th>
             </tr>
-            <tr th:each="race:${races}">
-                <td th:text="${race.date}">Date</td>
+            <tr th:each="race:${races}" th:if="${race.isActual}">
+                <td th:text="${#dates.format(race.date, 'yyyy-MM-dd')}">Date</td>
                 <td th:text="${race.raceType.getDisplayRaceType()}">Type</td>
                 <td th:text="${race.name}">Race name</td>
                 <td th:text="${race.location}">Location</td>

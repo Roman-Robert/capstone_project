@@ -10,6 +10,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Data
@@ -32,10 +33,13 @@ public class AthleteDTO {
     private Gender gender;
 
     @NotEmpty(message = "Country cannot be empty")
+    @Size(max=45, message = "Country name cannot be greater than 45 characters")
     private String country;
 
+    @Size(max=45, message = "City name cannot be greater than 45 characters")
     private String city;
 
+    @Size(max=45, message = "Team name cannot be greater than 45 characters")
     private String team;
 
     private int place;
