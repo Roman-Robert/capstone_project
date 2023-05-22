@@ -138,4 +138,30 @@ public class ResultController {
         model.addAttribute("id", id);
         return "result/success_participate";
     }
+
+    @GetMapping("/participants/{id}")
+    public String getParticipantsByRaceId(@PathVariable("id") long raceId,
+                                          @RequestParam("page") Optional<Integer> page,
+                                          @RequestParam("size") Optional<Integer> size,
+                                          Model model){
+        int currentPage = page.orElse(1);
+        int pageSize = size.orElse(10);
+
+        Page<ResultDTO> resultsPaged = resultService
+                .getRaceResultsByRaceId(raceId, PageRequest.of(currentPage - 1, pageSize));
+
+        int totalPages = resultsPaged.getTotalPages();
+
+        if (totalPages > 0) {
+            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
+                    .boxed()
+                    .collect(Collectors.toList());
+            model.addAttribute("pageNumbers", pageNumbers);
+        }
+
+        model.addAttribute("results", resultsPaged);
+        model.addAttribute("race", raceService.getRaceById(raceId));
+
+        return "/race/participants";
+    }
 }

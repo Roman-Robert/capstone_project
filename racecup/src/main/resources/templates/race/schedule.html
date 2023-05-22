@@ -11,7 +11,7 @@
 </header>
 <main>
     <div>
-        <h3>Upcoming races</h3>
+        <h3 style="text-align: center;">Upcoming races</h3>
         <table>
             <tr>
                 <th>Date</th>
@@ -27,8 +27,8 @@
                 <td th:text="${race.location}">Location</td>
                 <td th:text="${race.distanceKm}">Distance</td>
                 <td><a th:href="@{/race/about/{raceId}(raceId=${race.id})}">Info</a></td>
-<!--                Implement list of participants-->
-                <td><a th:href="@{/race/registration/{raceId}(raceId=${race.id})}">Participate</a></td>
+                <td><a th:href="@{/result/participants/{raceId}(raceId=${race.id})}">Participants</a></td>
+                <td><a th:href="@{/race/registration/{raceId}(raceId=${race.id})}">(???)Participate</a></td>
                 <td><a th:href="@{/race/edit/{raceId}(raceId=${race.id})}">Edit</a></td>
                 <td><a th:href="@{/race/delete/{raceId}(raceId=${race.id})}">Delete</a></td>
             </tr>
@@ -46,7 +46,7 @@
 
         <div>
             <form th:action="@{/race/schedule}" method="get">
-                <label for="pageSize">Users per page:</label>
+                <label for="pageSize">Races per page:</label>
                 <select id="pageSize" name="size" onchange="this.form.submit()">
                     <option value="5" th:selected="${races.size == 5}">5</option>
                     <option value="10" th:selected="${races.size == 10}">10</option>
@@ -56,7 +56,6 @@
         </div>
 
         <p><a href="/race/new">Create new race</a></p>
-        <p><a href="/race/all">All cup races</a></p>
     </div>
 
 

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Show race participants by race ID</title>
+  <link th:href="@{/style.css}" rel="stylesheet">
+</head>
+<body>
+<header>
+  <div th:replace="/fragments/header :: header"></div>
+</header>
+<main>
+  <div>
+    <h3>Participants of "<span th:text="${race.name}"></span>" race</h3>
+    <table>
+      <tr>
+        <th>Full Name</th>
+        <th>Group</th>
+      </tr>
+      <tr th:each="result:${results}">
+        <td th:text="${result.athlete.getUser().getFirstName()}+' '+${result.athlete.getUser().getLastName()}"></td>
+        <td th:text="${result.getGroup()}"></td>
+      </tr>
+    </table>
+
+    <div th:if="${results.totalPages > 0}" class="pagination">
+      <span>Page:</span>
+      <th:block th:each="pageNumber : ${pageNumbers}">
+        <a th:href="@{/result/{id}(id=${race.id}, size=${results.size}, page=${pageNumber})}"
+           th:text="${pageNumber}"
+           th:class="${pageNumber == results.number + 1} ? 'active' : 'inactive'">
+        </a>
+      </th:block>
+    </div>
+
+    <div>
+      <form th:action="@{/result/{id}(id=${race.id})}" method="get">
+        <label for="pageSize">Athletes per page:</label>
+        <select id="pageSize" name="size" onchange="this.form.submit()">
+          <option value="5" th:selected="${results.size == 5}">5</option>
+          <option value="10" th:selected="${results.size == 10}">10</option>
+          <option value="20" th:selected="${results.size == 20}">20</option>
+        </select>
+      </form>
+    </div>
+
+    <p><a href="/race/schedule">Back to schedule</a></p>
+
+  </div>
+</main>
+<footer>
+  <div th:replace="/fragments/footer :: footer"></div>
+</footer>
+</body>
+</html>
