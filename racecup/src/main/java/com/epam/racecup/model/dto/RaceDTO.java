@@ -6,11 +6,14 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
-import java.sql.Date;
+import java.util.Date;
 
 @Data
 @Builder
@@ -18,7 +21,8 @@ import java.sql.Date;
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 public class RaceDTO {
     private long id;
-//    @NotEmpty(message = "Race type should be selected")
+
+    @NotNull(message = "Race type should be selected")
     private RaceType raceType;
 
     @NotEmpty(message = "Race name cannot be empty")
@@ -29,20 +33,24 @@ public class RaceDTO {
     @Size(min = 3, max = 45, message = "Race name should be between 3 and 64 characters")
     private String location;
 
-//    @NotEmpty(message = "Distance cannot be empty")
+
+    @NotNull(message = "Distance cannot be empty")
+    @Positive(message = "Distance cannot be negative")
     @Min(value = 0, message = "Distance should be greater zero")
     private Double distanceKm;
 
-//    @NotEmpty(message = "Date cannot be empty")
+    @NotNull(message = "Date cannot be empty")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;
 
     @NotEmpty(message = "Info cannot be empty")
-    @Size(min = 1, max=255, message = "Race info should be between 1 and 255 characters")
+    @Size(min = 1, max = 255, message = "Race info should be between 1 and 255 characters")
     private String info;
 
-    //реализовать автозаполнение на айдишник админа
-//    @NotEmpty
+    //TODO: implement autofill on the admin id
+    @NotNull(message = "OrganizerId can not be empty")
     private long organizerId;
-//    @NotEmpty
+
+    @NotNull(message = "isActive can not be empty")
     private int isActual;
 }

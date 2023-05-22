@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 
@@ -16,6 +17,8 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 public class UserDTO {
+
+    @NotNull(message = "User id cannot be null")
     private long id;
 
     @NotEmpty(message = "Username cannot be empty")
@@ -39,8 +42,9 @@ public class UserDTO {
     @Size(min = 8, max = 255, message = "Password should be between 8 and 255 characters")
     private String password;
 
-//    @NotEmpty
+    @NotNull
     private int isActive;
-//    @NotEmpty
+
+    @NotNull
     private String role;
 }

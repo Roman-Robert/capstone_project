@@ -17,6 +17,8 @@
                 <label>Enter your phone number: </label>
                 <input type="text" th:field="*{mobilePhone}" placeholder="Phone number">
             </p>
+            <p th:if="${#fields.hasErrors('mobilePhone')}" th:errorclass="error" th:errors="*{mobilePhone}">
+                Contact info error</p>
             <p>
                 <input type="submit" value="Register">
             </p>

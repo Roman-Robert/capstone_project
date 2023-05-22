@@ -19,7 +19,6 @@ public class ResultDTO {
     private ResultStatus resultStatus;
     private AthleteDTO athlete;
     private RaceDTO race;
-
     private long place;
     private String group;
     private int rating;
