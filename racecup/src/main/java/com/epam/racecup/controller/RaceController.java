@@ -8,7 +8,12 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 import java.sql.Date;
@@ -103,18 +108,13 @@ public class RaceController {
     }
 
     @PostMapping("/edit/{id}")
-    public String editRace(@PathVariable("id") Long id,
+    public String editRace(@PathVariable("id") Long raceId,
                            @ModelAttribute("race") @Valid RaceDTO race,
                            BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "race/edit";
         }
-
-        //Saving old "organizer_id", "is_actual"
-        RaceDTO oldRaceEntity = raceService.getRaceById(id);
-        race.setOrganizerId(oldRaceEntity.getOrganizerId());
-        race.setIsActual(oldRaceEntity.getIsActual());
-        raceService.saveRace(race);
+        raceService.updateRace(race, raceId);
         return "race/success_edit_race";
     }
 

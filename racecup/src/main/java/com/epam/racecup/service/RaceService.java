@@ -30,6 +30,14 @@ public class RaceService {
         raceRepository.save(mapper.dtoToEntity(race));
     }
 
+    public void updateRace(RaceDTO race, long raceId) {
+        //Saving old "organizer_id", "is_actual"
+        RaceDTO oldRaceEntity = getRaceById(raceId);
+        race.setOrganizerId(oldRaceEntity.getOrganizerId());
+        race.setIsActual(oldRaceEntity.getIsActual());
+        raceRepository.save(mapper.dtoToEntity(race));
+    }
+
     public Page<RaceDTO> getAllRaces(Pageable pageable) {
         Page<RaceEntity> raceEntities = raceRepository.findAll(pageable);
         return raceEntities.map(mapper::entityToDto);

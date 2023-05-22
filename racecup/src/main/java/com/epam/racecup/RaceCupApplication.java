@@ -6,10 +6,10 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 
 
 @SpringBootApplication(exclude = {SecurityAutoConfiguration.class})
-public class RacecupApplication {
+public class RaceCupApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(RacecupApplication.class, args);
+        SpringApplication.run(RaceCupApplication.class, args);
     }
 
 }

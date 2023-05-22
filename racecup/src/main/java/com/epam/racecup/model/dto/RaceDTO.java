@@ -1,7 +1,11 @@
 package com.epam.racecup.model.dto;
 
 import com.epam.racecup.model.RaceType;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
