@@ -1,5 +1,15 @@
---MySQL
 
+CREATE DATABASE IF NOT EXIST 'race_cup';
+
+USE 'race_cup';
+
+DROP TABLE IF EXISTS `hibernate_sequence`;
+DROP TABLE IF EXISTS `race_result`;
+DROP TABLE IF EXISTS `race`;
+DROP TABLE IF EXISTS `admin`;
+DROP TABLE IF EXISTS `organizer`;
+DROP TABLE IF EXISTS `athlete`;
+DROP TABLE IF EXISTS `user`;
 
 CREATE TABLE `user` (
   `id` int NOT NULL AUTO_INCREMENT,
@@ -68,4 +78,3 @@ CREATE TABLE `race_result` (
 CREATE TABLE `hibernate_sequence` (
   `next_val` bigint DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-

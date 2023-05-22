@@ -2,7 +2,6 @@ package com.epam.racecup.controller;
 
 import com.epam.racecup.model.dto.AthleteDTO;
 import com.epam.racecup.service.AthleteService;
-import com.epam.racecup.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -27,7 +26,7 @@ public class AthleteController {
     private final AthleteService athleteService;
 
     @Autowired
-    public AthleteController(AthleteService athleteService, UserService userService) {
+    public AthleteController(AthleteService athleteService) {
         this.athleteService = athleteService;
     }
 

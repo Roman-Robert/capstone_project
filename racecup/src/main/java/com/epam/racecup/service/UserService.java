@@ -1,6 +1,6 @@
 package com.epam.racecup.service;
 
-import com.epam.racecup.dao.repository.UserRepository;
+import com.epam.racecup.repository.UserRepository;
 import com.epam.racecup.mapper.UserMapper;
 import com.epam.racecup.model.Role;
 import com.epam.racecup.model.dto.UserDTO;

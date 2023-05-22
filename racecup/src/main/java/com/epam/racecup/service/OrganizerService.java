@@ -1,6 +1,6 @@
 package com.epam.racecup.service;
 
-import com.epam.racecup.dao.repository.OrganizerRepository;
+import com.epam.racecup.repository.OrganizerRepository;
 import com.epam.racecup.mapper.OrganizerMapper;
 import com.epam.racecup.model.Role;
 import com.epam.racecup.model.dto.OrganizerDTO;

@@ -2,7 +2,6 @@ package com.epam.racecup.controller;
 
 import com.epam.racecup.model.dto.OrganizerDTO;
 import com.epam.racecup.service.OrganizerService;
-import com.epam.racecup.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,13 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/organizer")
 public class OrganizerController {
 
-    private final UserService userService;
     private final OrganizerService organizerService;
 
     @Autowired
-    public OrganizerController(UserService userService,
-                               OrganizerService organizerService) {
-        this.userService = userService;
+    public OrganizerController(OrganizerService organizerService) {
         this.organizerService = organizerService;
     }
 

@@ -1,6 +1,6 @@
 package com.epam.racecup.service;
 
-import com.epam.racecup.dao.repository.RaceRepository;
+import com.epam.racecup.repository.RaceRepository;
 import com.epam.racecup.mapper.RaceMapper;
 import com.epam.racecup.model.dto.RaceDTO;
 import com.epam.racecup.model.entity.RaceEntity;

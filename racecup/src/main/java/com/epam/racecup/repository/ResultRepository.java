@@ -1,4 +1,4 @@
-package com.epam.racecup.dao.repository;
+package com.epam.racecup.repository;
 
 import com.epam.racecup.model.entity.ResultEntity;
 import org.springframework.data.domain.Page;
