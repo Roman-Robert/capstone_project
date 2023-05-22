@@ -71,3 +71,10 @@
         color: #ccc;
     }
 
+    .error {
+         color: red;
+         font-style: italic;
+         opacity: 0.5;
+         font-size: 14px;
+    }
+

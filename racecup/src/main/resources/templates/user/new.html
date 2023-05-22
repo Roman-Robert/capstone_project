@@ -17,22 +17,27 @@
                 <label>Enter username: </label>
                 <input type="text" th:field="*{username}" placeholder="Username">
             </p>
+            <p th:if="${#fields.hasErrors('username')}" th:errorclass="error" th:errors="*{username}">Username error</p>
             <p>
                 <label>Enter email: </label>
                 <input type="email" th:field="*{email}" placeholder="Email">
             </p>
+            <p th:if="${#fields.hasErrors('email')}" th:errorclass="error" th:errors="*{email}">Email error</p>
             <p>
                 <label>Enter password: </label>
                 <input type="password" th:field="*{password}" placeholder="Password">
             </p>
+            <p th:if="${#fields.hasErrors('password')}" th:errorclass="error" th:errors="*{password}">Password error</p>
             <p>
                 <label>Enter firstname: </label>
                 <input type="text" th:field="*{firstName}" placeholder="First name">
             </p>
+            <p th:if="${#fields.hasErrors('firstName')}" th:errorclass="error" th:errors="*{firstName}">Firstname error</p>
             <p>
                 <label>Enter lastname: </label>
                 <input type="text" th:field="*{lastName}" placeholder="Last name">
             </p>
+            <p th:if="${#fields.hasErrors('lastName')}" th:errorclass="error" th:errors="*{lastName}">Lastname error</p>
             <p>
                 <input type="submit" value="Register">
             </p>

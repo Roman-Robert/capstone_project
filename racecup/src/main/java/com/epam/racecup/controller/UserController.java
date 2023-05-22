@@ -10,8 +10,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -37,7 +39,11 @@ public class UserController {
     }
 
     @PostMapping("/new")
-    public String createUser(@ModelAttribute("user") UserDTO user) {
+    public String createUser(@ModelAttribute("user") @Valid UserDTO user,
+                             BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "user/new";
+        }
         userService.saveUser(user);
         return "user/success_create_user";
     }
@@ -79,7 +85,11 @@ public class UserController {
 
     @PostMapping("/edit/{id}")
     public String editUser(@PathVariable("id") long id,
-                           @ModelAttribute("user") UserDTO user) {
+                           @ModelAttribute("user") @Valid UserDTO user,
+                           BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "user/edit";
+        }
         userService.updateUser(user);
         return "user/success_edit_user";
     }
@@ -114,7 +124,7 @@ public class UserController {
     @PostMapping("/set_role/{id}")
     public String setRole(@PathVariable("id") long id,
                           @ModelAttribute("user") UserDTO user) {
-            userService.updateUserRole(user);
+        userService.updateUserRole(user);
         return "user/success_edit_user";
     }
 
