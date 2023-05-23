@@ -47,9 +47,8 @@ public class RaceDTO {
     @Size(min = 1, max = 255, message = "Race info should be between 1 and 255 characters")
     private String info;
 
-    //TODO: implement autofill on the admin id
     @NotNull(message = "OrganizerId can not be empty")
-    private long organizerId=1;
+    private long organizerId;
 
     @NotNull(message = "isActive can not be empty")
     private int isActual=1;

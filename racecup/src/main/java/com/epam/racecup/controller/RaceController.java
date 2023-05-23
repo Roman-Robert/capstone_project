@@ -1,11 +1,14 @@
 package com.epam.racecup.controller;
 
 import com.epam.racecup.model.dto.RaceDTO;
+import com.epam.racecup.security.UserDetailsImpl;
 import com.epam.racecup.service.RaceService;
 import com.epam.racecup.util.RaceValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -93,6 +96,12 @@ public class RaceController {
         if (bindingResult.hasErrors()) {
             return "race/new";
         }
+        //taking organiser id from the session
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+        long organizerId = userDetails.getUser().getId();
+
+        race.setOrganizerId(organizerId);
 
         raceService.saveRace(race);
         return "race/success_create_race";

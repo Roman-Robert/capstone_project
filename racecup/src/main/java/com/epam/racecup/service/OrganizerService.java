@@ -15,12 +15,12 @@ import java.util.stream.Collectors;
 public class OrganizerService {
 
     private final OrganizerRepository organizerRepository;
-    private final UserService userService;
+    private final UserServiceImpl userService;
     private final OrganizerMapper mapper;
 
     @Autowired
     public OrganizerService(OrganizerRepository organizerRepository,
-                            UserService userService, OrganizerMapper mapper) {
+                            UserServiceImpl userService, OrganizerMapper mapper) {
         this.organizerRepository = organizerRepository;
         this.userService = userService;
         this.mapper = mapper;

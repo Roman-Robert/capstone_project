@@ -2,16 +2,17 @@ package com.epam.racecup.security;
 
 import com.epam.racecup.model.dto.UserDTO;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
 
-public class UserDetails implements org.springframework.security.core.userdetails.UserDetails {
+public class UserDetailsImpl implements UserDetails {
 
     private final UserDTO user;
 
 
-    public UserDetails(UserDTO user) {
+    public UserDetailsImpl(UserDTO user) {
         this.user = user;
     }
 

@@ -4,7 +4,7 @@ import com.epam.racecup.model.Role;
 import com.epam.racecup.model.dto.UserDTO;
 import com.epam.racecup.service.AthleteService;
 import com.epam.racecup.service.OrganizerService;
-import com.epam.racecup.service.UserService;
+import com.epam.racecup.service.UserServiceImpl;
 import com.epam.racecup.util.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -28,13 +28,13 @@ import java.util.stream.IntStream;
 @Controller
 @RequestMapping("/user")
 public class UserController {
-    private final UserService userService;
+    private final UserServiceImpl userService;
     private final AthleteService athleteService;
     private final OrganizerService organizerService;
     private final UserValidator userValidator;
 
     @Autowired
-    public UserController(UserService userService,
+    public UserController(UserServiceImpl userService,
                           AthleteService athleteService,
                           OrganizerService organizerService,
                           UserValidator userValidator) {

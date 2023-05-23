@@ -16,10 +16,10 @@ public class AthleteService {
 
     private final AthleteRepository athleteRepository;
     private final AthleteMapper mapper;
-    private final UserService userService;
+    private final UserServiceImpl userService;
 
     @Autowired
-    public AthleteService(AthleteRepository athleteRepository, AthleteMapper mapper, UserService userService) {
+    public AthleteService(AthleteRepository athleteRepository, AthleteMapper mapper, UserServiceImpl userService) {
         this.athleteRepository = athleteRepository;
         this.mapper = mapper;
         this.userService = userService;

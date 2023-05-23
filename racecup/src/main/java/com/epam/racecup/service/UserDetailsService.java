@@ -3,7 +3,7 @@ package com.epam.racecup.service;
 import com.epam.racecup.mapper.UserMapper;
 import com.epam.racecup.model.entity.UserEntity;
 import com.epam.racecup.repository.UserRepository;
-import com.epam.racecup.security.UserDetails;
+import com.epam.racecup.security.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -30,6 +30,6 @@ public class UserDetailsService implements org.springframework.security.core.use
             throw new UsernameNotFoundException("User not found");
         }
 
-        return new UserDetails(userMapper.entityToDto(user.get()));
+        return new UserDetailsImpl(userMapper.entityToDto(user.get()));
     }
 }

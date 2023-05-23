@@ -1,18 +1,21 @@
 package com.epam.racecup.util;
 
 import com.epam.racecup.model.dto.UserDTO;
-import com.epam.racecup.service.UserService;
+import com.epam.racecup.model.entity.UserEntity;
+import com.epam.racecup.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
+import java.util.Optional;
+
 @Component
 public class UserValidator implements Validator {
-    private final UserService userService;
+    private final UserServiceImpl userService;
 
     @Autowired
-    public UserValidator(UserService userService) {
+    public UserValidator(UserServiceImpl userService) {
         this.userService = userService;
     }
 
@@ -25,11 +28,15 @@ public class UserValidator implements Validator {
     public void validate(Object target, Errors errors) {
         UserDTO user = (UserDTO) target;
 
-        if (userService.getUserByEmail(user.getEmail()).isPresent()) {
+        Optional<UserEntity> userByEmail = userService.getUserByEmail(user.getEmail());
+
+        if (userByEmail.isPresent()) {
             errors.rejectValue("email", "", "This email is already registered");
         }
 
-        if (userService.getUserByUsername(user.getUsername()).isPresent()) {
+        Optional<UserEntity> userByUsername = userService.getUserByUsername(user.getUsername());
+
+        if (userByUsername.isPresent()) {
             errors.rejectValue("username", "", "This username is already registered");
         }
 
