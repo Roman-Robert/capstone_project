@@ -12,6 +12,7 @@ public class UserDetailsImpl implements UserDetails {
     private final UserDTO user;
 
 
+
     public UserDetailsImpl(UserDTO user) {
         this.user = user;
     }

@@ -1,3 +1,4 @@
+/*
 package com.epam.racecup.security;
 
 import com.epam.racecup.service.UserDetailsServiceImpl;
@@ -44,3 +45,4 @@ public class AuthProvider implements AuthenticationProvider {
         return true;
     }
 }
+*/

@@ -2,7 +2,7 @@ package com.epam.racecup.util;
 
 import com.epam.racecup.model.dto.UserDTO;
 import com.epam.racecup.model.entity.UserEntity;
-import com.epam.racecup.service.UserServiceImpl;
+import com.epam.racecup.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
@@ -12,10 +12,10 @@ import java.util.Optional;
 
 @Component
 public class UserValidator implements Validator {
-    private final UserServiceImpl userService;
+    private final UserService userService;
 
     @Autowired
-    public UserValidator(UserServiceImpl userService) {
+    public UserValidator(UserService userService) {
         this.userService = userService;
     }
 

@@ -5,6 +5,7 @@ import com.epam.racecup.model.entity.UserEntity;
 import com.epam.racecup.repository.UserRepository;
 import com.epam.racecup.security.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -24,7 +25,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     }
 
     @Override
-    public org.springframework.security.core.userdetails.UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<UserEntity> user = Optional.ofNullable(userRepository.findByUsername(username));
 
         if (user.isEmpty()) {
