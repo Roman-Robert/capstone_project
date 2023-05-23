@@ -101,7 +101,11 @@ public class UserController {
     public String editUser(@PathVariable("id") long id,
                            @ModelAttribute("user") @Valid UserDTO user,
                            BindingResult bindingResult) {
+
+        //TODO: check validation to unchanged fields email and username
         userValidator.validate(user, bindingResult);
+
+        //TODO: add fields to change athlete and organizer fields
 
         if (bindingResult.hasErrors()) {
             return "user/edit";

@@ -24,7 +24,7 @@
             <!--            Athlete info-->
             <tr th:if="${athlete != null}">
                 <td><label>Birthday:</label></td>
-                <td><a th:text="${athlete.birthday}">Birthday</a></td>
+                <td><a th:text="${#dates.format(athlete.birthday, 'yyyy-MM-dd')}">Birthday</a></td>
             </tr>
             <tr th:if="${athlete != null}">
                 <td><label>Team:</label></td>

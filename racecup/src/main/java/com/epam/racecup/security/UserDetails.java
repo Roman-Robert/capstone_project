@@ -1,36 +1,39 @@
 package com.epam.racecup.security;
 
-import com.epam.racecup.model.entity.UserEntity;
+import com.epam.racecup.model.dto.UserDTO;
 import org.springframework.security.core.GrantedAuthority;
 
 import java.util.Collection;
 
+
 public class UserDetails implements org.springframework.security.core.userdetails.UserDetails {
 
-    private final UserEntity userEntity;
+    private final UserDTO user;
 
-    public UserDetails(UserEntity userEntity) {
-        this.userEntity = userEntity;
+
+    public UserDetails(UserDTO user) {
+        this.user = user;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null; //implement access rights
+        return null; //TODO: implement access rights
     }
 
     @Override
     public String getPassword() {
-        return this.userEntity.getPassword();
+        return this.user.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return this.userEntity.getUsername();
+        return this.user.getUsername();
     }
 
+    //TODO:implement logic with deleted accounts(is_active)
     @Override
     public boolean isAccountNonExpired() {
-        return true; //implement logic with deleted accounts(is_active)
+        return true;
     }
 
     @Override
@@ -46,5 +49,10 @@ public class UserDetails implements org.springframework.security.core.userdetail
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    //needed to get authenticated user data
+    public UserDTO getUser() {
+        return this.user;
     }
 }

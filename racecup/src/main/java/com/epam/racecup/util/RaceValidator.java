@@ -30,19 +30,16 @@ public class RaceValidator implements Validator {
     public void validate(Object target, Errors errors) {
         RaceDTO race = (RaceDTO) target;
         Date today = new Date();
-        //checking for date before today
 
+        //checking for date before today
         try {
             if (race.getDate().before(today)) {
                 errors.rejectValue("date", "", "Race cannot be past date");
             }
         } catch (NullPointerException e) {
-
         }
 
-
         //checking for equals date+name
-
         Optional<RaceEntity> raceEntity = raceService.getRaceByName(race.getName());
 
         if (raceEntity.isPresent()) {
