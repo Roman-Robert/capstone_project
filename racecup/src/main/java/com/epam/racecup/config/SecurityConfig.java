@@ -26,14 +26,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/images/**").permitAll()
                 .antMatchers("/**/*.js", "/**/*.css").permitAll()
-                .antMatchers("/login", "/", "/mainpage").permitAll()
+                .antMatchers("/login", "/user/new", "/", "/mainpage").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")
                 .loginProcessingUrl("/process_login")
                 .defaultSuccessUrl("/mainpage", true)
-                .failureUrl("/login?error");
+                .failureUrl("/login?error")
+                .and()
+                .logout()
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/login");
     }
 
     @Override
