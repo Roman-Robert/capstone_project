@@ -103,10 +103,9 @@ public class UserController {
                            BindingResult bindingResult) {
 
         //TODO: check validation to unchanged fields email and username
-        userValidator.validate(user, bindingResult);
+//        userValidator.validate(user, bindingResult);
 
         //TODO: add fields to change athlete and organizer fields
-
         if (bindingResult.hasErrors()) {
             return "user/edit";
         }
@@ -125,7 +124,7 @@ public class UserController {
                               Model model) {
         UserDTO user = userService.getUserById(id);
         model.addAttribute("user", user);
-        //дополнительные поля аккаунта
+        //additional info fields for the account
         if (user.getRole().equals(Role.ROLE_ATHLETE.getRole())) {
             model.addAttribute("athlete", athleteService.getAthleteById(id));
         } else if (user.getRole().equals(Role.ROLE_ORGANIZER.getRole())) {

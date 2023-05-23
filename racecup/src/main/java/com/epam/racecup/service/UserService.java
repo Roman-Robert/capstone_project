@@ -5,6 +5,7 @@ import com.epam.racecup.model.Role;
 import com.epam.racecup.model.dto.UserDTO;
 import com.epam.racecup.model.entity.UserEntity;
 import com.epam.racecup.repository.UserRepository;
+import com.epam.racecup.util.StringFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -29,6 +30,8 @@ public class UserService {
     }
 
     public void saveUser(UserDTO user) {
+        user.setFirstName(StringFormatter.format(user.getFirstName()));
+        user.setLastName(StringFormatter.format(user.getLastName()));
         user.setRole(Role.ROLE_USER.getRole());
         user.setIsActive(1);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -37,14 +40,16 @@ public class UserService {
 
     public void updateUser(UserDTO user) {
         UserDTO oldUser = getUserById(user.getId());
-        //Saving old password, isActive, role
+
+        user.setFirstName(StringFormatter.format(user.getFirstName()));
+        user.setLastName(StringFormatter.format(user.getLastName()));
         user.setPassword(oldUser.getPassword());
         user.setIsActive(oldUser.getIsActive());
+        user.setRole(oldUser.getRole());
         userRepository.save(mapper.dtoToEntity(user));
     }
 
     public void deleteUser(UserDTO user) {
-        //Changing User status 1->0
         user.setIsActive(0);
         userRepository.save(mapper.dtoToEntity(user));
     }

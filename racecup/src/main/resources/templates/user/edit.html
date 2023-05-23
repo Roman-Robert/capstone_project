@@ -24,6 +24,11 @@
             </p>
             <p th:if="${#fields.hasErrors('email')}" th:errorclass="error" th:errors="*{email}">Email error</p>
             <p>
+                <label>Enter password: </label>
+                <input type="password" th:field="*{password}" placeholder="Password">
+            </p>
+            <p th:if="${#fields.hasErrors('password')}" th:errorclass="error" th:errors="*{password}">Email error</p>
+            <p>
                 <label>Enter firstname: </label>
                 <input type="text" th:field="*{firstName}" placeholder="First name">
             </p>

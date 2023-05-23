@@ -33,7 +33,7 @@ public class UserDetailsImpl implements UserDetails {
         return this.user.getUsername();
     }
 
-    //TODO:implement logic with deleted accounts(is_active)
+    //TODO: implement logic with deleted accounts(is_active)
     @Override
     public boolean isAccountNonExpired() {
         return true;

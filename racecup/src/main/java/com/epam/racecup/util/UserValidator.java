@@ -29,14 +29,13 @@ public class UserValidator implements Validator {
         UserDTO user = (UserDTO) target;
 
         Optional<UserEntity> userByEmail = userService.getUserByEmail(user.getEmail());
+        Optional<UserEntity> userByUsername = userService.getUserByUsername(user.getUsername());
 
-        if (userByEmail.isPresent()) {
+        if (userByEmail.isPresent() || !userByUsername.equals(userByEmail)) {
             errors.rejectValue("email", "", "This email is already registered");
         }
 
-        Optional<UserEntity> userByUsername = userService.getUserByUsername(user.getUsername());
-
-        if (userByUsername.isPresent()) {
+        if (userByUsername.isPresent() || !userByUsername.equals(userByEmail)) {
             errors.rejectValue("username", "", "This username is already registered");
         }
 
