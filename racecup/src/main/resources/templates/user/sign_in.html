@@ -12,12 +12,15 @@
 <main>
     <div>
         <h3>Sign in</h3>
-        <form>
-            <p><input type="text" placeholder="Username"></p>
-            <p><input type="password" placeholder="Password"></p>
+        <form method="POST" action="/process_login">
             <p>
-                <button>Sign in</button>
+                <input type="text" name="username" placeholder="Username">
             </p>
+            <p>
+                <input type="password" name="password" placeholder="Password">
+            </p>
+            <div th:if="${param.error}" style="color: red;">Wrong username or password</div>
+            <p><input type="submit" value="Sign in"></p>
             <p><a href="/user/new">Register</a></p>
         </form>
     </div>

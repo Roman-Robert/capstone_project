@@ -1,6 +1,6 @@
 package com.epam.racecup.security;
 
-import com.epam.racecup.service.UserDetailsService;
+import com.epam.racecup.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -15,11 +15,11 @@ import java.util.Collections;
 @Component
 public class AuthProvider implements AuthenticationProvider {
 
-    private final UserDetailsService userDetailsService;
+    private final UserDetailsServiceImpl userDetailsService;
 
     @Autowired
-    public AuthProvider(UserDetailsService userDetailsService) {
-        this.userDetailsService = userDetailsService;
+    public AuthProvider(UserDetailsServiceImpl userDetailsServiceImpl) {
+        this.userDetailsService = userDetailsServiceImpl;
     }
 
 
