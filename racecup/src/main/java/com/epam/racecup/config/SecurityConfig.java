@@ -22,7 +22,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable()
+        http
+                .csrf()
+                .disable()
                 .authorizeRequests()
                 .antMatchers("/images/**").permitAll()
                 .antMatchers("/**/*.js", "/**/*.css").permitAll()
@@ -35,7 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .defaultSuccessUrl("/mainpage", true)
                 .failureUrl("/login?error")
                 .and()
-                .logout()
+        .logout()
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/login");
     }
