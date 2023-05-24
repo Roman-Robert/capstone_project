@@ -39,16 +39,21 @@ public class UserService {
     }
 
     public void updateUser(UserDTO user) {
-        UserDTO oldUser = getUserById(user.getId());
-
         user.setFirstName(StringFormatter.format(user.getFirstName()));
         user.setLastName(StringFormatter.format(user.getLastName()));
-        user.setPassword(oldUser.getPassword());
+        updateImmutableUserFields(user);
+        userRepository.save(mapper.dtoToEntity(user));
+    }
+
+    public void updateImmutableUserFields(UserDTO user) {
+        UserDTO oldUser = getUserById(user.getId());
+
+        user.setUsername(oldUser.getUsername());
+        user.setEmail(oldUser.getEmail());
         user.setIsActive(oldUser.getIsActive());
         if (user.getRole() == null) {
             user.setRole(oldUser.getRole());
         }
-        userRepository.save(mapper.dtoToEntity(user));
     }
 
 

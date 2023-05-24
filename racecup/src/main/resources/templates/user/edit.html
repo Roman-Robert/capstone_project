@@ -14,17 +14,7 @@
         <h3>Edit user info</h3>
         <form th:action="@{{id}(id=${user.getId()})}" th:object="${user}" th:method="PATCH">
             <p>
-                <label>Enter username: </label>
-                <input type="text" th:field="*{username}" placeholder="Username">
-            </p>
-            <p th:if="${#fields.hasErrors('username')}" th:errorclass="error" th:errors="*{username}">Username error</p>
-            <p>
-                <label>Enter email: </label>
-                <input type="email" th:field="*{email}" placeholder="Email">
-            </p>
-            <p th:if="${#fields.hasErrors('email')}" th:errorclass="error" th:errors="*{email}">Email error</p>
-            <p>
-                <label>Enter password: </label>
+                <label>Enter new/old password: </label>
                 <input type="password" th:field="*{password}" placeholder="Password">
             </p>
             <p th:if="${#fields.hasErrors('password')}" th:errorclass="error" th:errors="*{password}">Email error</p>

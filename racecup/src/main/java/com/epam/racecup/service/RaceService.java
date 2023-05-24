@@ -61,8 +61,9 @@ public class RaceService {
                 .collect(Collectors.toList());
     }
 
-    public List<RaceDTO> findByDateBefore(Date date) {
-        return raceRepository.findByDateBefore(date)
+    public List<RaceDTO> findByDateBefore() {
+        Date today = Date.valueOf(LocalDate.now());
+        return raceRepository.findByDateBefore(today)
                 .stream()
                 .map(mapper::entityToDto)
                 .collect(Collectors.toList());

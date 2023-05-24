@@ -28,7 +28,6 @@
                 <td th:text="${race.distanceKm}">Distance</td>
                 <td><a th:href="@{/race/about/{raceId}(raceId=${race.id})}">Info</a></td>
                 <td><a th:href="@{/result/participants/{raceId}(raceId=${race.id})}">Participants</a></td>
-                <td><a th:href="@{/race/registration/{raceId}(raceId=${race.id})}">(???)Participate</a></td>
                 <td><a th:href="@{/race/edit/{raceId}(raceId=${race.id})}">Edit</a></td>
                 <td><a th:href="@{/race/delete/{raceId}(raceId=${race.id})}">Delete</a></td>
             </tr>

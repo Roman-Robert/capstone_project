@@ -18,8 +18,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.sql.Date;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -43,8 +41,7 @@ public class ResultController {
 
     @GetMapping("")
     public String result(Model model) {
-        Date today = Date.valueOf(LocalDate.now());
-        model.addAttribute("races", raceService.findByDateBefore(today));
+        model.addAttribute("races", raceService.findByDateBefore());
         return "result/result";
     }
 

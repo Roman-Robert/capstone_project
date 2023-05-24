@@ -11,6 +11,7 @@
 </header>
 <main>
     <div>
+        <h3><u>Personal account</u></h3>
         <h3><span th:text="${user.firstName}+' '+${user.lastName}"></span></h3>
         <p>
             <a style="color: grey; font-style: italic;" th:text="${user.role}">role</a>
@@ -21,7 +22,6 @@
                 <td><label>Email:</label></td>
                 <td><a th:text="${user.email}">Email</a></td>
             </tr>
-            <!--            Athlete info-->
             <tr th:if="${athlete != null}">
                 <td><label>Birthday:</label></td>
                 <td><a th:text="${#dates.format(athlete.birthday, 'yyyy-MM-dd')}">Birthday</a></td>
@@ -38,26 +38,23 @@
                 <td><label>City:</label></td>
                 <td><a th:text="${athlete.city}">City</a></td>
             </tr>
-            <!--            Organizer info-->
             <tr th:if="${organizer != null}">
                 <td><label>Contact:</label></td>
                 <td><a th:text="${organizer.mobilePhone}">Contact</a></td>
             </tr>
         </table>
+        <form action="/logout" method="post">
+            <p><button type="submit">Logout</button></p>
+        </form>
+    </div>
 
-
-        <!--        Implement for users only-->
+    <div>
         <p><a th:href="@{/athlete/{id}/new (id=${user.id})}">Register as athlete</a></p>
-        <!--        Implement for users only-->
         <p><a th:href="@{/organizer/{id}/new (id=${user.id})}">Register as organizer</a></p>
-        <!--        Implement for athletes only-->
         <p><a th:href="@{/result/participate/athlete={athlete_id}(athlete_id=${user.id})}">Take part in race</a></p>
-        <!--        Implement for athletes only-->
         <p><a th:href="@{/result/my_result/{id}(id=${user.id})}">List of my results</a></p>
-        <!--        For all users-->
         <p><a th:href="@{/user/edit/{id}(id=${user.id})}">Edit personal info</a></p>
         <p><a th:href="@{/user/delete/{id}(id=${user.id})}">Delete account</a></p>
-        <p><a href="/logout">Logout</a></p>
     </div>
 
 </main>

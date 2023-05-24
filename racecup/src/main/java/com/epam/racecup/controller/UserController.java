@@ -12,6 +12,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -99,11 +100,13 @@ public class UserController {
 
     @PostMapping("/edit/{id}")
     public String editUser(@PathVariable("id") long id,
-                           @ModelAttribute("user") @Valid UserDTO user,
+                           @ModelAttribute("user") @Validated UserDTO user,
                            BindingResult bindingResult) {
 
         //TODO: add fields to change athlete and organizer fields
-        if (bindingResult.hasErrors()) {
+        if (bindingResult.hasFieldErrors("password") ||
+                bindingResult.hasFieldErrors("firstName")||
+                bindingResult.hasFieldErrors("lastName")) {
             return "user/edit";
         }
         userService.updateUser(user);
