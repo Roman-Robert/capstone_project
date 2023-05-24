@@ -22,12 +22,12 @@ public class MainController {
 
     @GetMapping("/login")
     public String login(Authentication authentication) {
-            if (authentication != null && authentication.isAuthenticated()) {
-                UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
-                long userId = userDetails.getUser().getId();
+        if (authentication != null && authentication.isAuthenticated()) {
+            UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+            long userId = userDetails.getUser().getId();
 
-                return "redirect:/user/" + userId + "/account";
-            }
+            return "redirect:/user/" + userId + "/account";
+        }
         return "/user/sign_in";
     }
 }
