@@ -32,11 +32,8 @@ public class RaceValidator implements Validator {
         Date today = new Date();
 
         //checking for date before today
-        try {
-            if (race.getDate().before(today)) {
-                errors.rejectValue("date", "", "Race cannot be past date");
-            }
-        } catch (NullPointerException e) {
+        if (race.getDate().before(today)) {
+            errors.rejectValue("date", "", "Race cannot be past date");
         }
 
         //checking for equals date+name

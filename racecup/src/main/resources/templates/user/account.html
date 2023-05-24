@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<html lang="ru" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Personal account</title>
@@ -51,8 +52,10 @@
     <div>
         <p><a th:href="@{/athlete/{id}/new (id=${user.id})}">Register as athlete</a></p>
         <p><a th:href="@{/organizer/{id}/new (id=${user.id})}">Register as organizer</a></p>
-        <p><a th:href="@{/result/participate/athlete={athlete_id}(athlete_id=${user.id})}">Take part in race</a></p>
-        <p><a th:href="@{/result/my_result/{id}(id=${user.id})}">List of my results</a></p>
+        <p sec:authorize="hasRole('ROLE_ATHLETE')" >
+            <a th:href="@{/result/participate/athlete={athlete_id}(athlete_id=${user.id})}">Take part in race</a></p>
+        <p sec:authorize="hasRole('ROLE_ATHLETE')" >
+            <a th:href="@{/result/my_result/{id}(id=${user.id})}">List of my results</a></p>
         <p><a th:href="@{/user/edit/{id}(id=${user.id})}">Edit personal info</a></p>
         <p><a th:href="@{/user/delete/{id}(id=${user.id})}">Delete account</a></p>
     </div>

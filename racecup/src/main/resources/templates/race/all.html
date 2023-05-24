@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<html lang="ru" xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/thymeleaf/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>List of all races</title>
@@ -30,8 +31,10 @@
                 <td><a th:href="@{/race/about/{raceId}(raceId=${race.id})}">Info</a></td>
                 <td><a th:href="@{/result/{raceId}(raceId=${race.id})}">Results</a></td>
                 <td><a th:href="@{/result/participants/{raceId}(raceId=${race.id})}">Participants</a></td>
-                <td><a th:href="@{/race/edit/{raceId}(raceId=${race.id})}">Edit</a></td>
-                <td><a th:href="@{/race/delete/{raceId}(raceId=${race.id})}">Delete</a></td>
+                <td sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_ORGANISER')" >
+                    <a th:href="@{/race/edit/{raceId}(raceId=${race.id})}">Edit</a></td>
+                <td sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_ORGANISER')" >
+                    <a th:href="@{/race/delete/{raceId}(raceId=${race.id})}">Delete</a></td>
             </tr>
         </table>
 
@@ -56,7 +59,8 @@
             </form>
         </div>
 
-        <p><a href="/race/new">Create new race</a></p>
+        <p sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_ORGANISER')" >
+            <a href="/race/new" >Create new race</a></p>
     </div>
 </main>
 <footer>

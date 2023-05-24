@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<html lang="ru" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>List of all users</title>
-    <link th:href="@{/style.css}" rel="stylesheet" >
+    <link th:href="@{/style.css}" rel="stylesheet">
 </head>
 <body>
 <header>
@@ -28,10 +29,14 @@
                 <td th:text="${user.email}">Email</td>
                 <td th:text="${user.isActive}">Status</td>
                 <td th:text="${user.role}">Role</td>
-                <td><a th:href="@{/user/edit/{userId}(userId=${user.id})}">Edit</a></td>
-                <td><a th:href="@{/user/{userId}/account (userId=${user.id})}">Account</a></td>
-                <td><a th:href="@{/user/delete/{userId}(userId=${user.id})}">Delete</a></td>
-                <td><a th:href="@{/user/set_role/{userId}(userId=${user.id})}">Set role</a></td>
+                <td sec:authorize="isAuthenticated()">
+                    <a th:href="@{/user/edit/{userId}(userId=${user.id})}">Edit</a></td>
+                <td sec:authorize="hasRole('ROLE_ADMIN')">
+                    <a th:href="@{/user/{userId}/account (userId=${user.id})}">Account</a></td>
+                <td sec:authorize="hasRole('ROLE_ADMIN')">
+                    <a th:href="@{/user/delete/{userId}(userId=${user.id})}">Delete</a></td>
+                <td sec:authorize="hasRole('ROLE_ADMIN')">
+                    <a th:href="@{/user/set_role/{userId}(userId=${user.id})}">Set role</a></td>
             </tr>
         </table>
 

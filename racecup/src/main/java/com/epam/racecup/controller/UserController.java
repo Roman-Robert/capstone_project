@@ -114,7 +114,7 @@ public class UserController {
     }
 
     //TODO: check mapping
-    @GetMapping("/delete/{id}")
+    @PostMapping("/delete/{id}")
     public String deleteUser(@PathVariable("id") long id) {
         userService.deleteUser(userService.getUserById(id));
         return "user/success_delete_user";

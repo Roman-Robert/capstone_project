@@ -12,11 +12,30 @@
 <main>
     <div>
         <h3 th:text="${race.name}">Race name</h3>
-        <h4 th:text="${race.location}">Location</h4>
-        <td th:text="${#dates.format(race.date, 'yyyy-MM-dd')}">Date</td>
-        <h4 th:text="${race.raceType.getDisplayRaceType()}">Type</h4>
-        <h4 th:text="${race.distanceKm + ' km'}">Distance</h4>
-        <p th:text="${race.info}">Info</p>
+        <table>
+            <tr>
+                <td>Location:</td>
+                <td th:text="${race.location}" style="font-weight: bold;">Location</td>
+            </tr>
+            <tr>
+                <td>Date:</td>
+                <td th:text="${#dates.format(race.date, 'yyyy-MM-dd')}">Date</td>
+            </tr>
+            <tr>
+                <td>Race type:</td>
+                <td th:text="${race.raceType.getDisplayRaceType()}">Type</td>
+            </tr>
+            <tr>
+                <td>Distance:</td>
+                <td th:text="${race.distanceKm + ' km'}">Distance</td>
+            </tr>
+            <tr>
+                <td>Info:</td>
+                <td th:text="${race.info}">Info</td>
+            </tr>
+        </table>
+
+
 
         <a href="/race/all">Back to race list</a>
     </div>

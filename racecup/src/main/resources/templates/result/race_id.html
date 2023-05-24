@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<html lang="ru" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Show race results by race ID</title>
@@ -50,7 +51,7 @@
             </form>
         </div>
 
-        <p><a th:href="@{/result/{id}/set_result (id=${race.id})}">Set results of the race</a></p>
+        <p sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_ORGANISER')" ><a th:href="@{/result/{id}/set_result (id=${race.id})}">Set results of the race</a></p>
         <p><a href="/result">Back to results</a></p>
 
     </div>

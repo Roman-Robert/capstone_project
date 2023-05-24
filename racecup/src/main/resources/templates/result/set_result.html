@@ -31,8 +31,6 @@
                     <td><span th:text="${result.getGroup()}"></span></td>
                     <td><input type="time" step="1" th:name="|results[${index.index}].transitTime|"
                                th:value="${result.transitTime}" /></td>
-<!--                    <td><input type="text" th:name="|results[${index.index}].resultStatus|"-->
-<!--                               th:value="${result.resultStatus}" placeholder="Status"/></td>-->
                     <td>
                         <select th:name="|results[${index.index}].resultStatus|">
                             <option value="">Select status</option>
