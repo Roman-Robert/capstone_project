@@ -105,7 +105,7 @@ public class UserController {
 
         //TODO: add fields to change athlete and organizer fields
         if (bindingResult.hasFieldErrors("password") ||
-                bindingResult.hasFieldErrors("firstName")||
+                bindingResult.hasFieldErrors("firstName") ||
                 bindingResult.hasFieldErrors("lastName")) {
             return "user/edit";
         }
@@ -152,6 +152,5 @@ public class UserController {
     public String signIn() {
         return "user/sign_in";
     }
-
 }
 

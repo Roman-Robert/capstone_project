@@ -30,6 +30,7 @@ public class UserService {
     }
 
     public void saveUser(UserDTO user) {
+        //TODO: code repeat
         user.setFirstName(StringFormatter.format(user.getFirstName()));
         user.setLastName(StringFormatter.format(user.getLastName()));
         user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -47,6 +48,16 @@ public class UserService {
         userRepository.save(mapper.dtoToEntity(user));
     }
 
+    public void updateUserToOrganizer(UserDTO user) {
+        user.setRole(Role.ROLE_ORGANIZER.getRole());
+        userRepository.save(mapper.dtoToEntity(user));
+    }
+
+    public void updateUserToAthlete(UserDTO user) {
+        user.setRole(Role.ROLE_ATHLETE.getRole());
+        userRepository.save(mapper.dtoToEntity(user));
+    }
+
     public void updateImmutableUserFields(UserDTO user) {
         UserDTO oldUser = getUserById(user.getId());
 
@@ -57,7 +68,6 @@ public class UserService {
             user.setRole(oldUser.getRole());
         }
     }
-
 
     public void deleteUser(UserDTO user) {
         user.setIsActive(0);

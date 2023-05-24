@@ -1,10 +1,9 @@
 package com.epam.racecup.service;
 
-import com.epam.racecup.repository.OrganizerRepository;
 import com.epam.racecup.mapper.OrganizerMapper;
-import com.epam.racecup.model.Role;
 import com.epam.racecup.model.dto.OrganizerDTO;
 import com.epam.racecup.model.dto.UserDTO;
+import com.epam.racecup.repository.OrganizerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,13 +26,9 @@ public class OrganizerService {
     }
 
     public void saveOrganizer(OrganizerDTO organizer) {
-        //changing user role to organizer
         UserDTO user = userService.getUserById(organizer.getId());
-        user.setRole(Role.ROLE_ORGANIZER.getRole());
-        userService.updateUser(user);
-        //setting user to organizer field
+        userService.updateUserToOrganizer(user);
         organizer.setUser(user);
-        //saving organizer
         organizerRepository.save(mapper.dtoToEntity(organizer));
     }
 
