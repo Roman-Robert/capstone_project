@@ -2,15 +2,16 @@ package com.epam.racecup.security;
 
 import com.epam.racecup.model.dto.UserDTO;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.Collections;
 
 
 public class UserDetailsImpl implements UserDetails {
 
     private final UserDTO user;
-
 
 
     public UserDetailsImpl(UserDTO user) {
@@ -19,8 +20,23 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        //TODO: implement access rights
-        return null;
+        String userRole = user.getRole();
+        String role = null;
+
+        switch (userRole) {
+            case "User":
+                role = "ROLE_USER";
+                break;
+            case "Athlete":
+                role = "ROLE_ATHLETE";
+                break;
+            case "Organizer":
+                role = "ROLE_ORGANIZER";
+                break;
+            case "Admin":
+                role = "ROLE_ADMIN";
+        }
+        return Collections.singletonList(new SimpleGrantedAuthority(role));
     }
 
     @Override

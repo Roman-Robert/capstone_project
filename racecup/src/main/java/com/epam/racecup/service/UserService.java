@@ -32,15 +32,17 @@ public class UserService {
     public void saveUser(UserDTO user) {
         user.setFirstName(StringFormatter.format(user.getFirstName()));
         user.setLastName(StringFormatter.format(user.getLastName()));
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setRole(Role.ROLE_USER.getRole());
         user.setIsActive(1);
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(mapper.dtoToEntity(user));
     }
 
     public void updateUser(UserDTO user) {
+        //TODO: code repeat
         user.setFirstName(StringFormatter.format(user.getFirstName()));
         user.setLastName(StringFormatter.format(user.getLastName()));
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         updateImmutableUserFields(user);
         userRepository.save(mapper.dtoToEntity(user));
     }
