@@ -45,9 +45,12 @@ public class UserService {
         user.setLastName(StringFormatter.format(user.getLastName()));
         user.setPassword(oldUser.getPassword());
         user.setIsActive(oldUser.getIsActive());
-        user.setRole(oldUser.getRole());
+        if (user.getRole() == null) {
+            user.setRole(oldUser.getRole());
+        }
         userRepository.save(mapper.dtoToEntity(user));
     }
+
 
     public void deleteUser(UserDTO user) {
         user.setIsActive(0);

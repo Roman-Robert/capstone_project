@@ -102,9 +102,6 @@ public class UserController {
                            @ModelAttribute("user") @Valid UserDTO user,
                            BindingResult bindingResult) {
 
-        //TODO: check validation to unchanged fields email and username
-//        userValidator.validate(user, bindingResult);
-
         //TODO: add fields to change athlete and organizer fields
         if (bindingResult.hasErrors()) {
             return "user/edit";
@@ -113,6 +110,7 @@ public class UserController {
         return "user/success_edit_user";
     }
 
+    //TODO: check mapping
     @GetMapping("/delete/{id}")
     public String deleteUser(@PathVariable("id") long id) {
         userService.deleteUser(userService.getUserById(id));

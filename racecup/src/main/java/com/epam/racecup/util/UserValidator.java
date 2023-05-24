@@ -31,11 +31,11 @@ public class UserValidator implements Validator {
         Optional<UserEntity> userByEmail = userService.getUserByEmail(user.getEmail());
         Optional<UserEntity> userByUsername = userService.getUserByUsername(user.getUsername());
 
-        if (userByEmail.isPresent() || !userByUsername.equals(userByEmail)) {
+        if (userByEmail.isPresent()) {
             errors.rejectValue("email", "", "This email is already registered");
         }
 
-        if (userByUsername.isPresent() || !userByUsername.equals(userByEmail)) {
+        if (userByUsername.isPresent()) {
             errors.rejectValue("username", "", "This username is already registered");
         }
 

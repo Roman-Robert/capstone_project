@@ -166,6 +166,13 @@ INSERT INTO `user` VALUES (37,'vanderpoel','Mathieu','Poel','vanderpoel@gmail.co
 (51,'user02','Petr','Petrov','petrov@mail.ru','$2a$10$cV9kEM3Xk8StYg8uopYvmOjcU4ZWM.1K9qnweb2JyWjDRj71tWXni','User',1),
 (53,'user03','Sidor','Sidorov','sidorov@mail.ru','$2a$10$cV9kEM3Xk8StYg8uopYvmOjcU4ZWM.1K9qnweb2JyWjDRj71tWXni','User',1),
 (55,'user04','Alexandr','Alexandrov','test@mail.ru','$2a$10$n5bT8ZcKD5jmC57W/KWiN.MHzMbwbdYTwoS0VS4VEGODjQFpa6zzq','User',1);
+(56, 'org03', 'Org03', 'Org03', 'org@gmail.com', '$2a$10$R4qfLAi9PTkdhuW0c6xUjeT6JDOeU6HHt568SaL2Ro5y0Y6hjW0Hm', 'Organizer', 1);
+(57, 'alangvad', 'Annika', 'Langvad', 'langvad@gmail.com', '$2a$10$qqVaV1oH5bH2prQGdDvWHuQQMme8Zm8AR4hbhasEhWO6yFc0iOdXS', 'Athlete', 1)
+(58, 'betty', 'Emily', 'Betty', 'betty@gmail.com', '$2a$10$8ycFjSqyrzljTBEvnnAZKu4BwQ8jS0L/WkR4T8YKXdTFkQxJtEMAW', 'Athlete', 1)
+(85, 'ganna', 'Filippo', 'Ganna', 'f.ganna@gmail.com', '$2a$10$C11dTO9YzjpINYiK4ug78O9wc5eLTMa/NaYtNyQ.jfAoo5OJ1p.oW', 'Athlete', 1)
+(91, 'user', 'User', 'User', 'user@mail.ru', '$2a$10$8y5H6gyikuLLP09UqwWCKeEhkmkoXksLxzF29J9x2O.AnDchNEyje', 'User', 1)
+(93, 'admin', 'Admin', 'Admin', 'admin@mail.ru', '$2a$10$UjJG9IabvueLDnk/Imdi4utaw80Cjtw3d/JU41K9Z2kO3meYjT77m', 'Admin', 1)
+(94, 'organizer', 'Organizer', 'Organizer', 'org@mail.ru', '$2a$10$CQ0Chgl8RrxN/bnX8YvYCOqpl7eG3CeNVpAouqZipI7yHe8PIupo6', 'Organizer', 1)
 
 
 INSERT INTO `athlete` VALUES (37,'1995-01-19','MALE','Netherlands','','Alpecin-Deceuninck'),
