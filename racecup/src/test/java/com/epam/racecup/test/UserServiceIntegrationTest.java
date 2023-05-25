@@ -22,7 +22,7 @@ import static junit.framework.TestCase.assertNotNull;
 @ContextConfiguration(classes = JpaConfig.class)
 @SpringBootTest
 @Transactional
-public class UserServiceTest {
+public class UserServiceIntegrationTest {
 
     @Autowired
     private UserService userService;
@@ -72,7 +72,7 @@ public class UserServiceTest {
     @Test
     public void updateUserToOrganizerTest() {
         UserDTO user = userBuilder();
-        long id =saveUserAndGetId(user);
+        long id = saveUserAndGetId(user);
 
         UserDTO userUpd = userService.getUserById(id);
 
@@ -87,7 +87,7 @@ public class UserServiceTest {
     @Test
     public void updateUserToAthleteTest() {
         UserDTO user = userBuilder();
-        long id =saveUserAndGetId(user);
+        long id = saveUserAndGetId(user);
 
         UserDTO userUpd = userService.getUserById(id);
 
@@ -105,13 +105,12 @@ public class UserServiceTest {
         long id = saveUserAndGetId(userTest);
 
 
-        UserDTO userDel= userService.getUserById(id);
+        UserDTO userDel = userService.getUserById(id);
         userService.deleteUser(userDel);
 
         assertNotNull(userDel);
         assertEquals(userDel.getIsActive(), 0);
     }
-
 
     private UserDTO userBuilder() {
         return UserDTO.builder()
