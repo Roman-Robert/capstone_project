@@ -1,4 +1,4 @@
-package com.epam.racecup.util;
+package com.epam.racecup.exception;
 
 
 import org.springframework.data.crossstore.ChangeSetPersister;

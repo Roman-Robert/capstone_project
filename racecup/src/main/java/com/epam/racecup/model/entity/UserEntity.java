@@ -21,7 +21,7 @@ import javax.persistence.Table;
 @Builder
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
-@Table(name = "user")
+@Table(name = "`user`")
 public class UserEntity {
 
     @Id
