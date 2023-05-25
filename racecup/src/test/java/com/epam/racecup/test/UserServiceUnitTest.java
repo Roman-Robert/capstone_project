@@ -1,6 +1,5 @@
 package com.epam.racecup.test;
 
-
 import com.epam.racecup.config.JpaConfig;
 import com.epam.racecup.mapper.UserMapper;
 import com.epam.racecup.model.Role;

@@ -77,7 +77,7 @@ public class ResultService {
     }
 
 
-    //Method without pagination to set results of race
+
     public List<ResultDTO> getRaceResultsByRaceId(Long race_id) {
         List<ResultEntity> resultEntities = resultRepository.findByRaceId(race_id);
         List<ResultDTO> resultDTOs = new ArrayList<>();

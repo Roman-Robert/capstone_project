@@ -20,8 +20,8 @@ import java.sql.Time;
 @Entity
 @Data
 @Builder
-@AllArgsConstructor(access = AccessLevel.PACKAGE)
-@NoArgsConstructor(access = AccessLevel.PACKAGE)
+@AllArgsConstructor(access = AccessLevel.PUBLIC)
+@NoArgsConstructor(access = AccessLevel.PUBLIC)
 @Table(name = "race_result")
 public class ResultEntity {
 
