@@ -2,6 +2,7 @@ package com.epam.racecup.test;
 
 import com.epam.racecup.config.JpaConfig;
 import com.epam.racecup.mapper.UserMapper;
+import com.epam.racecup.model.Role;
 import com.epam.racecup.model.dto.UserDTO;
 import com.epam.racecup.model.entity.UserEntity;
 import com.epam.racecup.service.UserService;
@@ -66,8 +67,51 @@ public class UserServiceTest {
 
         assertNotNull(userCheck);
         assertEquals(userTest, userCheck);
-
     }
+
+    @Test
+    public void updateUserToOrganizerTest() {
+        UserDTO user = userBuilder();
+        long id =saveUserAndGetId(user);
+
+        UserDTO userUpd = userService.getUserById(id);
+
+        userService.updateUserToOrganizer(userUpd);
+
+        UserDTO userCheck = userService.getUserById(id);
+
+        assertNotNull(userCheck);
+        assertEquals(userCheck.getRole(), Role.ROLE_ORGANIZER.getRole());
+    }
+
+    @Test
+    public void updateUserToAthleteTest() {
+        UserDTO user = userBuilder();
+        long id =saveUserAndGetId(user);
+
+        UserDTO userUpd = userService.getUserById(id);
+
+        userService.updateUserToAthlete(userUpd);
+
+        UserDTO userCheck = userService.getUserById(id);
+
+        assertNotNull(userCheck);
+        assertEquals(userCheck.getRole(), Role.ROLE_ATHLETE.getRole());
+    }
+
+    @Test
+    public void deleteUserTest() {
+        UserDTO userTest = userBuilder();
+        long id = saveUserAndGetId(userTest);
+
+
+        UserDTO userDel= userService.getUserById(id);
+        userService.deleteUser(userDel);
+
+        assertNotNull(userDel);
+        assertEquals(userDel.getIsActive(), 0);
+    }
+
 
     private UserDTO userBuilder() {
         return UserDTO.builder()

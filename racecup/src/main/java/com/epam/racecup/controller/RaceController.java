@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -98,7 +97,6 @@ public class RaceController {
         if (bindingResult.hasErrors()) {
             return "race/new";
         }
-        //taking organiser id from the session
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
         long organizerId = userDetails.getUser().getId();
@@ -124,7 +122,7 @@ public class RaceController {
         return "race/edit";
     }
 
-    @PutMapping("/edit/{id}")
+    @PostMapping("/edit/{id}")
     public String editRace(@PathVariable("id") Long raceId,
                            @ModelAttribute("race") @Valid RaceDTO race,
                            BindingResult bindingResult) {
