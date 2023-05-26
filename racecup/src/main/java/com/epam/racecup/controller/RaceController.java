@@ -70,6 +70,7 @@ public class RaceController {
         int pageSize = size.orElse(10);
         Date today = Date.valueOf(LocalDate.now());
         Page<RaceDTO> allRacesPaged = raceService.findByDateAfter(today, PageRequest.of(currentPage - 1, pageSize));
+
         model.addAttribute("races", allRacesPaged);
 
         int totalPages = allRacesPaged.getTotalPages();

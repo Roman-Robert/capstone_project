@@ -15,26 +15,26 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(AccessDeniedException.class)
     @ResponseStatus(HttpStatus.FORBIDDEN)
-    public String handleAccessDeniedException(final AccessDeniedException exception,
-                                              final Model model) {
+    public String handleAccessDeniedException(AccessDeniedException exception,
+                                              Model model) {
         String errorMessage = (exception.getMessage());
-        model.addAttribute("errorMessage", errorMessage);
+        model.addAttribute("errorMessage", "Access denied");
         return "error/error_page";
     }
 
     @ExceptionHandler(ChangeSetPersister.NotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public String handleNotFoundException(final ChangeSetPersister.NotFoundException exception,
-                                          final Model model) {
+    public String handleNotFoundException(ChangeSetPersister.NotFoundException exception,
+                                          Model model) {
         String errorMessage = (exception.getMessage());
-        model.addAttribute("errorMessage", errorMessage);
+        model.addAttribute("errorMessage", "Not found exception");
         return "error/error_page";
     }
 
     @ExceptionHandler(Throwable.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public String exception(final Throwable exception,
-                            final Model model) {
+    public String exception(Throwable exception,
+                            Model model) {
         String errorMessage = (exception != null ? exception.getMessage() : "Unknown error");
         model.addAttribute("errorMessage", errorMessage);
         return "error/error_page";

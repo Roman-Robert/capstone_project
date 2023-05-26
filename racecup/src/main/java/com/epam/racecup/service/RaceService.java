@@ -1,9 +1,9 @@
 package com.epam.racecup.service;
 
-import com.epam.racecup.repository.RaceRepository;
 import com.epam.racecup.mapper.RaceMapper;
 import com.epam.racecup.model.dto.RaceDTO;
 import com.epam.racecup.model.entity.RaceEntity;
+import com.epam.racecup.repository.RaceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -58,6 +59,7 @@ public class RaceService {
                 .findByDateAfter(today)
                 .stream()
                 .map(mapper::entityToDto)
+                .sorted(Comparator.comparing(RaceDTO::getDate))
                 .collect(Collectors.toList());
     }
 

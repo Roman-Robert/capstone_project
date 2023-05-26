@@ -13,8 +13,9 @@
     <div th:replace="/fragments/header :: header"></div>
 </header>
 <main>
+
     <div>
-        <h3><u>Personal account</u></h3>
+        <h3><u>Account</u></h3>
         <h3><span th:text="${user.firstName}+' '+${user.lastName}"></span></h3>
         <p>
             <a style="color: grey; font-style: italic;" th:text="${user.role}">role</a>
