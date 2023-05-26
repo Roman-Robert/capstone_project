@@ -1,6 +1,6 @@
 package com.epam.racecup.test;
 
-import com.epam.racecup.config.JpaConfig;
+import com.epam.racecup.config.Config;
 import com.epam.racecup.mapper.UserMapper;
 import com.epam.racecup.model.Role;
 import com.epam.racecup.model.dto.UserDTO;
@@ -10,6 +10,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -19,7 +20,7 @@ import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNotNull;
 
 @RunWith(SpringRunner.class)
-@ContextConfiguration(classes = JpaConfig.class)
+@ContextConfiguration(classes = {Config.class, UserService.class, PasswordEncoder.class, UserMapper.class, BCryptPasswordEncoder.class})
 @SpringBootTest
 @Transactional
 public class UserServiceIntegrationTest {

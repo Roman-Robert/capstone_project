@@ -15,6 +15,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -98,7 +99,7 @@ public class UserController {
         return "user/edit";
     }
 
-    @PostMapping("/edit/{id}")
+    @PatchMapping("/edit/{id}")
     public String editUser(@PathVariable("id") long id,
                            @ModelAttribute("user") @Validated UserDTO user,
                            BindingResult bindingResult) {
@@ -113,7 +114,7 @@ public class UserController {
         return "user/success_edit_user";
     }
 
-    @GetMapping("/delete/{id}")
+    @PatchMapping("/delete/{id}")
     public String deleteUser(@PathVariable("id") long id) {
         userService.deleteUser(userService.getUserById(id));
         return "user/success_delete_user";

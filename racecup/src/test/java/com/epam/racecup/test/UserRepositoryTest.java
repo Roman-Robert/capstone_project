@@ -1,6 +1,6 @@
 package com.epam.racecup.test;
 
-import com.epam.racecup.config.JpaConfig;
+import com.epam.racecup.config.Config;
 import com.epam.racecup.model.entity.UserEntity;
 import com.epam.racecup.repository.UserRepository;
 import org.junit.Test;
@@ -16,7 +16,7 @@ import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNull;
 
 @RunWith(SpringRunner.class)
-@ContextConfiguration(classes = JpaConfig.class)
+@ContextConfiguration(classes = Config.class)
 @SpringBootTest
 @Transactional
 //@ActiveProfiles("test")

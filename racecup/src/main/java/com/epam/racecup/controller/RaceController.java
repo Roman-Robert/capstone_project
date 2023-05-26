@@ -12,7 +12,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -107,9 +106,8 @@ public class RaceController {
         return "race/success_create_race";
     }
 
-    @DeleteMapping("/delete/{id}")
+    @GetMapping("/delete/{id}")
     public String deleteRace(@PathVariable("id") long id) {
-        ////Changing Race "is_actual" status 1->0
         RaceDTO race = raceService.getRaceById(id);
         race.setIsActual(0);
         raceService.saveRace(race);

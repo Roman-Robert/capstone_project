@@ -1,6 +1,6 @@
 package com.epam.racecup.test;
 
-import com.epam.racecup.config.JpaConfig;
+import com.epam.racecup.config.Config;
 import com.epam.racecup.mapper.UserMapper;
 import com.epam.racecup.model.Role;
 import com.epam.racecup.model.dto.UserDTO;
@@ -26,7 +26,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-@ContextConfiguration(classes = JpaConfig.class)
+@ContextConfiguration(classes = {Config.class, UserService.class, UserRepository.class, PasswordEncoder.class, UserMapper.class})
 @SpringBootTest
 public class UserServiceUnitTest {
 
