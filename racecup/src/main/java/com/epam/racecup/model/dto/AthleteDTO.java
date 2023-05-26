@@ -45,5 +45,4 @@ public class AthleteDTO {
     private int place;
 
     private String group;
-
 }

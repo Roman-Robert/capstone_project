@@ -30,7 +30,6 @@ public class UserService {
     }
 
     public void saveUser(UserDTO user) {
-        //TODO: code repeat
         user.setFirstName(StringFormatter.format(user.getFirstName()));
         user.setLastName(StringFormatter.format(user.getLastName()));
         user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -40,7 +39,6 @@ public class UserService {
     }
 
     public void updateUser(UserDTO user) {
-        //TODO: code repeat
         user.setFirstName(StringFormatter.format(user.getFirstName()));
         user.setLastName(StringFormatter.format(user.getLastName()));
         user.setPassword(passwordEncoder.encode(user.getPassword()));

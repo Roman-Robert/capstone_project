@@ -39,5 +39,4 @@ public class GlobalExceptionHandler {
         model.addAttribute("errorMessage", errorMessage);
         return "error/error_page";
     }
-
 }

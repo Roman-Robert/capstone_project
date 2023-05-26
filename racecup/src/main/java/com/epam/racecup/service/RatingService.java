@@ -22,16 +22,11 @@ public class RatingService {
         this.ratingCalculator = ratingCalculator;
     }
 
-
     public List<Map.Entry<String, Integer>> getPersonalRating() {
         List<ResultDTO> fullResultList = resultService.getAllResultsListWithPlaces();
-        //Calculating rating for each result
-        for (ResultDTO resultDTO : fullResultList) {
-            int place = (int) resultDTO.getPlace();
-            resultDTO.setRating(ratingCalculator.calculateRating(place));
-        }
 
-        //mapping result
+        calculateRating(fullResultList);
+
         Map<String, Integer> scoreMap = new HashMap<>();
 
         for (ResultDTO result : fullResultList) {
@@ -50,12 +45,9 @@ public class RatingService {
 
     public List<Map.Entry<String, Integer>> getTeamRating() {
         List<ResultDTO> fullResultList = resultService.getAllResultsListWithPlaces();
-        //Calculating rating for each result
-        for (ResultDTO resultDTO : fullResultList) {
-            int place = (int) resultDTO.getPlace();
-            resultDTO.setRating(ratingCalculator.calculateRating(place));
-        }
-        //mapping result
+
+        calculateRating(fullResultList);
+
         Map<String, Integer> scoreMap = new HashMap<>();
 
         for (ResultDTO result : fullResultList) {
@@ -69,5 +61,12 @@ public class RatingService {
                 .stream()
                 .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
                 .collect(Collectors.toList());
+    }
+
+    public void calculateRating(List<ResultDTO> results) {
+        for (ResultDTO result : results) {
+            int place = (int) result.getPlace();
+            result.setRating(ratingCalculator.calculateRating(place));
+        }
     }
 }

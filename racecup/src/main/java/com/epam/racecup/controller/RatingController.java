@@ -34,5 +34,4 @@ public class RatingController {
         model.addAttribute("ratings", ratingService.getTeamRating());
         return "/rating/team";
     }
-
 }

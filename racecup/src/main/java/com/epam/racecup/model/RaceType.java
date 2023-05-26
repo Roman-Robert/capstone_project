@@ -15,5 +15,3 @@ public enum RaceType {
         return raceType;
     }
 }
-
-

@@ -140,7 +140,6 @@ public class UserController {
         return "user/set_role";
     }
 
-//    @PatchMapping("/set_role/{id}") doesn't work with patch request
     @PostMapping("/set_role/{id}")
     public String setRole(@PathVariable("id") long id,
                           @ModelAttribute("user") UserDTO user) {
@@ -153,4 +152,3 @@ public class UserController {
         return "user/sign_in";
     }
 }
-

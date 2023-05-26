@@ -38,6 +38,5 @@ public class UserValidator implements Validator {
         if (userByUsername.isPresent()) {
             errors.rejectValue("username", "", "This username is already registered");
         }
-
     }
 }

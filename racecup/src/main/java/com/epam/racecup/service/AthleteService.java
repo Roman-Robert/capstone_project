@@ -25,13 +25,13 @@ public class AthleteService {
     }
 
     public void saveAthlete(AthleteDTO athlete) {
-        //changing user role to athlete
         UserDTO user = userService.getUserById(athlete.getId());
+
         userService.updateUserToAthlete(user);
-        //adding user to athlete field
         athlete.setUser(user);
-        //saving athlete
+
         AthleteEntity athleteEntity = mapper.dtoToEntity(athlete);
+
         athleteRepository.save(athleteEntity);
     }
 
@@ -43,5 +43,4 @@ public class AthleteService {
     public AthleteDTO getAthleteById(long id) {
         return mapper.entityToDto(athleteRepository.getOne(id));
     }
-
 }

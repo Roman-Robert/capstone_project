@@ -119,9 +119,7 @@ public class ResultService {
 
     public List<ResultDTO> getAllResultsListWithPlaces() {
         List<ResultDTO> resultDTOs = new ArrayList<>();
-        //List of all results
         List<ResultEntity> resultEntityList = resultRepository.findAll();
-        //Getting list of unique race id
         List<Long> listRaceId = resultEntityList
                 .stream()
                 .map(ResultEntity::getRace)
@@ -130,20 +128,15 @@ public class ResultService {
                 .collect(Collectors.toList());
 
         for (long raceId : listRaceId) {
-            //getting list of results for each race id
             List<ResultEntity> resultEntities = resultRepository.findByRaceId(raceId);
-            //comparing results by transit time
             sortResultListByTransitTime(resultEntities);
-            //Entity->DTO
             List<ResultDTO> resultDtoOneRace = resultEntities
                     .stream()
                     .map(mapper::entityToDto)
                     .collect(Collectors.toList());
-            //assigning a place by index in the list of results
+
             for (ResultDTO resultDTO : resultDtoOneRace) {
-                //Setting place in this race
                 resultDTO.setPlace(resultDtoOneRace.indexOf(resultDTO) + 1);
-                //Adding to exit list if athlete id equals parameter id
                 resultDTOs.add(resultDTO);
             }
         }
@@ -152,12 +145,10 @@ public class ResultService {
 
     public void updateResult(List<ResultDTO> results) {
         for (ResultDTO result : results) {
-            //getting result to update
             ResultDTO updatedResult = getResultById(result.getResultId());
-            //updating status and transit time fields
+
             updatedResult.setResultStatus(result.getResultStatus());
             updatedResult.setTransitTime(result.getTransitTime());
-            //saving updated result
             saveResult(updatedResult);
         }
     }
@@ -166,9 +157,7 @@ public class ResultService {
         return mapper.entityToDto(resultRepository.getOne(id));
     }
 
-    public List<ResultEntity> sortResultListByTransitTime(List<ResultEntity> resultsList) {
+    public void sortResultListByTransitTime(List<ResultEntity> resultsList) {
         resultsList.sort(new TimeComparator());
-        return resultsList;
     }
 }
-

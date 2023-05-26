@@ -8,11 +8,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.Collections;
 
-
 public class UserDetailsImpl implements UserDetails {
 
     private final UserDTO user;
-
 
     public UserDetailsImpl(UserDTO user) {
         this.user = user;
@@ -49,7 +47,6 @@ public class UserDetailsImpl implements UserDetails {
         return this.user.getUsername();
     }
 
-    //TODO: implement logic with deleted accounts(is_active)
     @Override
     public boolean isAccountNonExpired() {
         return true;
@@ -70,7 +67,6 @@ public class UserDetailsImpl implements UserDetails {
         return true;
     }
 
-    //needed to get authenticated user data
     public UserDTO getUser() {
         return this.user;
     }

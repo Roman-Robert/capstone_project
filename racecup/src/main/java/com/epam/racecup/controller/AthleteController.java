@@ -71,5 +71,4 @@ public class AthleteController {
         }
         return "athlete/all";
     }
-
 }

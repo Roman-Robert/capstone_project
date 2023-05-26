@@ -19,5 +19,4 @@ public class RatingCalculatorUtil {
         }
         return rating;
     }
-
 }

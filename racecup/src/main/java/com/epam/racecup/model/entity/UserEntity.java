@@ -50,8 +50,6 @@ public class UserEntity {
     @Column(name = "role")
     private String role = Role.ROLE_USER.getRole();
 
-
-    //////////////////////////////////////////////
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private AthleteEntity athlete;
 
