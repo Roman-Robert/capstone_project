@@ -2,9 +2,7 @@ package com.epam.racecup.util;
 
 import com.epam.racecup.model.entity.AthleteEntity;
 import com.epam.racecup.model.entity.RaceEntity;
-import org.springframework.stereotype.Component;
 
-@Component
 public class AgeGroupUtil {
 
     public static String getGroup(AthleteEntity athlete, RaceEntity race) {

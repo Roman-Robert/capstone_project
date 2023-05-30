@@ -1,44 +1,42 @@
-# Capstone project
+# RaceCup
+### Capstone project EPAM UpSkillMe program
+RaceCap is a project developed as part of a curriculum designed to demonstrate Java development skills.
 
-## Racing cup
+## Main functions
 
-### Цели:
-Объединение нескольких гонок в один кубок для определения сильнейших спортсменов и команд по результатам прошедших соревнований.
+### Race schedule
+Create and view future races
+Showing the results of past races
 
-### Виды гонок
-1. Road
-2. Gravel
-3. CrossCountry
+### Race results
+In the web application, there is a function to set the time result for each participant of the race, based on which the rating will be calculated
 
-### Этапы гонок
-1. (Race type) DateTimeName-1
-2. (Race type) DateTimeName-2
-...
 
-### Возрастные группы
-В зависимости от возраста и гендера спортсмена, ему присваивается возрастная группа
+### Rating calculation
+The application calculates the rating based on the results of past races:
+- Personal rating of athletes
+- Team rating
 
-### Рейтинг спортсменов
-За каждый этап гонки, в зависимости от занятого места в абсолютном зачете на дистанции марафон участнику присваиваются очки рейтинга:  
-1 место – 100  
-2 место – 95  
-3 место – 92  
-4 место – 89  
-5 место – 87  
-6 место – 85  
-7 место – 83  
-8 место – 82  
-9 место — 81  
-...  
-91 место и ниже — 1  
+### Rating
+Distribution by roles has been implemented, which expands the range of available functions for registered users:
+- Unauthenticated user
+- User
+- Athlete
+- Organizer
+- Admin
 
-Гонщикам, которые не стартовали или сошли с дистанции, а также которые были дисквалифицированы, очки рейтинга не присваиваются. В графе результата гонки такие гонщики помечаются "DNS"/"DNF"/"DSQ" соответственно.
+## Stack of applied technologies
+- Java 11
+- Spring framework
+- MySQL
+- H2 in-memory database for tests
+- JUnit
+- Mockito
+- Thymeleaf
+- HTML
 
-### Рейтинг команд
-Команда может состоять из неограниченного количества спортсменов. В командном рейтинге учитывается сумма трёх лучших результатов гонщиков на дистанции за гонку(марафон и полумарафон). По итогам гонки команда, в зависимости от занятого места, получает командные очки рейтинга:  
-1 место – 150  
-2 место – 149  
-3 место – 148  
-4 место – 147  
-5 место — 146 и т.д.  
-Победителем командного зачета кубка становится команда, набравшая максимальную сумму командных очков рейтинга по итогам всех этапов гонок. Если команды получают одинаковое количество очков рейтинга, то победителем выбирается та, у которой командный рейтинг на последнем этапе гонки.  
+### In the next releases
+- Logic for processing deleted accounts and races will be added
+- Fields for editing information in the personal account for all types of users (now implemented only for the user)
+- Custom error handling
+- Age validation for racing
